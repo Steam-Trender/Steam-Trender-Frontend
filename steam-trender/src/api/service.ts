@@ -2,6 +2,7 @@ import qs from "qs";
 import { ICompetitors } from "../models/competitors";
 import { ITag } from "../models/tag";
 import API from "./api";
+import { IYears } from "../models/years";
 
 class ApiService {
     static async fetchTags(): Promise<[ITag]> {
@@ -10,6 +11,15 @@ class ApiService {
             return response.data;
         } catch (error) {
             return [{ title: "FPS", id: 1 }];
+        }
+    }
+
+    static async fetchYears(): Promise<IYears> {
+        try {
+            const response = await API.get<IYears>("/years");
+            return response.data;
+        } catch (error) {
+            return { min_year: 2010, max_year: 2024 };
         }
     }
 

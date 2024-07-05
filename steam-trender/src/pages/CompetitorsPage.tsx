@@ -3,6 +3,7 @@ import { ICompetitors } from "../models/competitors";
 import ApiService from "../api/service";
 import { TagSelector } from "../components/TagSelector";
 import { MoneyFormatter } from "../utils/money_formatter";
+import { YearDropdown } from "../components/YearsDropdown";
 
 const CompetitorsPage = () => {
     const [reviewsCoeff, setReviewsCoeff] = useState("");
@@ -32,6 +33,14 @@ const CompetitorsPage = () => {
         }
     };
 
+    const handleMinYearChange = (year: number) => {
+        setMinYear(year);
+    };
+
+    const handleMaxYearChange = (year: number) => {
+        setMaxYear(year);
+    };
+
     return (
         <>
             <div className="row">
@@ -55,57 +64,17 @@ const CompetitorsPage = () => {
                         placeholder="Enter Reviews Threshold"
                     />
                 </div>
-                <div className="dropdown col p-0 mx-1">
-                    <button
-                        className="btn btn-primary dropdown-toggle w-100"
-                        type="button"
-                        id="minYearDropdown"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                    >
-                        {minYear || "Select Min Year"}
-                    </button>
-                    <div
-                        className="dropdown-menu"
-                        aria-labelledby="minYearDropdown"
-                    >
-                        {[2010, 2011, 2012, 2013, 2014, 2015].map((year) => (
-                            <a
-                                className="dropdown-item"
-                                key={year}
-                                href="#"
-                                onClick={() => setMinYear(year)}
-                            >
-                                {year}
-                            </a>
-                        ))}
-                    </div>
+                <div className="col p-0 mx-1">
+                    <YearDropdown
+                        onChange={handleMinYearChange}
+                        initialLabel="Select Min Year"
+                    />
                 </div>
-                <div className="dropdown col p-0 mx-1">
-                    <button
-                        className="btn btn-primary dropdown-toggle w-100"
-                        type="button"
-                        id="maxYearDropdown"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                    >
-                        {maxYear || "Select Max Year"}
-                    </button>
-                    <div
-                        className="dropdown-menu"
-                        aria-labelledby="maxYearDropdown"
-                    >
-                        {[2016, 2017, 2018, 2019, 2020, 2021].map((year) => (
-                            <a
-                                className="dropdown-item"
-                                key={year}
-                                href="#"
-                                onClick={() => setMaxYear(year)}
-                            >
-                                {year}
-                            </a>
-                        ))}
-                    </div>
+                <div className="col p-0 mx-1">
+                    <YearDropdown
+                        onChange={handleMaxYearChange}
+                        initialLabel="Select Max Year"
+                    />
                 </div>
                 <div className="col p-0 mx-1">
                     <button
