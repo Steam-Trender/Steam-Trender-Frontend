@@ -6,7 +6,7 @@ function App() {
     return (
         <>
             <Router>
-                <div className="d-flex flex-column min-vh-100">
+                <div className="container-fluid min-vh-100 d-flex flex-column">
                     <Routes>{createRoutes()}</Routes>
                 </div>
             </Router>
