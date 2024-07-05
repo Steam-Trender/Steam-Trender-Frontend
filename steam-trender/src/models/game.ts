@@ -9,4 +9,6 @@ export interface IGame {
     release_date: string;
     price: number;
     tags: [ITag];
+    revenue: number;
+    owners: number;
 }

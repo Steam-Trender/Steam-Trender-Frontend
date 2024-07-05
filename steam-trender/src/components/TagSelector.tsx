@@ -45,9 +45,9 @@ export function TagSelector({ onChange, placeholder }: TagsSelectorProps) {
             options={selectOptions}
             isMulti
             value={selectedTags}
-            onChange={(
-                selectedOption: MultiValue<SelectOption>
-            ) => setSelectedTags(selectedOption)}
+            onChange={(selectedOption: MultiValue<SelectOption>) =>
+                setSelectedTags(selectedOption)
+            }
             getOptionLabel={(option) => option.label}
             getOptionValue={(option) => option.value.toString()}
             placeholder={placeholder}
