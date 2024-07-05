@@ -68,12 +68,14 @@ const CompetitorsPage = () => {
                     <YearDropdown
                         onChange={handleMinYearChange}
                         initialLabel="Select Min Year"
+                        descending={false}
                     />
                 </div>
                 <div className="col p-0 mx-1">
                     <YearDropdown
                         onChange={handleMaxYearChange}
                         initialLabel="Select Max Year"
+                        descending={true}
                     />
                 </div>
                 <div className="col p-0 mx-1">

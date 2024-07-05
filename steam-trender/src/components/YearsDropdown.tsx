@@ -4,27 +4,40 @@ import ApiService from "../api/service";
 interface YearDropdownProps {
     onChange: (year: number) => void;
     initialLabel: string;
+    descending: boolean;
 }
 
-export function YearDropdown({ initialLabel, onChange }: YearDropdownProps) {
+export function YearDropdown({
+    initialLabel,
+    onChange,
+    descending,
+}: YearDropdownProps) {
     const [years, setYears] = useState<number[]>([]);
     const [selectedYear, setSelectedYear] = useState<number>();
 
     useEffect(() => {
-        const fetchYears = async () => {
+        const fetchYears = async (descending: boolean) => {
             try {
                 const response = await ApiService.fetchYears();
-                const years = Array.from(
-                    { length: response.max_year - response.min_year + 1 },
-                    (v, k) => response.max_year - k
-                );
+                let years = [2020, 2021, 2022, 2023];
+                if (descending) {
+                    years = Array.from(
+                        { length: response.max_year - response.min_year + 1 },
+                        (v, k) => response.max_year - k
+                    );
+                } else {
+                    years = Array.from(
+                        { length: response.max_year - response.min_year + 1 },
+                        (v, k) => response.min_year + k
+                    );
+                }
                 setYears(years);
             } catch (error) {
                 console.error("Failed to fetch years:", error);
             }
         };
 
-        fetchYears();
+        fetchYears(descending);
     }, []);
 
     const handleYearSelect = (year: number) => {

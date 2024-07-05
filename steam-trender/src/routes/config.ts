@@ -22,6 +22,16 @@ const routeConfigs: RouteConfig[] = [
         element: React.createElement(CompetitorsPage),
     },
     {
+        path: "/tags",
+        title: "Tags",
+        element: React.createElement(NotFoundPage),
+    },
+    {
+        path: "/trends",
+        title: "Trends",
+        element: React.createElement(NotFoundPage),
+    },
+    {
         path: "*",
         title: "Not Found",
         element: NotFoundPage(),
