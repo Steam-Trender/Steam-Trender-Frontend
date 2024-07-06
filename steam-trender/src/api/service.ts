@@ -3,6 +3,7 @@ import { ICompetitors } from "../models/competitors";
 import { ITag } from "../models/tag";
 import API from "./api";
 import { IYears } from "../models/years";
+import { IPost } from "../models/post";
 
 class ApiService {
     static async fetchTags(): Promise<[ITag]> {
@@ -20,6 +21,15 @@ class ApiService {
             return response.data;
         } catch (error) {
             return { min_year: 2010, max_year: 2024 };
+        }
+    }
+
+    static async fetchPosts(): Promise<IPost[]> {
+        try {
+            const response = await API.get<[IPost]>("/posts");
+            return response.data;
+        } catch (error) {
+            return [];
         }
     }
 
