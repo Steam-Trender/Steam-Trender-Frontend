@@ -3,6 +3,7 @@ import React from "react";
 import NotFoundPage from "../pages/NotFoundPage";
 import CompetitorsPage from "../pages/CompetitorsPage";
 import BlogPage from "../pages/BlogPage";
+import BlogPostPage from "../pages/BlogPostPage";
 
 interface RouteConfig {
     path: string;
@@ -21,6 +22,11 @@ const routeConfigs: RouteConfig[] = [
         path: "/blog",
         title: "Home",
         element: React.createElement(BlogPage),
+    },
+    {
+        path: "/blog/:slug",
+        title: "Post",
+        element: React.createElement(BlogPostPage),
     },
     {
         path: "/competitors",

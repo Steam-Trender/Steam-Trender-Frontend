@@ -1,16 +1,17 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 const BlogPostPage = () => {
+    const { slug } = useParams();
+    const url = `https://teletype.in/@sadari/${slug}`;
+
     return (
-        <div className="flex-fill d-flex flex-column">
-            <iframe
-                src="https://teletype.in/@sadari/nextfest2024"
-                width="100%"
-                height="100%"
-                style={{ border: "none" }}
-                allowFullScreen
-            ></iframe>
-        </div>
+        <iframe
+            className="flex-fill d-flex"
+            src={url}
+            style={{ border: "none" }}
+            allowFullScreen
+        ></iframe>
     );
 };
 
