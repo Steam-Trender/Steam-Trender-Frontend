@@ -17,9 +17,7 @@ class ApiService {
 
     static async fetchYears(): Promise<IYears> {
         try {
-            const response = await API.get<IYears>("/years", {
-                params: { blog_url: "https://teletype.in/@sadari" },
-            });
+            const response = await API.get<IYears>("/years");
             return response.data;
         } catch (error) {
             return { min_year: 2010, max_year: 2024 };
@@ -28,7 +26,7 @@ class ApiService {
 
     static async fetchPosts(): Promise<IPost[]> {
         try {
-            const response = await API.get<[IPost]>("/posts");
+            const response = await API.get<[IPost]>("/posts", { params: { blog_url: "https://teletype.in/@sadari", category: "" },});
             return response.data;
         } catch (error) {
             return [];
