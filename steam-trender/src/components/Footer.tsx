@@ -1,21 +1,26 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
         <footer className="bg-light mt-2">
             <div className="container text-center py-3">
-                <p className="m-0">Questions or problems?</p>
-                <p className="m-0">
-                    tw:
-                    <a
-                        href="https://twitter.com/evllko"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        @evllko
-                    </a>
-                    gm: evlko.oklve
-                </p>
+                <a
+                    className="mx-5"
+                    href="https://steampowered.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    powered by steam
+                </a>
+                |
+                <Link className="mx-5" to="/about">
+                    about
+                </Link>
+                |
+                <Link className="mx-5" to="/privacy">
+                    privacy policy
+                </Link>
             </div>
         </footer>
     );
