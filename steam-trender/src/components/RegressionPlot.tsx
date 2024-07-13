@@ -8,6 +8,7 @@ interface ChartProps {
     yaxis_title: string;
     real: number[];
     trend: number[] | null;
+    money: boolean;
 }
 
 export function RegressionPlot({
@@ -15,6 +16,7 @@ export function RegressionPlot({
     real,
     trend,
     yaxis_title,
+    money,
 }: ChartProps) {
     const [chartOptions, setChartOptions] = useState<ApexOptions>({});
 
@@ -50,7 +52,8 @@ export function RegressionPlot({
                 min: 0,
                 labels: {
                     formatter: (value) => {
-                        return value.toString();
+                        if (money) return `$${value.toLocaleString()}`;
+                        return value.toLocaleString();
                     },
                     style: {
                         fontSize: "12px",
