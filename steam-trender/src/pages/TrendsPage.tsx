@@ -109,6 +109,7 @@ const TrendsPage = () => {
                                     (item) => item.regression.median_reviews
                                 )}
                                 yaxis_title={"Median Reviews"}
+                                money={false}
                             />
                         </div>
                         <div className="col-4">
@@ -124,6 +125,7 @@ const TrendsPage = () => {
                                     (item) => item.regression.median_owners
                                 )}
                                 yaxis_title={"Median Owners"}
+                                money={false}
                             />
                         </div>
                         <div className="col-4">
@@ -137,6 +139,7 @@ const TrendsPage = () => {
                                 )}
                                 trend={null}
                                 yaxis_title={"Games"}
+                                money={false}
                             />
                         </div>
                     </div>
@@ -154,6 +157,7 @@ const TrendsPage = () => {
                                     (item) => item.regression.median_revenue
                                 )}
                                 yaxis_title={"Median Revenue"}
+                                money={true}
                             />
                         </div>
                         <div className="col-4">
@@ -169,6 +173,7 @@ const TrendsPage = () => {
                                     (item) => item.regression.median_price
                                 )}
                                 yaxis_title={"Median Price"}
+                                money={true}
                             />
                         </div>
                         <div className="col-4">
