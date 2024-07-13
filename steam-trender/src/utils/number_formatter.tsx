@@ -4,7 +4,7 @@ interface NumberFormatterProps {
     value: number;
 }
 
-export function MoneyFormatter({ value }: NumberFormatterProps) {
+export function NumberFormatter({ value }: NumberFormatterProps) {
     const formattedNumber = new Intl.NumberFormat("en-US", {
         style: "decimal",
         maximumFractionDigits: 0,
