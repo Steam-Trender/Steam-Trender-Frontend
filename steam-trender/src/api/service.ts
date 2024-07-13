@@ -5,6 +5,7 @@ import API from "./api";
 import { IYears } from "../models/years";
 import { IPost } from "../models/post";
 import { ITagOverview } from "../models/tag_overview";
+import { IYearOverview } from "../models/year_overview";
 
 class ApiService {
     static async fetchTags(): Promise<[ITag]> {
@@ -96,6 +97,28 @@ class ApiService {
                     tag_ids: selectedTags,
                     min_reviews: min_reviews,
                     reviews_coeff: reviews_coeff,
+                },
+                paramsSerializer: (params) =>
+                    qs.stringify(params, { arrayFormat: "repeat" }),
+            });
+            return response.data;
+        } catch (error) {
+            throw new Error("Failed to fetch data from API");
+        }
+    }
+
+    static async fetchTrendsOverview(
+        min_reviews: string,
+        year: number,
+        selectedTags: number[]
+    ): Promise<IYearOverview[]> {
+        try {
+            const response = await API.get<IYearOverview[]>("/analyze/trends", {
+                params: {
+                    min_year: year - 5,
+                    max_year: year,
+                    tag_ids: selectedTags,
+                    min_reviews: min_reviews,
                 },
                 paramsSerializer: (params) =>
                     qs.stringify(params, { arrayFormat: "repeat" }),

@@ -1,7 +1,8 @@
 import { IOverview } from "./overview";
-import { IYear } from "./year";
+import { IRegression } from "./regression";
 
 export interface IYearOverview {
+    year: string;
     overview: IOverview;
-    year: IYear;
+    regression: IRegression;
 }

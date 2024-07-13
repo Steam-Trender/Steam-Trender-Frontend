@@ -4,10 +4,7 @@ import { IYearOverview } from "./year_overview";
 
 export interface IGenericOverview {
     overview: IOverview;
-    detail: {
-        id: number;
-        title: string;
-    };
+    title: string;
 }
 
 export function convertTagDataToGeneric(
@@ -15,7 +12,7 @@ export function convertTagDataToGeneric(
 ): IGenericOverview[] {
     return data.map((item) => ({
         overview: item.overview,
-        detail: item.tag,
+        title: item.tag.title,
     }));
 }
 
@@ -24,6 +21,6 @@ export function convertYearDataToGeneric(
 ): IGenericOverview[] {
     return data.map((item) => ({
         overview: item.overview,
-        detail: item.year,
+        title: item.year,
     }));
 }

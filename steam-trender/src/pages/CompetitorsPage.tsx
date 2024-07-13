@@ -85,6 +85,7 @@ const CompetitorsPage = () => {
                 <div className="form-group col-3">
                     <input
                         type="number"
+                        min="1"
                         className="form-control"
                         id="reviewsCoeff"
                         value={reviewsCoeff}
@@ -95,6 +96,7 @@ const CompetitorsPage = () => {
                 <div className="form-group col-3">
                     <input
                         type="number"
+                        min="0"
                         className="form-control"
                         id="reviewsThreshold"
                         value={reviewsThreshold}
@@ -102,7 +104,6 @@ const CompetitorsPage = () => {
                         placeholder="Enter Reviews Threshold"
                     />
                 </div>
-
                 <div className="col-3">
                     <YearDropdown
                         onChange={handleMinYearChange}

@@ -51,6 +51,7 @@ const TagsPage = () => {
                 <div className="form-group col-3">
                     <input
                         type="number"
+                        min="1"
                         className="form-control"
                         id="reviewsCoeff"
                         value={reviewsCoeff}
@@ -61,6 +62,7 @@ const TagsPage = () => {
                 <div className="form-group col-3">
                     <input
                         type="number"
+                        min="0"
                         className="form-control"
                         id="reviewsThreshold"
                         value={reviewsThreshold}
@@ -115,7 +117,9 @@ const TagsPage = () => {
                         <h1>Overview</h1>
                         <div className="col-6">
                             <h2>Revenue Box Plot</h2>
-                            <MoneyBoxPlot data={tagsOverview} />
+                            <MoneyBoxPlot
+                                data={convertTagDataToGeneric(tagsOverview)}
+                            />
                         </div>
                         <div className="col-6">
                             <h2>Games & Median Revenue</h2>

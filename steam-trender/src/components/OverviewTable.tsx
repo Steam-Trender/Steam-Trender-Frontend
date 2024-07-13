@@ -15,7 +15,7 @@ export function OverviewTable({ data }: OverviewTableProps) {
                     <tr>
                         <th></th>
                         {data.map((item, index) => (
-                            <th key={index}>{item.detail.title}</th>
+                            <th key={index}>{item.title}</th>
                         ))}
                     </tr>
                 </thead>
@@ -30,6 +30,16 @@ export function OverviewTable({ data }: OverviewTableProps) {
                         <td>Median Reviews</td>
                         {data.map((item, index) => (
                             <td key={index}>{item.overview.median_reviews}</td>
+                        ))}
+                    </tr>
+                    <tr>
+                        <td>Median Owners</td>
+                        {data.map((item, index) => (
+                            <td key={index}>
+                                <NumberFormatter
+                                    value={item.overview.median_owners}
+                                />
+                            </td>
                         ))}
                     </tr>
                     <tr>
