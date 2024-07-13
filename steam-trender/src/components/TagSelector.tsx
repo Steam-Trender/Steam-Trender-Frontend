@@ -11,13 +11,26 @@ interface SelectOption {
 interface TagsSelectorProps {
     onChange: (selectedTagIds: number[]) => void;
     placeholder: string;
+    limit: number;
 }
 
-export function TagSelector({ onChange, placeholder }: TagsSelectorProps) {
+export function TagSelector({
+    onChange,
+    placeholder,
+    limit,
+}: TagsSelectorProps) {
     const [tags, setTags] = useState<ITag[]>([]);
     const [selectedTags, setSelectedTags] = useState<MultiValue<SelectOption>>(
         []
     );
+
+    const handleChange = (selectedOption: MultiValue<SelectOption>) => {
+        if (selectedOption.length <= limit) {
+            setSelectedTags(selectedOption);
+        } else {
+            alert("You reached tags limit.");
+        }
+    };
 
     useEffect(() => {
         const fetchTags = async () => {
@@ -45,9 +58,7 @@ export function TagSelector({ onChange, placeholder }: TagsSelectorProps) {
             options={selectOptions}
             isMulti
             value={selectedTags}
-            onChange={(selectedOption: MultiValue<SelectOption>) =>
-                setSelectedTags(selectedOption)
-            }
+            onChange={handleChange}
             getOptionLabel={(option) => option.label}
             getOptionValue={(option) => option.value.toString()}
             placeholder={placeholder}

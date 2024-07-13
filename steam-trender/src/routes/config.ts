@@ -4,6 +4,8 @@ import NotFoundPage from "../pages/NotFoundPage";
 import CompetitorsPage from "../pages/CompetitorsPage";
 import BlogPage from "../pages/BlogPage";
 import BlogPostPage from "../pages/BlogPostPage";
+import TagsPage from "../pages/TagsPage";
+import AboutPage from "../pages/AboutPage";
 
 interface RouteConfig {
     path: string;
@@ -36,12 +38,17 @@ const routeConfigs: RouteConfig[] = [
     {
         path: "/tags",
         title: "Tags",
-        element: React.createElement(NotFoundPage),
+        element: React.createElement(TagsPage),
     },
     {
         path: "/trends",
         title: "Trends",
         element: React.createElement(NotFoundPage),
+    },
+    {
+        path: "/about",
+        title: "About",
+        element: React.createElement(AboutPage),
     },
     {
         path: "*",

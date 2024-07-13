@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { ICompetitors } from "../models/competitors";
 import ApiService from "../api/service";
 import { TagSelector } from "../components/TagSelector";
-import { MoneyFormatter } from "../utils/money_formatter";
+import { NumberFormatter } from "../utils/number_formatter";
 import { YearDropdown } from "../components/YearsDropdown";
 import { IGame } from "../models/game";
+import { getSpecificRevenue } from "../models/overview";
+import { GamesTable } from "../components/GamesTable";
 
 const CompetitorsPage = () => {
     const [reviewsCoeff, setReviewsCoeff] = useState("");
@@ -20,6 +22,8 @@ const CompetitorsPage = () => {
         if (minYear && maxYear) {
             try {
                 const data = await ApiService.fetchCompetitorOverview(
+                    reviewsThreshold,
+                    reviewsCoeff,
                     minYear,
                     maxYear,
                     selectedTagIds,
@@ -119,19 +123,21 @@ const CompetitorsPage = () => {
                     <TagSelector
                         onChange={setSelectedTagIds}
                         placeholder="Avaialbe Tags"
+                        limit={10}
                     />
                 </div>
                 <div className="col-6">
                     <TagSelector
                         onChange={setBannedTagIds}
                         placeholder="Banned Tags"
+                        limit={10}
                     />
                 </div>
             </div>
             <div className="row pt-2">
                 <div className="col-6">
                     <button
-                        className="btn btn-primary w-100"
+                        className="btn btn-primary w-100 text-uppercase"
                         onClick={handleAnalyzeClick}
                     >
                         Analyze
@@ -139,7 +145,7 @@ const CompetitorsPage = () => {
                 </div>
                 <div className="col-6">
                     <button
-                        className="btn btn-primary w-100"
+                        className="btn btn-primary w-100 text-uppercase"
                         onClick={handleDownload}
                     >
                         Download
@@ -149,65 +155,48 @@ const CompetitorsPage = () => {
             {competitorOverview && (
                 <>
                     <div className="row pt-4">
+                        <h1>Overview</h1>
                         <p>
                             <b>Total Games: </b>
-                            {competitorOverview.overview.total_games},
-                            <b> Median Revenue: </b>
-                            {competitorOverview.overview.median_revenue},
-                            <b> Median Reviews: </b>
-                            {competitorOverview.overview.median_reviews},
-                            <b> Median Owners: </b>
-                            {competitorOverview.overview.median_owners},
-                            <b> Median Launch Price: </b>$
+                            <NumberFormatter
+                                value={competitorOverview.overview.total_games}
+                            />
+                            ,<b> Median Revenue: </b>
+                            $
+                            <NumberFormatter
+                                value={getSpecificRevenue(
+                                    competitorOverview.overview,
+                                    0.5
+                                )}
+                            />
+                            ,<b> Median Reviews: </b>
+                            <NumberFormatter
+                                value={
+                                    competitorOverview.overview.median_reviews
+                                }
+                            />
+                            ,<b> Median Owners: </b>
+                            <NumberFormatter
+                                value={
+                                    competitorOverview.overview.median_owners
+                                }
+                            />
+                            ,<b> Median Launch Price: </b>$
                             {competitorOverview.overview.median_price}
                         </p>
                     </div>
                     <div className="row pt-2">
-                        <small>
-                            <table className="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Reviews Total</th>
-                                        <th scope="col">Reviews Score Fancy</th>
-                                        <th scope="col">Release Date</th>
-                                        <th scope="col">Launch Price</th>
-                                        <th scope="col">Tags</th>
-                                        <th scope="col">Owners Estimated</th>
-                                        <th scope="col">Revenue Estimated</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {competitorOverview.games.map((game) => (
-                                        <tr key={game.id}>
-                                            <td>
-                                                <a
-                                                    href={`https://store.steampowered.com/app/${game.appid}`}
-                                                >
-                                                    {game.title}
-                                                </a>
-                                            </td>
-                                            <td>{game.reviews}</td>
-                                            <td>{game.reviews_score}%</td>
-                                            <td>{game.release_date}</td>
-                                            <td>${game.price}</td>
-                                            <td>
-                                                {game.tags
-                                                    .map((tag) => tag.title)
-                                                    .join(", ")}
-                                            </td>
-                                            <td>{game.owners}</td>
-                                            <td>
-                                                $
-                                                <MoneyFormatter
-                                                    value={game.revenue}
-                                                />
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </small>
+                        <h1>Competitors Table</h1>
+                        <p className="my-0">
+                            <i>
+                                Note: only the first 100 games (or less) are
+                                listed below, sorted by the number of reviews,
+                                that fit the selected parameters. Nevertheless,
+                                all were taken into account in the calculation
+                                of aggregate values.
+                            </i>
+                        </p>
+                        <GamesTable games={competitorOverview.games} />
                     </div>
                 </>
             )}
