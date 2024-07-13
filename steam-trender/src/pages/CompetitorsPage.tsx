@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ICompetitors } from "../models/competitors";
 import ApiService from "../api/service";
-import { TagSelector } from "../components/TagSelector";
+import TagSelector from "../components/TagSelector";
 import { NumberFormatter } from "../utils/number_formatter";
 import { YearDropdown } from "../components/YearsDropdown";
 import { IGame } from "../models/game";

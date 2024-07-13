@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ApiService from "../api/service";
+import YearStore from "../stores/YearStore";
 
 interface YearDropdownProps {
     onChange: (year: number) => void;
@@ -12,32 +12,10 @@ export function YearDropdown({
     onChange,
     descending,
 }: YearDropdownProps) {
-    const [years, setYears] = useState<number[]>([]);
     const [selectedYear, setSelectedYear] = useState<number>();
 
     useEffect(() => {
-        const fetchYears = async (descending: boolean) => {
-            try {
-                const response = await ApiService.fetchYears();
-                let years = [2020, 2021, 2022, 2023];
-                if (descending) {
-                    years = Array.from(
-                        { length: response.max_year - response.min_year + 1 },
-                        (v, k) => response.max_year - k
-                    );
-                } else {
-                    years = Array.from(
-                        { length: response.max_year - response.min_year + 1 },
-                        (v, k) => response.min_year + k
-                    );
-                }
-                setYears(years);
-            } catch (error) {
-                console.error("Failed to fetch years:", error);
-            }
-        };
-
-        fetchYears(descending);
+        YearStore.fetchYears();
     }, []);
 
     const handleYearSelect = (year: number) => {
@@ -57,7 +35,7 @@ export function YearDropdown({
                 {selectedYear || initialLabel}
             </button>
             <div className="dropdown-menu" aria-labelledby="yearDropdown">
-                {years.map((year) => (
+                {YearStore.getYears(descending).map((year) => (
                     <button
                         className="dropdown-item"
                         key={year}

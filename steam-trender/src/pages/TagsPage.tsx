@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ITagOverview } from "../models/tag_overview";
 import ApiService from "../api/service";
-import { TagSelector } from "../components/TagSelector";
+import TagSelector from "../components/TagSelector";
 import { YearDropdown } from "../components/YearsDropdown";
 import { MoneyBoxPlot } from "../components/MoneyBoxPlot";
 import { OverviewTable } from "../components/OverviewTable";

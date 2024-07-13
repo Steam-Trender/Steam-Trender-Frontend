@@ -1,28 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { IPost } from "../models/post";
-import ApiService from "../api/service";
+import React, { useEffect } from "react";
 import { PostCard } from "../components/PostCard";
+import { observer } from "mobx-react";
+import BlogStore from "../stores/BlogStore";
 
-const BlogPage = () => {
-    const [posts, setPosts] = useState<IPost[]>([]);
-
+const BlogPage = observer(() => {
     useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const response = await ApiService.fetchPosts();
-                setPosts(response);
-            } catch (error) {
-                console.error("Error fetching posts:", error);
-            }
-        };
-        fetchPosts();
+        BlogStore.fetchPosts();
     }, []);
 
     return (
         <>
             <h1 className="text-uppercase">Blog</h1>
             <div className="row">
-                {posts.map((post) => (
+                {BlogStore.posts.map((post) => (
                     <div className="col-6 mb-3" key={post.id}>
                         <PostCard key={post.id} post={post} />
                     </div>
@@ -30,6 +20,6 @@ const BlogPage = () => {
             </div>
         </>
     );
-};
+});
 
 export default BlogPage;

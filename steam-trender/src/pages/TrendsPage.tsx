@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ApiService from "../api/service";
 import { YearDropdown } from "../components/YearsDropdown";
-import { TagSelector } from "../components/TagSelector";
+import TagSelector from "../components/TagSelector";
 import { IYearOverview } from "../models/year_overview";
 import { OverviewTable } from "../components/OverviewTable";
 import { convertYearDataToGeneric } from "../models/generic_overview";
