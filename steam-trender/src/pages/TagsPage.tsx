@@ -7,6 +7,7 @@ import { MoneyBoxPlot } from "../components/MoneyBoxPlot";
 import { OverviewTable } from "../components/OverviewTable";
 import { convertTagDataToGeneric } from "../models/generic_overview";
 import CombinedChart from "../components/CombinedPlot";
+import { Tooltip } from "../components/Tooltip";
 
 const TagsPage = () => {
     const [reviewsCoeff, setReviewsCoeff] = useState("");
@@ -49,15 +50,17 @@ const TagsPage = () => {
         <>
             <div className="row">
                 <div className="form-group col-3">
-                    <input
-                        type="number"
-                        min="1"
-                        className="form-control"
-                        id="reviewsCoeff"
-                        value={reviewsCoeff}
-                        onChange={(e) => setReviewsCoeff(e.target.value)}
-                        placeholder="Enter Reviews Coefficient"
-                    />
+                    <Tooltip text="The coeff by which the number of reviews a game has is multiplied. The default is 30.">
+                        <input
+                            type="number"
+                            min="1"
+                            className="form-control"
+                            id="reviewsCoeff"
+                            value={reviewsCoeff}
+                            onChange={(e) => setReviewsCoeff(e.target.value)}
+                            placeholder="Enter Reviews Coefficient"
+                        />
+                    </Tooltip>
                 </div>
                 <div className="form-group col-3">
                     <input
