@@ -23,13 +23,21 @@ export function OverviewTable({ data }: OverviewTableProps) {
                     <tr>
                         <td>Games Released</td>
                         {data.map((item, index) => (
-                            <td key={index}>{item.overview.total_games}</td>
+                            <td key={index}>
+                                <NumberFormatter
+                                    value={item.overview.total_games}
+                                />
+                            </td>
                         ))}
                     </tr>
                     <tr>
                         <td>Median Reviews</td>
                         {data.map((item, index) => (
-                            <td key={index}>{item.overview.median_reviews}</td>
+                            <td key={index}>
+                                <NumberFormatter
+                                    value={item.overview.median_reviews}
+                                />
+                            </td>
                         ))}
                     </tr>
                     <tr>
