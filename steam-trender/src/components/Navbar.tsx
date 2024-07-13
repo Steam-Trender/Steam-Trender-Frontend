@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
     return (
@@ -28,28 +28,37 @@ const Navbar = () => {
                 >
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <Link
-                                className="navbar-brand text-uppercase"
+                            <NavLink
                                 to="/competitors"
+                                className={({ isActive }) =>
+                                    "navbar-brand text-uppercase" +
+                                    (isActive ? " active-link" : "")
+                                }
                             >
                                 Competitors
-                            </Link>
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link
-                                className="navbar-brand text-uppercase"
+                            <NavLink
                                 to="/tags"
+                                className={({ isActive }) =>
+                                    "navbar-brand text-uppercase" +
+                                    (isActive ? " active-link" : "")
+                                }
                             >
                                 Tags
-                            </Link>
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link
-                                className="navbar-brand text-uppercase"
+                            <NavLink
                                 to="/trends"
+                                className={({ isActive }) =>
+                                    "navbar-brand text-uppercase" +
+                                    (isActive ? " active-link" : "")
+                                }
                             >
                                 Trends
-                            </Link>
+                            </NavLink>
                         </li>
                     </ul>
                 </div>
