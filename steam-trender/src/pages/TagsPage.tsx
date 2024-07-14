@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { ITagOverview } from "../models/tag_overview";
 import ApiService from "../api/service";
 import TagSelector from "../components/TagSelector";
-import { YearDropdown } from "../components/YearsDropdown";
+import YearDropdown from "../components/YearsDropdown";
 import { MoneyBoxPlot } from "../components/MoneyBoxPlot";
 import { OverviewTable } from "../components/OverviewTable";
 import { convertTagDataToGeneric } from "../models/generic_overview";
 import CombinedChart from "../components/CombinedPlot";
-import { Tooltip } from "../components/Tooltip";
+import { ReviewsCoefficientInput } from "../components/ReviewsCoefficientInput";
+import { ReviewsThresholdInput } from "../components/ReviewsThresholdInput";
 
 const TagsPage = () => {
     const [reviewsCoeff, setReviewsCoeff] = useState("");
@@ -50,42 +51,29 @@ const TagsPage = () => {
         <>
             <div className="row">
                 <div className="form-group col-3">
-                    <Tooltip text="The coeff by which the number of reviews a game has is multiplied. The default is 30.">
-                        <input
-                            type="number"
-                            min="1"
-                            className="form-control"
-                            id="reviewsCoeff"
-                            value={reviewsCoeff}
-                            onChange={(e) => setReviewsCoeff(e.target.value)}
-                            placeholder="Enter Reviews Coefficient"
-                        />
-                    </Tooltip>
-                </div>
-                <div className="form-group col-3">
-                    <input
-                        type="number"
-                        min="0"
-                        className="form-control"
-                        id="reviewsThreshold"
-                        value={reviewsThreshold}
-                        onChange={(e) => setReviewsThreshold(e.target.value)}
-                        placeholder="Enter Reviews Threshold"
+                    <ReviewsCoefficientInput
+                        value={reviewsCoeff}
+                        onChange={setReviewsCoeff}
                     />
                 </div>
-
+                <div className="form-group col-3">
+                    <ReviewsThresholdInput
+                        value={reviewsThreshold}
+                        onChange={setReviewsThreshold}
+                    />
+                </div>
                 <div className="col-3">
                     <YearDropdown
                         onChange={handleMinYearChange}
                         initialLabel="Select Min Year"
-                        descending={false}
+                        isDescending={false}
                     />
                 </div>
                 <div className="col-3">
                     <YearDropdown
                         onChange={handleMaxYearChange}
                         initialLabel="Select Max Year"
-                        descending={true}
+                        isDescending={true}
                     />
                 </div>
             </div>

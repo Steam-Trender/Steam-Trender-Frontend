@@ -3,10 +3,12 @@ import { ICompetitors } from "../models/competitors";
 import ApiService from "../api/service";
 import TagSelector from "../components/TagSelector";
 import { NumberFormatter } from "../utils/number_formatter";
-import { YearDropdown } from "../components/YearsDropdown";
+import YearDropdown from "../components/YearsDropdown";
 import { IGame } from "../models/game";
 import { getSpecificRevenue } from "../models/overview";
 import { GamesTable } from "../components/GamesTable";
+import { ReviewsThresholdInput } from "../components/ReviewsThresholdInput";
+import { ReviewsCoefficientInput } from "../components/ReviewsCoefficientInput";
 
 const CompetitorsPage = () => {
     const [reviewsCoeff, setReviewsCoeff] = useState("");
@@ -83,39 +85,29 @@ const CompetitorsPage = () => {
         <>
             <div className="row">
                 <div className="form-group col-3">
-                    <input
-                        type="number"
-                        min="1"
-                        className="form-control"
-                        id="reviewsCoeff"
+                    <ReviewsCoefficientInput
                         value={reviewsCoeff}
-                        onChange={(e) => setReviewsCoeff(e.target.value)}
-                        placeholder="Enter Reviews Coefficient"
+                        onChange={setReviewsCoeff}
                     />
                 </div>
                 <div className="form-group col-3">
-                    <input
-                        type="number"
-                        min="0"
-                        className="form-control"
-                        id="reviewsThreshold"
+                    <ReviewsThresholdInput
                         value={reviewsThreshold}
-                        onChange={(e) => setReviewsThreshold(e.target.value)}
-                        placeholder="Enter Reviews Threshold"
+                        onChange={setReviewsThreshold}
                     />
                 </div>
                 <div className="col-3">
                     <YearDropdown
                         onChange={handleMinYearChange}
                         initialLabel="Select Min Year"
-                        descending={false}
+                        isDescending={false}
                     />
                 </div>
                 <div className="col-3">
                     <YearDropdown
                         onChange={handleMaxYearChange}
                         initialLabel="Select Max Year"
-                        descending={true}
+                        isDescending={true}
                     />
                 </div>
             </div>

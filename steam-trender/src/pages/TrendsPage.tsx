@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ApiService from "../api/service";
-import { YearDropdown } from "../components/YearsDropdown";
+import YearDropdown from "../components/YearsDropdown";
 import TagSelector from "../components/TagSelector";
 import { IYearOverview } from "../models/year_overview";
 import { OverviewTable } from "../components/OverviewTable";
@@ -8,6 +8,7 @@ import { convertYearDataToGeneric } from "../models/generic_overview";
 import { MoneyBoxPlot } from "../components/MoneyBoxPlot";
 import { RegressionPlot } from "../components/RegressionPlot";
 import { getSpecificRevenue } from "../models/overview";
+import { ReviewsThresholdInput } from "../components/ReviewsThresholdInput";
 
 const TrendsPage = () => {
     const [reviewsThreshold, setReviewsThreshold] = useState("");
@@ -38,21 +39,16 @@ const TrendsPage = () => {
         <>
             <div className="row">
                 <div className="form-group col-3">
-                    <input
-                        type="number"
-                        min="0"
-                        className="form-control"
-                        id="reviewsThreshold"
+                    <ReviewsThresholdInput
                         value={reviewsThreshold}
-                        onChange={(e) => setReviewsThreshold(e.target.value)}
-                        placeholder="Enter Reviews Threshold"
+                        onChange={setReviewsThreshold}
                     />
                 </div>
                 <div className="col-3">
                     <YearDropdown
                         onChange={handleYearChange}
                         initialLabel="Select Year"
-                        descending={true}
+                        isDescending={true}
                     />
                 </div>
                 <div className="col-3">
