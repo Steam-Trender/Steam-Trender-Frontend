@@ -77,7 +77,7 @@ export function RegressionPlot({
 
     if (trend !== null) {
         series.push({
-            name: "Regression",
+            name: "Trend",
             data: trend,
         });
     }
