@@ -19,11 +19,12 @@ export function ReviewsCoefficientInput({
             <input
                 type="number"
                 min="1"
+                max="100"
                 className="form-control"
                 id="reviewsThreshold"
                 value={value}
                 onChange={handleChange}
-                placeholder="Enter Reviews Threshold"
+                placeholder="Reviews Coeff"
             />
         </Tooltip>
     );
