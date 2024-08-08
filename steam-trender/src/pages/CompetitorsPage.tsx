@@ -92,6 +92,22 @@ const CompetitorsPage = () => {
     return (
         <>
             <div className="row">
+                <div className="col-6">
+                    <TagSelector
+                        onChange={setSelectedTagIds}
+                        placeholder="Avaialbe Tags"
+                        limit={10}
+                    />
+                </div>
+                <div className="col-6">
+                    <TagSelector
+                        onChange={setBannedTagIds}
+                        placeholder="Banned Tags"
+                        limit={10}
+                    />
+                </div>
+            </div>
+            <div className="row pt-2">
                 <div className="form-group col-3">
                     <ReviewsCoefficientInput
                         value={reviewsCoeff}
@@ -117,51 +133,29 @@ const CompetitorsPage = () => {
                     </div>
                 </div>
                 <div className="col-3">
-                    <YearDropdown
-                        onChange={handleMinYearChange}
-                        initialLabel="Min Year"
-                        isDescending={false}
-                    />
+                    <div className="row">
+                        <div className="col-6">
+                            <YearDropdown
+                                onChange={handleMinYearChange}
+                                initialLabel="Min Year"
+                                isDescending={false}
+                            />
+                        </div>
+                        <div className="col-6">
+                            <YearDropdown
+                                onChange={handleMaxYearChange}
+                                initialLabel="Max Year"
+                                isDescending={true}
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div className="col-3">
-                    <YearDropdown
-                        onChange={handleMaxYearChange}
-                        initialLabel="Max Year"
-                        isDescending={true}
-                    />
-                </div>
-            </div>
-            <div className="row pt-2">
-                <div className="col-6">
-                    <TagSelector
-                        onChange={setSelectedTagIds}
-                        placeholder="Avaialbe Tags"
-                        limit={10}
-                    />
-                </div>
-                <div className="col-6">
-                    <TagSelector
-                        onChange={setBannedTagIds}
-                        placeholder="Banned Tags"
-                        limit={10}
-                    />
-                </div>
-            </div>
-            <div className="row pt-2">
-                <div className="col-6">
                     <button
                         className="btn btn-primary w-100 text-uppercase"
                         onClick={handleAnalyzeClick}
                     >
                         Analyze
-                    </button>
-                </div>
-                <div className="col-6">
-                    <button
-                        className="btn btn-primary w-100 text-uppercase"
-                        onClick={handleDownload}
-                    >
-                        Download
                     </button>
                 </div>
             </div>
@@ -200,17 +194,29 @@ const CompetitorsPage = () => {
                     </div>
                     <div className="row pt-2">
                         <h1>Competitors Table</h1>
-                        <p className="my-0">
-                            <i>
-                                Note: only the first 100 games (or less) are
-                                listed below, sorted by the number of reviews,
-                                that fit the selected parameters. Nevertheless,
-                                all were taken into account in the calculation
-                                of aggregate values. You can download all games
-                                by clicking DOWNLOAD button.
-                            </i>
-                        </p>
-                        <GamesTable games={competitorOverview.games} />
+                        <div className="col-9">
+                            <p className="my-0">
+                                <i>
+                                    NB: only the first 100 games (or less) are
+                                    listed below, sorted by the number of
+                                    reviews, that fit the selected parameters.
+                                    Nevertheless, all were taken into account in
+                                    the calculation of aggregate values. You can
+                                    download all data.
+                                </i>
+                            </p>
+                        </div>
+                        <div className="col-3">
+                            <button
+                                className="btn btn-outline-primary w-100 text-uppercase"
+                                onClick={handleDownload}
+                            >
+                                Download
+                            </button>
+                        </div>
+                        <div className="col-12 pt-2">
+                            <GamesTable games={competitorOverview.games} />
+                        </div>
                     </div>
                 </>
             )}

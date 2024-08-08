@@ -50,6 +50,15 @@ const TagsPage = () => {
     return (
         <>
             <div className="row">
+                <div className="col-12">
+                    <TagSelector
+                        onChange={setSelectedTagIds}
+                        placeholder="Tags"
+                        limit={10}
+                    />
+                </div>
+            </div>
+            <div className="row pt-2">
                 <div className="form-group col-3">
                     <ReviewsCoefficientInput
                         value={reviewsCoeff}
@@ -88,15 +97,6 @@ const TagsPage = () => {
                     >
                         Analyze
                     </button>
-                </div>
-            </div>
-            <div className="row pt-2">
-                <div className="col-12">
-                    <TagSelector
-                        onChange={setSelectedTagIds}
-                        placeholder="Tags"
-                        limit={10}
-                    />
                 </div>
             </div>
             {tagsOverview && (
