@@ -4,9 +4,11 @@ import { IGame } from "../models/game";
 
 interface GamesTableProps {
     games: IGame[];
+    limit?: number;
 }
 
-export function GamesTable({ games }: GamesTableProps) {
+export function GamesTable({ games, limit = 100 }: GamesTableProps) {
+    const limitedGames: IGame[] = games.slice(0, limit);
     return (
         <small>
             <small>
@@ -25,7 +27,7 @@ export function GamesTable({ games }: GamesTableProps) {
                         </tr>
                     </thead>
                     <tbody>
-                        {games.map((game) => (
+                        {limitedGames.map((game) => (
                             <tr key={game.id}>
                                 <td>
                                     <a
