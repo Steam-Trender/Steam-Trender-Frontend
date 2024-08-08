@@ -60,7 +60,7 @@ export function CombinedChart({ data }: ChartProps) {
                 },
                 {
                     min: 0,
-                    max: 200000,
+                    max: 1000000,
                     opposite: true,
                     axisTicks: {
                         show: true,
