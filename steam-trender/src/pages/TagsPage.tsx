@@ -64,27 +64,22 @@ const TagsPage = () => {
                     />
                 </div>
                 <div className="col-3">
-                    <YearDropdown
-                        onChange={handleMinYearChange}
-                        initialLabel="Select Min Year"
-                        isDescending={false}
-                    />
-                </div>
-                <div className="col-3">
-                    <YearDropdown
-                        onChange={handleMaxYearChange}
-                        initialLabel="Select Max Year"
-                        isDescending={true}
-                    />
-                </div>
-            </div>
-            <div className="row pt-2">
-                <div className="col-6">
-                    <TagSelector
-                        onChange={setSelectedTagIds}
-                        placeholder="Tags"
-                        limit={10}
-                    />
+                    <div className="row">
+                        <div className="col-6">
+                            <YearDropdown
+                                onChange={handleMinYearChange}
+                                initialLabel="Min Year"
+                                isDescending={false}
+                            />
+                        </div>
+                        <div className="col-6">
+                            <YearDropdown
+                                onChange={handleMaxYearChange}
+                                initialLabel="Max Year"
+                                isDescending={true}
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div className="col-3">
                     <button
@@ -94,13 +89,14 @@ const TagsPage = () => {
                         Analyze
                     </button>
                 </div>
-                <div className="col-3">
-                    <button
-                        className="btn btn-primary text-uppercase w-100"
-                        onClick={handleAnalyzeClick}
-                    >
-                        Download
-                    </button>
+            </div>
+            <div className="row pt-2">
+                <div className="col-12">
+                    <TagSelector
+                        onChange={setSelectedTagIds}
+                        placeholder="Tags"
+                        limit={10}
+                    />
                 </div>
             </div>
             {tagsOverview && (

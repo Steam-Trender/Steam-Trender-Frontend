@@ -38,17 +38,28 @@ const TrendsPage = () => {
     return (
         <>
             <div className="row">
-                <div className="form-group col-3">
-                    <ReviewsThresholdInput
-                        value={reviewsThreshold}
-                        onChange={setReviewsThreshold}
-                        max={false}
-                    />
+                <div className="col-6">
+                    <div className="row">
+                        <div className="form-group col-3">
+                            <ReviewsThresholdInput
+                                value={reviewsThreshold}
+                                onChange={setReviewsThreshold}
+                                max={false}
+                            />
+                        </div>
+                        <div className="col-9">
+                            <TagSelector
+                                onChange={setSelectedTagIds}
+                                placeholder="Tags"
+                                limit={10}
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div className="col-3">
                     <YearDropdown
                         onChange={handleYearChange}
-                        initialLabel="Select Year"
+                        initialLabel="Pivot Year"
                         isDescending={true}
                     />
                 </div>
@@ -59,23 +70,6 @@ const TrendsPage = () => {
                     >
                         Analyze
                     </button>
-                </div>
-                <div className="col-3">
-                    <button
-                        className="btn btn-primary text-uppercase w-100"
-                        onClick={handleAnalyzeClick}
-                    >
-                        Download
-                    </button>
-                </div>
-            </div>
-            <div className="row pt-2">
-                <div className="col-6">
-                    <TagSelector
-                        onChange={setSelectedTagIds}
-                        placeholder="Tags"
-                        limit={10}
-                    />
                 </div>
             </div>
             <div className="row pt-2">
