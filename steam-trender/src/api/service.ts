@@ -7,6 +7,10 @@ import { IPost } from "../models/post";
 import { ITagOverview } from "../models/tag_overview";
 import { IYearOverview } from "../models/year_overview";
 
+type Params = {
+    [key: string]: any;
+};
+
 class ApiService {
     static async fetchTags(): Promise<[ITag]> {
         try {
@@ -22,7 +26,7 @@ class ApiService {
             const response = await API.get<IYears>("/years");
             return response.data;
         } catch (error) {
-            return { min_year: 2010, max_year: 2024 };
+            return { min_year: 2017, max_year: 2024 };
         }
     }
 
@@ -42,30 +46,43 @@ class ApiService {
 
     static async fetchCompetitorOverview(
         min_reviews: string,
+        max_reviews: string,
         reviews_coeff: string,
         minYear: number,
         maxYear: number,
         selectedTags: number[],
         bannedTags: number[]
     ): Promise<ICompetitors> {
-        if (min_reviews === "") {
-            min_reviews = "0";
-        }
-        if (reviews_coeff === "") {
-            reviews_coeff = "30";
-        }
         try {
+            const addParamIfNotEmpty = (
+                params: Params,
+                key: string,
+                value: any
+            ) => {
+                if (value !== "" && value !== undefined && value !== null) {
+                    params[key] = value;
+                }
+            };
+
+            const getParams = () => {
+                const params: any = {
+                    min_year: minYear,
+                    max_year: maxYear,
+                    whitelist_tag_ids: selectedTags,
+                    blacklist_tag_ids: bannedTags,
+                };
+
+                addParamIfNotEmpty(params, "reviews_coeff", reviews_coeff);
+                addParamIfNotEmpty(params, "min_reviews", min_reviews);
+                addParamIfNotEmpty(params, "max_reviews", max_reviews);
+
+                return params;
+            };
+
             const response = await API.get<ICompetitors>(
                 "/analyze/competitors",
                 {
-                    params: {
-                        min_year: minYear,
-                        max_year: maxYear,
-                        whitelist_tag_ids: selectedTags,
-                        blacklist_tag_ids: bannedTags,
-                        reviews_coeff: reviews_coeff,
-                        min_reviews: min_reviews,
-                    },
+                    params: getParams(),
                     paramsSerializer: (params) =>
                         qs.stringify(params, { arrayFormat: "repeat" }),
                 }

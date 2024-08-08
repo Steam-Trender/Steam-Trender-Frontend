@@ -60,6 +60,7 @@ const TagsPage = () => {
                     <ReviewsThresholdInput
                         value={reviewsThreshold}
                         onChange={setReviewsThreshold}
+                        max={false}
                     />
                 </div>
                 <div className="col-3">

@@ -12,7 +12,8 @@ import { ReviewsCoefficientInput } from "../components/ReviewsCoefficientInput";
 
 const CompetitorsPage = () => {
     const [reviewsCoeff, setReviewsCoeff] = useState("");
-    const [reviewsThreshold, setReviewsThreshold] = useState("");
+    const [minReviewsThreshold, setMinReviewsThreshold] = useState("");
+    const [maxReviewsThreshold, setMaxReviewsThreshold] = useState("");
     const [minYear, setMinYear] = useState<number | null>(null);
     const [maxYear, setMaxYear] = useState<number | null>(null);
     const [competitorOverview, setCompetitorOverview] =
@@ -24,7 +25,8 @@ const CompetitorsPage = () => {
         if (minYear && maxYear) {
             try {
                 const data = await ApiService.fetchCompetitorOverview(
-                    reviewsThreshold,
+                    minReviewsThreshold,
+                    maxReviewsThreshold,
                     reviewsCoeff,
                     minYear,
                     maxYear,
@@ -90,11 +92,23 @@ const CompetitorsPage = () => {
                         onChange={setReviewsCoeff}
                     />
                 </div>
-                <div className="form-group col-3">
-                    <ReviewsThresholdInput
-                        value={reviewsThreshold}
-                        onChange={setReviewsThreshold}
-                    />
+                <div className="col-3">
+                    <div className="row">
+                        <div className="form-group col-6 pe-1">
+                            <ReviewsThresholdInput
+                                value={minReviewsThreshold}
+                                onChange={setMinReviewsThreshold}
+                                max={false}
+                            />
+                        </div>
+                        <div className="form-group col-6 ps-1">
+                            <ReviewsThresholdInput
+                                value={maxReviewsThreshold}
+                                onChange={setMaxReviewsThreshold}
+                                max={true}
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div className="col-3">
                     <YearDropdown
