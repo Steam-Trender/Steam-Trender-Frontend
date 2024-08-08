@@ -29,6 +29,17 @@ const Navbar = () => {
                     <ul className="navbar-nav">
                         <li className="nav-item">
                             <NavLink
+                                to="/description"
+                                className={({ isActive }) =>
+                                    "navbar-brand text-uppercase" +
+                                    (isActive ? " active-link" : "")
+                                }
+                            >
+                                Description
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink
                                 to="/competitors"
                                 className={({ isActive }) =>
                                     "navbar-brand text-uppercase" +

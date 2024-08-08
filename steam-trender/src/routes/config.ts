@@ -7,6 +7,7 @@ import BlogPostPage from "../pages/BlogPostPage";
 import TagsPage from "../pages/TagsPage";
 import AboutPage from "../pages/AboutPage";
 import TrendsPage from "../pages/TrendsPage";
+import DescriptionPage from "../pages/DescriptionPage";
 
 interface RouteConfig {
     path: string;
@@ -45,6 +46,11 @@ const routeConfigs: RouteConfig[] = [
         path: "/trends",
         title: "Trends",
         element: React.createElement(TrendsPage),
+    },
+    {
+        path: "/description",
+        title: "Description",
+        element: React.createElement(DescriptionPage),
     },
     {
         path: "/about",
