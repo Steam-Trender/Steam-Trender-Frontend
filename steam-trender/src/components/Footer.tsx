@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 const Footer = () => {
     return (
         <footer className="bg-light mt-2">
-            <div className="container text-center py-3">
+            <div className="container text-center pb-3 pt-1">
+                <p className="m-1">Contact us: MAIL</p>
                 <a
                     className="mx-5"
                     href="https://steampowered.com/"
