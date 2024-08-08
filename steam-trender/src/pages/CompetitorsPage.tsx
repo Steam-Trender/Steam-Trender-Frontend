@@ -9,6 +9,7 @@ import { getSpecificRevenue } from "../models/overview";
 import { GamesTable } from "../components/GamesTable";
 import { ReviewsThresholdInput } from "../components/ReviewsThresholdInput";
 import { ReviewsCoefficientInput } from "../components/ReviewsCoefficientInput";
+import { ITag } from "../models/tag";
 
 const CompetitorsPage = () => {
     const [reviewsCoeff, setReviewsCoeff] = useState("");
@@ -52,15 +53,20 @@ const CompetitorsPage = () => {
         const headers = Object.keys(
             competitorOverview.games[0]
         ) as (keyof IGame)[];
-        csvRows.push(headers.join(","));
+        csvRows.push(headers.join(";"));
 
         for (const row of competitorOverview.games) {
             const values = headers.map((header) => {
-                const cell = row[header];
+                let cell = row[header];
+
+                if (header === "tags") {
+                    cell = (cell as ITag[]).map((tag) => tag.title).join(",");
+                }
+
                 const escaped = ("" + cell).replace(/"/g, "\\\"");
                 return `"${escaped}"`;
             });
-            csvRows.push(values.join(","));
+            csvRows.push(values.join(";"));
         }
 
         const csvString = csvRows.join("\n");
@@ -69,7 +75,7 @@ const CompetitorsPage = () => {
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = "table_data.csv";
+        link.download = "steam_trender_competitors_data.csv";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -200,7 +206,8 @@ const CompetitorsPage = () => {
                                 listed below, sorted by the number of reviews,
                                 that fit the selected parameters. Nevertheless,
                                 all were taken into account in the calculation
-                                of aggregate values.
+                                of aggregate values. You can download all games
+                                by clicking DOWNLOAD button.
                             </i>
                         </p>
                         <GamesTable games={competitorOverview.games} />
