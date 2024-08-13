@@ -6,12 +6,28 @@ import { IYears } from "../models/years";
 import { IPost } from "../models/post";
 import { ITagOverview } from "../models/tag_overview";
 import { IYearOverview } from "../models/year_overview";
+import { IStatus } from "../models/status";
 
 type Params = {
     [key: string]: any;
 };
 
 class ApiService {
+    static async fetchStatus(): Promise<IStatus> {
+        try {
+            const response = await API.get<IStatus>("/health");
+            return response.data;
+        } catch (error) {
+            return {
+                status: "offline",
+                update: {
+                    id: 0,
+                    date: "2024-01-01",
+                },
+            };
+        }
+    }
+
     static async fetchTags(): Promise<[ITag]> {
         try {
             const response = await API.get<[ITag]>("/tags");
@@ -48,11 +64,17 @@ class ApiService {
         min_reviews: string,
         max_reviews: string,
         reviews_coeff: string,
-        minYear: number,
-        maxYear: number,
+        minYear: number | null,
+        maxYear: number | null,
         selectedTags: number[],
         bannedTags: number[]
     ): Promise<ICompetitors> {
+        if (minYear === null) {
+            minYear = 2020;
+        }
+        if (maxYear === null) {
+            maxYear = 2024;
+        }
         try {
             const addParamIfNotEmpty = (
                 params: Params,
