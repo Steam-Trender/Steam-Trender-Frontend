@@ -28,7 +28,7 @@ const YearDropdown = observer(
         return (
             <div className="dropdown">
                 <button
-                    className="btn btn-outline-primary dropdown-toggle w-100"
+                    className="btn btn-outline-secondary dropdown-toggle w-100"
                     type="button"
                     id="yearDropdown"
                     data-bs-toggle="dropdown"
