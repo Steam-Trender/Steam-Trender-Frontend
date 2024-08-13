@@ -11,22 +11,25 @@ interface OptionType {
 const selectStyle: StylesConfig<OptionType, true> = {
     control: (provided, state) => ({
         ...provided,
+        borderRadius: "var(--bs-border-radius)",
         backgroundColor: state.isDisabled ? "#e9ecef" : "white",
-        borderColor: state.isFocused ? "var(--bs-primary, #00000)" : "#ced4da",
+        borderColor: state.isFocused
+            ? "var(--bs-primary, #00000)"
+            : "var(--bs-border-color)",
         boxShadow: state.isFocused
             ? "0 0 0 0.2rem rgba(var(--bs-primary-rgb, 0, 123, 255), 0.25)"
             : "none",
         "&:hover": {
             borderColor: state.isFocused
                 ? "var(--bs-primary, #00000)"
-                : "#ced4da",
+                : "var(--bs-border-color)",
         },
         color: "black",
         minHeight: "calc(1.5em + 0.75rem + 2px)",
     }),
     menu: (provided) => ({
         ...provided,
-        borderColor: "#ced4da",
+        borderColor: "var(--bs-border-color)",
     }),
     option: (provided, state) => ({
         ...provided,
