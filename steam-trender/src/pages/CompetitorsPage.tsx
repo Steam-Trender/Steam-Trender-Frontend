@@ -3,43 +3,40 @@ import { ICompetitors } from "../models/competitors";
 import ApiService from "../api/service";
 import TagSelector from "../components/TagSelector";
 import { NumberFormatter } from "../utils/number_formatter";
-import YearDropdown from "../components/YearsDropdown";
 import { IGame } from "../models/game";
 import { getSpecificRevenue } from "../models/overview";
 import { GamesTable } from "../components/GamesTable";
 import { ReviewsThresholdInput } from "../components/ReviewsThresholdInput";
 import { ReviewsCoefficientInput } from "../components/ReviewsCoefficientInput";
 import { ITag } from "../models/tag";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const CompetitorsPage = () => {
     const [reviewsCoeff, setReviewsCoeff] = useState("");
     const [minReviewsThreshold, setMinReviewsThreshold] = useState("");
     const [maxReviewsThreshold, setMaxReviewsThreshold] = useState("");
-    const [minYear, setMinYear] = useState<number | null>(null);
-    const [maxYear, setMaxYear] = useState<number | null>(null);
+    const [minYear, setMinYear] = useState<Date | null>(null);
+    const [maxYear, setMaxYear] = useState<Date | null>(null);
     const [competitorOverview, setCompetitorOverview] =
         useState<ICompetitors | null>(null);
     const [selectedTagIds, setSelectedTagIds] = useState<number[]>([]);
     const [bannedTagIds, setBannedTagIds] = useState<number[]>([]);
 
     const handleAnalyzeClick = async () => {
-        if (minYear && maxYear) {
-            try {
-                const data = await ApiService.fetchCompetitorOverview(
-                    minReviewsThreshold,
-                    maxReviewsThreshold,
-                    reviewsCoeff,
-                    minYear,
-                    maxYear,
-                    selectedTagIds,
-                    bannedTagIds
-                );
-                setCompetitorOverview(data);
-            } catch (error) {
-                console.error("Failed to fetch data", error);
-            }
-        } else {
-            alert("Please select both a minimum and maximum year.");
+        try {
+            const data = await ApiService.fetchCompetitorOverview(
+                minReviewsThreshold,
+                maxReviewsThreshold,
+                reviewsCoeff,
+                minYear,
+                maxYear,
+                selectedTagIds,
+                bannedTagIds
+            );
+            setCompetitorOverview(data);
+        } catch (error) {
+            console.error("Failed to fetch data", error);
         }
     };
 
@@ -81,12 +78,12 @@ const CompetitorsPage = () => {
         document.body.removeChild(link);
     };
 
-    const handleMinYearChange = (year: number) => {
-        setMinYear(year);
+    const handleMinYearChange = (date: Date | null) => {
+        setMinYear(date);
     };
 
-    const handleMaxYearChange = (year: number) => {
-        setMaxYear(year);
+    const handleMaxYearChange = (date: Date | null) => {
+        setMaxYear(date);
     };
 
     return (
@@ -135,17 +132,21 @@ const CompetitorsPage = () => {
                 <div className="col-3">
                     <div className="row">
                         <div className="col-6">
-                            <YearDropdown
+                            <DatePicker
+                                selected={minYear}
                                 onChange={handleMinYearChange}
-                                initialLabel="Min Year"
-                                isDescending={false}
+                                dateFormat="yyyy-MM-dd"
+                                className="form-control"
+                                placeholderText="Min Date"
                             />
                         </div>
                         <div className="col-6">
-                            <YearDropdown
+                            <DatePicker
+                                selected={maxYear}
                                 onChange={handleMaxYearChange}
-                                initialLabel="Max Year"
-                                isDescending={true}
+                                dateFormat="yyyy-MM-dd"
+                                className="form-control"
+                                placeholderText="Max Date"
                             />
                         </div>
                     </div>
@@ -159,7 +160,7 @@ const CompetitorsPage = () => {
                     </button>
                 </div>
             </div>
-            {competitorOverview && (
+            {competitorOverview ? (
                 <>
                     <div className="row pt-4">
                         <h1>Overview</h1>
@@ -219,6 +220,27 @@ const CompetitorsPage = () => {
                         </div>
                     </div>
                 </>
+            ) : (
+                <div className="row flex-fill align-items-center">
+                    <div>
+                        <p>
+                            Hey! If you see this message, it means either you
+                            havent selected the parameters yet, or you have
+                            selected them in such a way that a null result is
+                            returned. Here is a brief description of the
+                            parameters for this page and their default values.
+                        </p>
+                        <ul>
+                            <li>Available Tags (all): ...</li>
+                            <li>Banned Tags (none): ...</li>
+                            <li>Reviews Coeff (30): ...</li>
+                            <li>Min Reviews (0): ...</li>
+                            <li>Max Reviews (inf): ...</li>
+                            <li>Min Year (2020): ...</li>
+                            <li>Max Year (2024): ...</li>
+                        </ul>
+                    </div>
+                </div>
             )}
         </>
     );

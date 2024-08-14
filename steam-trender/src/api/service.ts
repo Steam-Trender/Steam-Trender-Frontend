@@ -7,6 +7,7 @@ import { IPost } from "../models/post";
 import { ITagOverview } from "../models/tag_overview";
 import { IYearOverview } from "../models/year_overview";
 import { IStatus } from "../models/status";
+import { format } from "date-fns";
 
 type Params = {
     [key: string]: any;
@@ -64,16 +65,16 @@ class ApiService {
         min_reviews: string,
         max_reviews: string,
         reviews_coeff: string,
-        minYear: number | null,
-        maxYear: number | null,
+        minYear: Date | string | null,
+        maxYear: Date | string | null,
         selectedTags: number[],
         bannedTags: number[]
     ): Promise<ICompetitors> {
-        if (minYear === null) {
-            minYear = 2020;
+        if (minYear !== null) {
+            minYear = format(minYear, "yyyy-MM-dd");
         }
-        if (maxYear === null) {
-            maxYear = 2024;
+        if (maxYear !== null) {
+            maxYear = format(maxYear, "yyyy-MM-dd");
         }
         try {
             const addParamIfNotEmpty = (
@@ -88,8 +89,6 @@ class ApiService {
 
             const getParams = () => {
                 const params: any = {
-                    min_year: minYear,
-                    max_year: maxYear,
                     whitelist_tag_ids: selectedTags,
                     blacklist_tag_ids: bannedTags,
                 };
@@ -97,6 +96,8 @@ class ApiService {
                 addParamIfNotEmpty(params, "reviews_coeff", reviews_coeff);
                 addParamIfNotEmpty(params, "min_reviews", min_reviews);
                 addParamIfNotEmpty(params, "max_reviews", max_reviews);
+                addParamIfNotEmpty(params, "min_date", minYear);
+                addParamIfNotEmpty(params, "max_date", maxYear);
 
                 return params;
             };
