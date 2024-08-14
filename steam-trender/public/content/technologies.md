@@ -1,6 +1,6 @@
 ## Technologies Used
 
-Below is a list of key technologies that make **SteamTrender** possible, along with their licensing information.
+Below is a list of key technologies that make client side of **SteamTrender** possible, along with their licensing information.
 
 ### React
 
@@ -30,7 +30,7 @@ Below is a list of key technologies that make **SteamTrender** possible, along w
 
 -   **Description**: MobX is a battle tested library that makes state management simple and scalable by transparently applying functional reactive programming (TFRP).
 -   **License**: MIT
--   **Website**: [MobX on GitHub](https://mobx.js.org/)
+-   **Website**: [MobX Official Site](https://mobx.js.org/)
 
 ### Axios
 
@@ -48,10 +48,16 @@ Below is a list of key technologies that make **SteamTrender** possible, along w
 
 -   **Description**: React Router is a collection of navigational components that compose declaratively with your application.
 -   **License**: MIT
--   **Website**: [React Router on GitHub](https://reactrouter.com/)
+-   **Website**: [React Router Home](https://reactrouter.com/)
 
 ### React Select
 
 -   **Description**: React Select is a flexible and beautiful Select Input control for ReactJS with multiselect, autocomplete, and ajax support.
 -   **License**: MIT
--   **Website**: [React Select on GitHub](https://react-select.com/home)
+-   **Website**: [React Select Home](https://react-select.com/home)
+
+### React Datapicker
+
+-   **Description**: A simple and reusable datepicker component for React.
+-   **License**: MIT
+-   **Website**: [React Datapicker on GitHub](https://github.com/Hacker0x01/react-datepicker/)

@@ -9,6 +9,7 @@ import { MoneyBoxPlot } from "../components/MoneyBoxPlot";
 import { RegressionPlot } from "../components/RegressionPlot";
 import { getSpecificRevenue } from "../models/overview";
 import { ReviewsThresholdInput } from "../components/ReviewsThresholdInput";
+import { ParametersInfo } from "../components/ParametersInfo";
 
 const TrendsPage = () => {
     const [reviewsThreshold, setReviewsThreshold] = useState("");
@@ -72,18 +73,7 @@ const TrendsPage = () => {
                     </button>
                 </div>
             </div>
-            <div className="row pt-2">
-                <p className="my-0">
-                    <i>
-                        Note: When you select a year, trends <b>5 years back</b>{" "}
-                        from that year will be calculated. For example, if you
-                        select 2023, years: 2019, 2020, 2021, 2022, 2023 will be
-                        taken into account. Each year has a different review
-                        multiplier.
-                    </i>
-                </p>
-            </div>
-            {trendsOverview && (
+            {trendsOverview ? (
                 <>
                     <h1>Overview</h1>
                     <div className="row pt-3">
@@ -175,12 +165,29 @@ const TrendsPage = () => {
                         </div>
                     </div>
                     <div className="row pt-3">
-                        <h1>Raw Data</h1>
+                        <h1>Table View</h1>
                         <OverviewTable
                             data={convertYearDataToGeneric(trendsOverview)}
                         />
                     </div>
                 </>
+            ) : (
+                <div className="row flex-fill align-items-center">
+                    <div>
+                        <ParametersInfo />
+                        <ul>
+                            <li>Tags (all): ...</li>
+                            <li>Min Reviews (10): ...</li>
+                            <li>
+                                Pivot Year (2024): trends <b>5 years back</b>{" "}
+                                from that year will be calculated, e. g. if you
+                                select 2023, years: 2019, 2020, 2021, 2022, 2023
+                                will be taken into account and each year has an
+                                own review multiplier.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             )}
         </>
     );

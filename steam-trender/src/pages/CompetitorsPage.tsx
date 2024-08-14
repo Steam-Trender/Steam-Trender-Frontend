@@ -11,6 +11,7 @@ import { ReviewsCoefficientInput } from "../components/ReviewsCoefficientInput";
 import { ITag } from "../models/tag";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { ParametersInfo } from "../components/ParametersInfo";
 
 const CompetitorsPage = () => {
     const [reviewsCoeff, setReviewsCoeff] = useState("");
@@ -200,10 +201,9 @@ const CompetitorsPage = () => {
                                 <i>
                                     NB: only the first 100 games (or less) are
                                     listed below, sorted by the number of
-                                    reviews, that fit the selected parameters.
-                                    Nevertheless, all were taken into account in
-                                    the calculation of aggregate values. You can
-                                    download all data.
+                                    reviews. Nevertheless, all were taken into
+                                    account in the calculation of aggregate
+                                    values. You can download up to 10 000 rows.
                                 </i>
                             </p>
                         </div>
@@ -223,21 +223,15 @@ const CompetitorsPage = () => {
             ) : (
                 <div className="row flex-fill align-items-center">
                     <div>
-                        <p>
-                            Hey! If you see this message, it means either you
-                            havent selected the parameters yet, or you have
-                            selected them in such a way that a null result is
-                            returned. Here is a brief description of the
-                            parameters for this page and their default values.
-                        </p>
+                        <ParametersInfo />
                         <ul>
                             <li>Available Tags (all): ...</li>
                             <li>Banned Tags (none): ...</li>
                             <li>Reviews Coeff (30): ...</li>
                             <li>Min Reviews (0): ...</li>
                             <li>Max Reviews (inf): ...</li>
-                            <li>Min Year (2020): ...</li>
-                            <li>Max Year (2024): ...</li>
+                            <li>Min Date (2020-01-01): ...</li>
+                            <li>Max Date (2024-31-12): ...</li>
                         </ul>
                     </div>
                 </div>

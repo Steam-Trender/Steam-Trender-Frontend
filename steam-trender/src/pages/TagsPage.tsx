@@ -9,6 +9,7 @@ import { convertTagDataToGeneric } from "../models/generic_overview";
 import CombinedChart from "../components/CombinedPlot";
 import { ReviewsCoefficientInput } from "../components/ReviewsCoefficientInput";
 import { ReviewsThresholdInput } from "../components/ReviewsThresholdInput";
+import { ParametersInfo } from "../components/ParametersInfo";
 
 const TagsPage = () => {
     const [reviewsCoeff, setReviewsCoeff] = useState("");
@@ -99,7 +100,7 @@ const TagsPage = () => {
                     </button>
                 </div>
             </div>
-            {tagsOverview && (
+            {tagsOverview ? (
                 <>
                     <div className="row pt-3">
                         <h1>Overview</h1>
@@ -115,12 +116,27 @@ const TagsPage = () => {
                         </div>
                     </div>
                     <div className="row pt-3">
-                        <h1>Raw Data</h1>
+                        <h1>Table View</h1>
                         <OverviewTable
                             data={convertTagDataToGeneric(tagsOverview)}
                         />
                     </div>
                 </>
+            ) : (
+                <div className="row flex-fill align-items-center">
+                    <div>
+                        <ParametersInfo />
+                        <ul>
+                            <li>
+                                <b>Tags (none): ...</b>
+                            </li>
+                            <li>Reviews Coeff (30): ...</li>
+                            <li>Min Reviews (10): ...</li>
+                            <li>Min Year (2020): ...</li>
+                            <li>Max Year (2024): ...</li>
+                        </ul>
+                    </div>
+                </div>
             )}
         </>
     );
