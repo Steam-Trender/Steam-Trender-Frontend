@@ -30,6 +30,7 @@ const selectStyle: StylesConfig<OptionType, true> = {
     menu: (provided) => ({
         ...provided,
         borderColor: "var(--bs-border-color)",
+        borderRadius: "var(--bs-border-radius)",
     }),
     option: (provided, state) => ({
         ...provided,
@@ -41,6 +42,23 @@ const selectStyle: StylesConfig<OptionType, true> = {
                 : undefined,
         "&:active": {
             backgroundColor: "var(--bs-primary-color, #007bff)",
+            color: "white",
+        },
+    }),
+    multiValue: (provided) => ({
+        ...provided,
+        borderRadius: "var(--bs-border-radius)",
+        backgroundColor: "var(--bs-light, #f8f9fa)",
+    }),
+    multiValueLabel: (provided) => ({
+        ...provided,
+        color: "#000",
+    }),
+    multiValueRemove: (provided) => ({
+        ...provided,
+        color: "var(--bs-primary, #6c757d)",
+        "&:hover": {
+            backgroundColor: "var(--bs-primary, #6c757d)",
             color: "white",
         },
     }),

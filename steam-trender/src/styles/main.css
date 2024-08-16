@@ -23,3 +23,28 @@ code {
 .btn-outline-secondary {
     border: var(--bs-border-width) solid var(--bs-border-color);
 }
+
+.react-datepicker__day--keyboard-selected {
+    background-color: var(--bs-primary);
+    color: #000;
+}
+
+.react-datepicker__day--selected {
+    background-color: var(--bs-primary);
+    color: #000;
+}
+
+.react-datepicker__day:hover {
+    background-color: var(--bs-primary-bg-subtle);
+}
+
+.react-datepicker {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+    border-radius: var(--bs-border-radius);
+}
+
+.react-datepicker-wrapper {
+    width: 100%;
+}
