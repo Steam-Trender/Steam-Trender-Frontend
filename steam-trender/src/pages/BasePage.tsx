@@ -9,7 +9,7 @@ interface BasePageProps {
 const BasePage: React.FC<BasePageProps> = ({ title, children }) => {
     return (
         <PageTitleWrapper title={title}>
-            <div className="d-flex flex-fill flex-column my-2 mx-4">
+            <div className="d-flex flex-fill flex-column my-2 mx-3 mx-sm-3 mx-md-4">
                 {children}
             </div>
         </PageTitleWrapper>

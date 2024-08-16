@@ -13,7 +13,10 @@ const BlogPage = observer(() => {
             <h1 className="text-uppercase">Blog</h1>
             <div className="row">
                 {BlogStore.posts.map((post) => (
-                    <div className="col-6 mb-3" key={post.id}>
+                    <div
+                        className="col-sm-12 col-md-6 col-lg-4 mb-3"
+                        key={post.id}
+                    >
                         <PostCard key={post.id} post={post} />
                     </div>
                 ))}
