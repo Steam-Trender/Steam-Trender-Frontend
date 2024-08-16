@@ -17,8 +17,8 @@ const CompetitorsPage = () => {
     const [reviewsCoeff, setReviewsCoeff] = useState("");
     const [minReviewsThreshold, setMinReviewsThreshold] = useState("");
     const [maxReviewsThreshold, setMaxReviewsThreshold] = useState("");
-    const [minYear, setMinYear] = useState<Date | null>(null);
-    const [maxYear, setMaxYear] = useState<Date | null>(null);
+    const [minYear, setMinYear] = useState(new Date("2020-01-01"));
+    const [maxYear, setMaxYear] = useState(new Date("2024-12-31"));
     const [competitorOverview, setCompetitorOverview] =
         useState<ICompetitors | null>(null);
     const [selectedTagIds, setSelectedTagIds] = useState<number[]>([]);
@@ -80,41 +80,53 @@ const CompetitorsPage = () => {
     };
 
     const handleMinYearChange = (date: Date | null) => {
-        setMinYear(date);
+        if (date === null) {
+            setMinYear(new Date("2020-01-01"));
+        } else {
+            setMinYear(date);
+        }
     };
 
     const handleMaxYearChange = (date: Date | null) => {
-        setMaxYear(date);
+        if (date === null) {
+            setMaxYear(new Date("2024-31-12"));
+        } else {
+            setMaxYear(date);
+        }
     };
 
     return (
         <>
             <div className="row">
-                <div className="col-6">
+                <div className="col-sm-12 col-md-6 pb-2">
+                    <label>Included Tags (0/10)</label>
                     <TagSelector
                         onChange={setSelectedTagIds}
-                        placeholder="Avaialbe Tags"
+                        placeholder="All"
                         limit={10}
                     />
                 </div>
-                <div className="col-6">
+                <div className="col-sm-12 col-md-6 pb-2">
+                    <label>Excluded Tags (0/10)</label>
                     <TagSelector
                         onChange={setBannedTagIds}
-                        placeholder="Banned Tags"
+                        placeholder="None"
                         limit={10}
                     />
                 </div>
             </div>
-            <div className="row pt-2">
-                <div className="form-group col-3">
+            <div className="row">
+                <div className="form-group col-sm-6 col-md-3 pb-2">
+                    <label>Reviews Coefficient</label>
                     <ReviewsCoefficientInput
                         value={reviewsCoeff}
                         onChange={setReviewsCoeff}
                     />
                 </div>
-                <div className="col-3">
+                <div className="col-sm-6 col-md-3 pb-2">
                     <div className="row">
                         <div className="form-group col-6 pe-1">
+                            <label>Min Reviews</label>
                             <ReviewsThresholdInput
                                 value={minReviewsThreshold}
                                 onChange={setMinReviewsThreshold}
@@ -122,6 +134,7 @@ const CompetitorsPage = () => {
                             />
                         </div>
                         <div className="form-group col-6 ps-1">
+                            <label>Max Reviews</label>
                             <ReviewsThresholdInput
                                 value={maxReviewsThreshold}
                                 onChange={setMaxReviewsThreshold}
@@ -130,29 +143,32 @@ const CompetitorsPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-3">
+                <div className="col-sm-6 col-md-3 pb-2">
                     <div className="row">
-                        <div className="col-6">
+                        <div className="col-6 pe-1">
+                            <label>Min Date</label>
                             <DatePicker
                                 selected={minYear}
                                 onChange={handleMinYearChange}
                                 dateFormat="yyyy-MM-dd"
-                                className="form-control"
+                                className="form-control w-100"
                                 placeholderText="Min Date"
                             />
                         </div>
-                        <div className="col-6">
+                        <div className="col-6 ps-1">
+                            <label>Max Date</label>
                             <DatePicker
                                 selected={maxYear}
                                 onChange={handleMaxYearChange}
                                 dateFormat="yyyy-MM-dd"
-                                className="form-control"
+                                className="form-control w-100"
                                 placeholderText="Max Date"
                             />
                         </div>
                     </div>
                 </div>
-                <div className="col-3">
+                <div className="col-sm-12 col-md-3 pb-2">
+                    <label>Click Here!</label>
                     <button
                         className="btn btn-primary w-100 text-uppercase"
                         onClick={handleAnalyzeClick}
@@ -163,8 +179,8 @@ const CompetitorsPage = () => {
             </div>
             {competitorOverview ? (
                 <>
-                    <div className="row pt-4">
-                        <h1>Overview</h1>
+                    <div className="row">
+                        <h1 className="text-uppercase">Overview</h1>
                         <p>
                             <b>Total Games: </b>
                             <NumberFormatter
@@ -194,9 +210,9 @@ const CompetitorsPage = () => {
                             {competitorOverview.overview.median_price}
                         </p>
                     </div>
-                    <div className="row pt-2">
-                        <h1>Competitors Table</h1>
-                        <div className="col-9">
+                    <div className="row">
+                        <h1 className="text-uppercase">Competitors Table</h1>
+                        <div className="col-sm-12 col-md-9 pb-2">
                             <p className="my-0">
                                 <i>
                                     NB: only the first 100 games (or less) are
@@ -207,7 +223,7 @@ const CompetitorsPage = () => {
                                 </i>
                             </p>
                         </div>
-                        <div className="col-3">
+                        <div className="col-sm-12 col-md-3 pb-2">
                             <button
                                 className="btn btn-outline-primary w-100 text-uppercase"
                                 onClick={handleDownload}
@@ -215,7 +231,7 @@ const CompetitorsPage = () => {
                                 Download
                             </button>
                         </div>
-                        <div className="col-12 pt-2">
+                        <div className="col-12">
                             <GamesTable games={competitorOverview.games} />
                         </div>
                     </div>

@@ -18,7 +18,7 @@ export function ReviewsThresholdInput({
 
     const prefix = max ? "Max" : "Min";
     const tooltipText = `${prefix} reviews number that game should have to be sampled.`;
-    const placeholderText = `${prefix} Reviews`;
+    const placeholderText = max ? "inf" : "10";
 
     return (
         <Tooltip text={tooltipText}>

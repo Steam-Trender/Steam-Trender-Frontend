@@ -50,7 +50,7 @@ const TagsPage = () => {
 
     return (
         <>
-            <div className="row">
+            <div className="row pb-2">
                 <div className="col-12">
                     <TagSelector
                         onChange={setSelectedTagIds}
@@ -59,30 +59,41 @@ const TagsPage = () => {
                     />
                 </div>
             </div>
-            <div className="row pt-2">
-                <div className="form-group col-3">
+            <div className="row">
+                <div className="form-group col-sm-6 col-md-3 pb-2">
                     <ReviewsCoefficientInput
                         value={reviewsCoeff}
                         onChange={setReviewsCoeff}
                     />
                 </div>
-                <div className="form-group col-3">
-                    <ReviewsThresholdInput
-                        value={reviewsThreshold}
-                        onChange={setReviewsThreshold}
-                        max={false}
-                    />
-                </div>
-                <div className="col-3">
+                <div className="col-sm-6 col-md-3 pb-2">
                     <div className="row">
-                        <div className="col-6">
+                        <div className="form-group col-6 pe-1">
+                            <ReviewsThresholdInput
+                                value={reviewsThreshold}
+                                onChange={setReviewsThreshold}
+                                max={false}
+                            />
+                        </div>
+                        <div className="form-group col-6 ps-1">
+                            <ReviewsThresholdInput
+                                value={reviewsThreshold}
+                                onChange={setReviewsThreshold}
+                                max={true}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="col-sm-12 col-md-3 pb-2">
+                    <div className="row">
+                        <div className="col-6 pe-1">
                             <YearDropdown
                                 onChange={handleMinYearChange}
                                 initialLabel="Min Year"
                                 isDescending={false}
                             />
                         </div>
-                        <div className="col-6">
+                        <div className="col-6 ps-1">
                             <YearDropdown
                                 onChange={handleMaxYearChange}
                                 initialLabel="Max Year"
@@ -91,7 +102,7 @@ const TagsPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-3">
+                <div className="col-sm-12 col-md-3 pb-2">
                     <button
                         className="btn btn-primary text-uppercase w-100"
                         onClick={handleAnalyzeClick}
@@ -104,13 +115,13 @@ const TagsPage = () => {
                 <>
                     <div className="row pt-3">
                         <h1>Overview</h1>
-                        <div className="col-6">
+                        <div className="col-sm-12 col-md-6">
                             <h2>Revenue Box Plot</h2>
                             <MoneyBoxPlot
                                 data={convertTagDataToGeneric(tagsOverview)}
                             />
                         </div>
-                        <div className="col-6">
+                        <div className="col-sm-12 col-md-6">
                             <h2>Games & Median Revenue</h2>
                             <CombinedChart data={tagsOverview} />
                         </div>
@@ -132,6 +143,7 @@ const TagsPage = () => {
                             </li>
                             <li>Reviews Coeff (30): ...</li>
                             <li>Min Reviews (10): ...</li>
+                            <li>Max Reviews (inf): ...</li>
                             <li>Min Year (2020): ...</li>
                             <li>Max Year (2024): ...</li>
                         </ul>

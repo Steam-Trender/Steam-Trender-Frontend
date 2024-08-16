@@ -39,32 +39,32 @@ const TrendsPage = () => {
     return (
         <>
             <div className="row">
-                <div className="col-6">
+                <div className="col-sm-12 col-md-6">
                     <div className="row">
-                        <div className="form-group col-3">
-                            <ReviewsThresholdInput
-                                value={reviewsThreshold}
-                                onChange={setReviewsThreshold}
-                                max={false}
-                            />
-                        </div>
-                        <div className="col-9">
+                        <div className="col-sm-12 col-md-9 pb-2">
                             <TagSelector
                                 onChange={setSelectedTagIds}
                                 placeholder="Tags"
                                 limit={10}
                             />
                         </div>
+                        <div className="form-group col-sm-12 col-md-3 pb-2">
+                            <ReviewsThresholdInput
+                                value={reviewsThreshold}
+                                onChange={setReviewsThreshold}
+                                max={false}
+                            />
+                        </div>
                     </div>
                 </div>
-                <div className="col-3">
+                <div className="col-sm-12 col-md-3 pb-2">
                     <YearDropdown
                         onChange={handleYearChange}
                         initialLabel="Pivot Year"
                         isDescending={true}
                     />
                 </div>
-                <div className="col-3">
+                <div className="col-sm-12 col-md-3 pb-2">
                     <button
                         className="btn btn-primary text-uppercase w-100"
                         onClick={handleAnalyzeClick}
@@ -77,7 +77,7 @@ const TrendsPage = () => {
                 <>
                     <h1>Overview</h1>
                     <div className="row pt-3">
-                        <div className="col-4">
+                        <div className="col-sm-12 col-md-4">
                             <h2>Median Reviews</h2>
                             <RegressionPlot
                                 categories={trendsOverview.map(
@@ -93,7 +93,7 @@ const TrendsPage = () => {
                                 money={false}
                             />
                         </div>
-                        <div className="col-4">
+                        <div className="col-sm-12 col-md-4">
                             <h2>Median Owners</h2>
                             <RegressionPlot
                                 categories={trendsOverview.map(
@@ -109,7 +109,7 @@ const TrendsPage = () => {
                                 money={false}
                             />
                         </div>
-                        <div className="col-4">
+                        <div className="col-sm-12 col-md-4">
                             <h2>Game Released</h2>
                             <RegressionPlot
                                 categories={trendsOverview.map(
@@ -125,7 +125,7 @@ const TrendsPage = () => {
                         </div>
                     </div>
                     <div className="row pt-3">
-                        <div className="col-4">
+                        <div className="col-sm-12 col-md-4">
                             <h2>Median Revenue</h2>
                             <RegressionPlot
                                 categories={trendsOverview.map(
@@ -141,7 +141,7 @@ const TrendsPage = () => {
                                 money={true}
                             />
                         </div>
-                        <div className="col-4">
+                        <div className="col-sm-12 col-md-4">
                             <h2>Median Price</h2>
                             <RegressionPlot
                                 categories={trendsOverview.map(
@@ -157,7 +157,7 @@ const TrendsPage = () => {
                                 money={true}
                             />
                         </div>
-                        <div className="col-4">
+                        <div className="col-sm-12 col-md-4">
                             <h2>Revenue Box Chart</h2>
                             <MoneyBoxPlot
                                 data={convertYearDataToGeneric(trendsOverview)}
