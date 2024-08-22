@@ -6,14 +6,12 @@ interface BasePageProps {
     children: ReactNode;
 }
 
-const BasePage: React.FC<BasePageProps> = ({ title, children }) => {
+export function BasePage({ title, children }: BasePageProps) {
     return (
         <PageTitleWrapper title={title}>
-            <div className="d-flex flex-fill flex-column my-2 mx-3 mx-sm-3 mx-md-4">
-                {children}
+            <div className="flex-fill d-flex flex-column">
+                <div className="container my-2">{children}</div>
             </div>
         </PageTitleWrapper>
     );
-};
-
-export default BasePage;
+}

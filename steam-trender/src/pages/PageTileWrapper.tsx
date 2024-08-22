@@ -5,7 +5,7 @@ interface TitleProps {
     children: React.ReactNode;
 }
 
-export const PageTitleWrapper: React.FC<TitleProps> = ({ title, children }) => {
+export function PageTitleWrapper({ title, children }: TitleProps) {
     const maintTitle = "Steam Trender";
 
     useEffect(() => {
@@ -13,4 +13,4 @@ export const PageTitleWrapper: React.FC<TitleProps> = ({ title, children }) => {
     }, [title]);
 
     return <>{children}</>;
-};
+}
