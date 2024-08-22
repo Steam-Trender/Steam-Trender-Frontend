@@ -16,50 +16,55 @@ const Footer = () => {
     }, []);
 
     return (
-        <footer className="pb-3 pt-2 mt-2 mx-0 bg-light text-center">
-            <div className="row mb-2">
-                <div className="col-sm-12 col-md-4">
-                    <span>
-                        status: <b>{status?.status}</b>
-                    </span>
+        <footer className="pb-3 pt-2 mt-2 bg-light">
+            <div className="container">
+                <div className="row mb-2 text-center">
+                    <div className="col-md-4 text-md-start">
+                        <span>
+                            Status: <b>{status?.status}</b>
+                        </span>
+                    </div>
+                    <div className="col-md-4">
+                        <span>
+                            Contact us: <b>help [at] steamtrender [dot] com</b>
+                        </span>
+                    </div>
+                    <div className="col-md-4 text-md-end">
+                        <span>
+                            Updated: <b>{status?.update.date}</b>
+                        </span>
+                    </div>
                 </div>
-                <div className="col-sm-12 col-md-4 p-0">
-                    <span>
-                        contact us: <b>help [at] steamtrender [dot] com</b>
-                    </span>
+                <div className="row mb-2 text-center">
+                    <div className="col-md-3 text-md-start">
+                        <a
+                            href="https://steampowered.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Powered by Steam
+                        </a>
+                    </div>
+                    <div className="col-md-3">
+                        <Link to="/about">About</Link>
+                    </div>
+                    <div className="col-md-3">
+                        <Link to="/terms-of-use">Terms of Use</Link>
+                    </div>
+                    <div className="col-md-3 text-md-end">
+                        <Link to="/privacy">Privacy Policy</Link>
+                    </div>
                 </div>
-                <div className="col-sm-12 col-md-4">
-                    <span>
-                        updated: <b>{status?.update.date}</b>
-                    </span>
-                </div>
-            </div>
-            <div className="row mb-2">
-                <div className="col-4">
-                    <a
-                        href="https://steampowered.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        powered by steam
-                    </a>
-                </div>
-                <div className="col-4">
-                    <Link to="/about">about</Link>
-                </div>
-                <div className="col-4">
-                    <Link to="/privacy">privacy policy</Link>
-                </div>
-            </div>
-            <div className="row px-3">
-                <div className="col-sm-12 col-md-9 text-start">
-                    <span className="text-secondary">
-                        Video games, thumnails, all
-                        trademarks are the property of their respective owners.
-                    </span>
-                </div>
-                <div className="col-sm-12 col-md-3 text-end">
-                    <span className="text-secondary">© 2024 SteamTrender</span>
+                <div className="row text-center text-secondary muted">
+                    <div className="col-md-9 text-md-start">
+                        <span>
+                            Video games, thumbnails, all trademarks are the
+                            property of their respective owners.
+                        </span>
+                    </div>
+                    <div className="col-md-3 text-md-end">
+                        <span>© 2024 SteamTrender</span>
+                    </div>
                 </div>
             </div>
         </footer>
