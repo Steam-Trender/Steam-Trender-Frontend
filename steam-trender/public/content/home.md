@@ -8,6 +8,6 @@ This allows us to better understand current audience & developer preferences, es
 
 Anyway, what are you waiting for? Check the tabs at the top!
 
-If you want to find out more about the methodology we use to gather and analyze the data, please check the [FAQ]("https://steamtrender.com/faq).
+If you want to find out more about the methodology we use to gather and analyze the data, please check the [FAQ](https://steamtrender.com/faq).
 
 And if you'd like to help us out a little, you can buy us a coffee through this [link](https://google.com) or by pressing the button at the top.
