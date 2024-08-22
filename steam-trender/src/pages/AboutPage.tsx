@@ -5,7 +5,6 @@ const AboutPage = () => {
     return (
         <>
             <Markdown file={"about"} />
-            <Markdown file={"technologies"} />
         </>
     );
 };
