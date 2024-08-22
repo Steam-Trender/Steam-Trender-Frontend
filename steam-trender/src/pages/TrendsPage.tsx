@@ -18,6 +18,7 @@ const TrendsPage = () => {
     const [trendsOverview, setTrendsOverview] = useState<
         IYearOverview[] | null
     >(null);
+    const tagsLimit = 5;
 
     const handleAnalyzeClick = async () => {
         try {
@@ -39,32 +40,39 @@ const TrendsPage = () => {
     return (
         <>
             <div className="row">
-                <div className="col-sm-12 col-md-6">
+                <div className="col-sm-12 col-md-6 pb-2">
+                    <label>
+                        Tags ({selectedTagIds.length}/{tagsLimit})
+                    </label>
+                    <TagSelector
+                        onChange={setSelectedTagIds}
+                        placeholder="Tags"
+                        limit={tagsLimit}
+                    />
+                </div>
+                <div className="col-sm-12 col-md-3">
                     <div className="row">
-                        <div className="col-sm-12 col-md-9 pb-2">
-                            <TagSelector
-                                onChange={setSelectedTagIds}
-                                placeholder="Tags"
-                                limit={10}
-                            />
-                        </div>
-                        <div className="form-group col-sm-12 col-md-3 pb-2">
+                        <div className="form-group col-sm-12 col-md-6 pb-2">
+                            <label>Min Reviews</label>
                             <ReviewsThresholdInput
                                 value={reviewsThreshold}
                                 onChange={setReviewsThreshold}
                                 max={false}
                             />
                         </div>
+                        <div className="col-sm-12 col-md-6 pb-2">
+                            <label>Pivot Year</label>
+                            <YearDropdown
+                                onChange={handleYearChange}
+                                initialLabel="Pivot Year"
+                                isDescending={true}
+                                defaultYear={2024}
+                            />
+                        </div>
                     </div>
                 </div>
                 <div className="col-sm-12 col-md-3 pb-2">
-                    <YearDropdown
-                        onChange={handleYearChange}
-                        initialLabel="Pivot Year"
-                        isDescending={true}
-                    />
-                </div>
-                <div className="col-sm-12 col-md-3 pb-2">
+                    <label>Click Here!</label>
                     <button
                         className="btn btn-primary text-uppercase w-100"
                         onClick={handleAnalyzeClick}
@@ -76,56 +84,8 @@ const TrendsPage = () => {
             {trendsOverview ? (
                 <>
                     <h1>Overview</h1>
-                    <div className="row pt-3">
-                        <div className="col-sm-12 col-md-4">
-                            <h2>Median Reviews</h2>
-                            <RegressionPlot
-                                categories={trendsOverview.map(
-                                    (item) => item.year
-                                )}
-                                real={trendsOverview.map(
-                                    (item) => item.overview.median_reviews
-                                )}
-                                trend={trendsOverview.map(
-                                    (item) => item.regression.median_reviews
-                                )}
-                                yaxis_title={"Median Reviews"}
-                                money={false}
-                            />
-                        </div>
-                        <div className="col-sm-12 col-md-4">
-                            <h2>Median Owners</h2>
-                            <RegressionPlot
-                                categories={trendsOverview.map(
-                                    (item) => item.year
-                                )}
-                                real={trendsOverview.map(
-                                    (item) => item.overview.median_owners
-                                )}
-                                trend={trendsOverview.map(
-                                    (item) => item.regression.median_owners
-                                )}
-                                yaxis_title={"Median Owners"}
-                                money={false}
-                            />
-                        </div>
-                        <div className="col-sm-12 col-md-4">
-                            <h2>Game Released</h2>
-                            <RegressionPlot
-                                categories={trendsOverview.map(
-                                    (item) => item.year
-                                )}
-                                real={trendsOverview.map(
-                                    (item) => item.overview.total_games
-                                )}
-                                trend={null}
-                                yaxis_title={"Games"}
-                                money={false}
-                            />
-                        </div>
-                    </div>
-                    <div className="row pt-3">
-                        <div className="col-sm-12 col-md-4">
+                    <div className="row">
+                        <div className="col-sm-12 col-md-6">
                             <h2>Median Revenue</h2>
                             <RegressionPlot
                                 categories={trendsOverview.map(
@@ -141,7 +101,63 @@ const TrendsPage = () => {
                                 money={true}
                             />
                         </div>
-                        <div className="col-sm-12 col-md-4">
+                        <div className="col-sm-12 col-md-6">
+                            <h2>Revenue Box Chart</h2>
+                            <MoneyBoxPlot
+                                data={convertYearDataToGeneric(trendsOverview)}
+                            />
+                        </div>
+                    </div>
+                    <div className="row pt-3">
+                        <div className="col-sm-12 col-md-6">
+                            <h2>Game Released</h2>
+                            <RegressionPlot
+                                categories={trendsOverview.map(
+                                    (item) => item.year
+                                )}
+                                real={trendsOverview.map(
+                                    (item) => item.overview.total_games
+                                )}
+                                trend={null}
+                                yaxis_title={"Games"}
+                                money={false}
+                            />
+                        </div>
+                        <div className="col-sm-12 col-md-6">
+                            <h2>Median Reviews</h2>
+                            <RegressionPlot
+                                categories={trendsOverview.map(
+                                    (item) => item.year
+                                )}
+                                real={trendsOverview.map(
+                                    (item) => item.overview.median_reviews
+                                )}
+                                trend={trendsOverview.map(
+                                    (item) => item.regression.median_reviews
+                                )}
+                                yaxis_title={"Median Reviews"}
+                                money={false}
+                            />
+                        </div>
+                    </div>
+                    <div className="row pt-3">
+                        <div className="col-sm-12 col-md-6">
+                            <h2>Median Owners</h2>
+                            <RegressionPlot
+                                categories={trendsOverview.map(
+                                    (item) => item.year
+                                )}
+                                real={trendsOverview.map(
+                                    (item) => item.overview.median_owners
+                                )}
+                                trend={trendsOverview.map(
+                                    (item) => item.regression.median_owners
+                                )}
+                                yaxis_title={"Median Owners"}
+                                money={false}
+                            />
+                        </div>
+                        <div className="col-sm-12 col-md-6">
                             <h2>Median Price</h2>
                             <RegressionPlot
                                 categories={trendsOverview.map(
@@ -157,12 +173,6 @@ const TrendsPage = () => {
                                 money={true}
                             />
                         </div>
-                        <div className="col-sm-12 col-md-4">
-                            <h2>Revenue Box Chart</h2>
-                            <MoneyBoxPlot
-                                data={convertYearDataToGeneric(trendsOverview)}
-                            />
-                        </div>
                     </div>
                     <div className="row pt-3">
                         <h1>Table View</h1>
@@ -176,12 +186,18 @@ const TrendsPage = () => {
                     <div>
                         <ParametersInfo />
                         <ul>
-                            <li>Tags (all): ...</li>
-                            <li>Min Reviews (10): ...</li>
+                            <li>
+                                Tags (None): Tags that must all be present for a
+                                game to be considered in the sample.
+                            </li>
+                            <li>
+                                Min Reviews (10): The minimum number of reviews
+                                required for a game to be considered.
+                            </li>
                             <li>
                                 Pivot Year (2024): trends <b>5 years back</b>{" "}
-                                from that year will be calculated, e. g. if you
-                                select 2023, years: 2019, 2020, 2021, 2022, 2023
+                                from that year will be calculated, e.g. if you
+                                select 2023, years: 2019, 2020, 2021, 2022 & 2023
                                 will be taken into account and each year has an
                                 own review multiplier.
                             </li>
