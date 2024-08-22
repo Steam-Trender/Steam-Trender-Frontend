@@ -7,6 +7,8 @@ import AboutPage from "../pages/AboutPage";
 import TrendsPage from "../pages/TrendsPage";
 import DescriptionPage from "../pages/DescriptionPage";
 import HomePage from "../pages/HomePage";
+import PrivacyPolicyPage from "../pages/PrivacyPolicyPage";
+import TermsPage from "../pages/TermsPage";
 
 interface RouteConfig {
     path: string;
@@ -45,6 +47,16 @@ const routeConfigs: RouteConfig[] = [
         path: "/about",
         title: "About",
         element: React.createElement(AboutPage),
+    },
+    {
+        path: "/privacy",
+        title: "Privacy Policy",
+        element: React.createElement(PrivacyPolicyPage),
+    },
+    {
+        path: "/terms-of-use",
+        title: "Terms of Use",
+        element: React.createElement(TermsPage),
     },
     {
         path: "*",

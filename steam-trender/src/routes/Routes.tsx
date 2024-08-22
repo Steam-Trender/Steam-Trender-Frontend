@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import routeConfigs from "./config";
-import BasePage from "../pages/BasePage";
+import { BasePage } from "../pages/BasePage";
 
 export const createRoutes = () => {
     return routeConfigs.map((config, index) => (
