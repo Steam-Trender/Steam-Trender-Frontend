@@ -23,6 +23,7 @@ const CompetitorsPage = () => {
         useState<ICompetitors | null>(null);
     const [selectedTagIds, setSelectedTagIds] = useState<number[]>([]);
     const [bannedTagIds, setBannedTagIds] = useState<number[]>([]);
+    const tagsLimit = 10;
 
     const handleAnalyzeClick = async () => {
         try {
@@ -99,19 +100,23 @@ const CompetitorsPage = () => {
         <>
             <div className="row">
                 <div className="col-sm-12 col-md-6 pb-2">
-                    <label>Included Tags (0/10)</label>
+                    <label>
+                        Included Tags ({selectedTagIds.length}/{tagsLimit})
+                    </label>
                     <TagSelector
                         onChange={setSelectedTagIds}
-                        placeholder="All"
-                        limit={10}
+                        placeholder="Any"
+                        limit={tagsLimit}
                     />
                 </div>
                 <div className="col-sm-12 col-md-6 pb-2">
-                    <label>Excluded Tags (0/10)</label>
+                    <label>
+                        Excluded Tags ({bannedTagIds.length}/{tagsLimit})
+                    </label>
                     <TagSelector
                         onChange={setBannedTagIds}
                         placeholder="None"
-                        limit={10}
+                        limit={tagsLimit}
                     />
                 </div>
             </div>
@@ -241,13 +246,37 @@ const CompetitorsPage = () => {
                     <div>
                         <ParametersInfo />
                         <ul>
-                            <li>Available Tags (all): ...</li>
-                            <li>Banned Tags (none): ...</li>
-                            <li>Reviews Coeff (30): ...</li>
-                            <li>Min Reviews (0): ...</li>
-                            <li>Max Reviews (inf): ...</li>
-                            <li>Min Date (2020-01-01): ...</li>
-                            <li>Max Date (2024-31-12): ...</li>
+                            <li>
+                                Included Tags (any): Tags that must all be
+                                present for a game to be considered in the
+                                sample.
+                            </li>
+                            <li>
+                                Excluded Tags (none): Tags that, if present,
+                                will exclude a game from the sample (any one is
+                                enough for exclusion).
+                            </li>
+                            <li>
+                                Reviews Coefficient (30): A multiplier applied
+                                to the number of reviews to estimate a
+                                game&apos;s revenue.
+                            </li>
+                            <li>
+                                Min Reviews (10): The minimum number of reviews
+                                required for a game to be considered.
+                            </li>
+                            <li>
+                                Max Reviews (inf): The maximum number of reviews
+                                allowed for a game to be considered.
+                            </li>
+                            <li>
+                                Min Date (2020-01-01): The earliest release date
+                                a game can have to be included.
+                            </li>
+                            <li>
+                                Max Date (2024-12-31): The latest release date a
+                                game can have to be included.
+                            </li>
                         </ul>
                     </div>
                 </div>

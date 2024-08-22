@@ -79,8 +79,6 @@ const TagSelector = observer(
         const handleChange = (selectedOption: MultiValue<OptionType>) => {
             if (selectedOption.length <= limit) {
                 setSelectedTags(selectedOption);
-            } else {
-                alert("You reached tags limit.");
             }
         };
 
