@@ -8,7 +8,7 @@ const Navbar = () => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-            <div className="container-fluid px-3 py-1">
+            <div className="container px-3 py-1">
                 <Link className="navbar-brand text-uppercase" to="/">
                     <b>
                         Steam<span className="text-primary">Trender</span>
