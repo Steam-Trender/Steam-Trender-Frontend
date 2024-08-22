@@ -9,8 +9,8 @@ interface BasePageProps {
 export function BasePage({ title, children }: BasePageProps) {
     return (
         <PageTitleWrapper title={title}>
-            <div className="flex-fill d-flex flex-column">
-                <div className="container my-2">{children}</div>
+            <div className="flex-fill d-flex flex-column container my-2">
+                {children}
             </div>
         </PageTitleWrapper>
     );
