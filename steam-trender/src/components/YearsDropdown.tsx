@@ -6,11 +6,17 @@ interface YearDropdownProps {
     onChange: (year: number) => void;
     initialLabel: string;
     isDescending: boolean;
+    defaultYear: number;
 }
 
 const YearDropdown = observer(
-    ({ initialLabel, onChange, isDescending }: YearDropdownProps) => {
-        const [selectedYear, setSelectedYear] = useState<number>();
+    ({
+        initialLabel,
+        onChange,
+        isDescending,
+        defaultYear,
+    }: YearDropdownProps) => {
+        const [selectedYear, setSelectedYear] = useState(defaultYear || null);
 
         useEffect(() => {
             YearStore.fetchYears();
@@ -26,28 +32,32 @@ const YearDropdown = observer(
             : YearStore.years;
 
         return (
-            <div className="dropdown">
+            <div className="dropdown-center">
                 <button
-                    className="btn btn-outline-secondary dropdown-toggle w-100"
+                    className="btn btn-outline-secondary dropdown-toggle w-100 d-flex justify-content-between align-items-center"
                     type="button"
                     id="yearDropdown"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                 >
-                    {selectedYear || initialLabel}
+                    <span className="text-start">
+                        {selectedYear || initialLabel}
+                    </span>
+                    <span className="dropdown-toggle-icon"></span>
                 </button>
-                <div className="dropdown-menu" aria-labelledby="yearDropdown">
+                <ul className="dropdown-menu" aria-labelledby="yearDropdown">
                     {displayedYears.map((year) => (
-                        <button
-                            className="dropdown-item"
-                            key={year}
-                            type="button"
-                            onClick={() => handleYearSelect(year)}
-                        >
-                            {year}
-                        </button>
+                        <li key={year}>
+                            <button
+                                className="dropdown-item"
+                                type="button"
+                                onClick={() => handleYearSelect(year)}
+                            >
+                                {year}
+                            </button>
+                        </li>
                     ))}
-                </div>
+                </ul>
             </div>
         );
     }

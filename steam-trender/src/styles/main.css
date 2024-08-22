@@ -46,3 +46,14 @@ code {
 .react-datepicker-wrapper {
     width: 100%;
 }
+
+#yearDropdown span {
+    color: var(--bs-body-color);
+}
+
+#yearDropdown:hover span,
+#yearDropdown:focus span,
+#yearDropdown:active span,
+#yearDropdown[aria-expanded="true"] span {
+    color: var(--bs-text-light);
+}
