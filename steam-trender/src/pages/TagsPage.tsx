@@ -91,6 +91,7 @@ const TagsPage = () => {
                                 onChange={handleMinYearChange}
                                 initialLabel="Min Year"
                                 isDescending={false}
+                                defaultYear={2020}
                             />
                         </div>
                         <div className="col-6 ps-1">
@@ -98,6 +99,7 @@ const TagsPage = () => {
                                 onChange={handleMaxYearChange}
                                 initialLabel="Max Year"
                                 isDescending={true}
+                                defaultYear={2024}
                             />
                         </div>
                     </div>
