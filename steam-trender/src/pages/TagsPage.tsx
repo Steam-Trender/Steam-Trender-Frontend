@@ -13,20 +13,22 @@ import { ParametersInfo } from "../components/ParametersInfo";
 
 const TagsPage = () => {
     const [reviewsCoeff, setReviewsCoeff] = useState("");
-    const [reviewsThreshold, setReviewsThreshold] = useState("");
+    const [minReviewsThreshold, setMinReviewsThreshold] = useState("");
+    const [maxReviewsThreshold, setMaxReviewsThreshold] = useState("");
     const [minYear, setMinYear] = useState<number | null>(null);
     const [maxYear, setMaxYear] = useState<number | null>(null);
     const [tagsOverview, setTagsOverview] = useState<ITagOverview[] | null>(
         null
     );
     const [selectedTagIds, setSelectedTagIds] = useState<number[]>([]);
+    const tagsLimit = 10;
 
     const handleAnalyzeClick = async () => {
         if (minYear && maxYear) {
             try {
                 const data = await ApiService.fetchTagsOverview(
                     reviewsCoeff,
-                    reviewsThreshold,
+                    minReviewsThreshold,
                     minYear,
                     maxYear,
                     selectedTagIds
@@ -52,15 +54,19 @@ const TagsPage = () => {
         <>
             <div className="row pb-2">
                 <div className="col-12">
+                    <label>
+                        Tags ({selectedTagIds.length}/{tagsLimit})
+                    </label>
                     <TagSelector
                         onChange={setSelectedTagIds}
                         placeholder="Tags"
-                        limit={10}
+                        limit={tagsLimit}
                     />
                 </div>
             </div>
             <div className="row">
                 <div className="form-group col-sm-6 col-md-3 pb-2">
+                    <label>Reviews Coefficient</label>
                     <ReviewsCoefficientInput
                         value={reviewsCoeff}
                         onChange={setReviewsCoeff}
@@ -69,16 +75,18 @@ const TagsPage = () => {
                 <div className="col-sm-6 col-md-3 pb-2">
                     <div className="row">
                         <div className="form-group col-6 pe-1">
+                            <label>Min Reviews</label>
                             <ReviewsThresholdInput
-                                value={reviewsThreshold}
-                                onChange={setReviewsThreshold}
+                                value={minReviewsThreshold}
+                                onChange={setMinReviewsThreshold}
                                 max={false}
                             />
                         </div>
                         <div className="form-group col-6 ps-1">
+                            <label>Max Reviews</label>
                             <ReviewsThresholdInput
-                                value={reviewsThreshold}
-                                onChange={setReviewsThreshold}
+                                value={maxReviewsThreshold}
+                                onChange={setMaxReviewsThreshold}
                                 max={true}
                             />
                         </div>
@@ -87,6 +95,7 @@ const TagsPage = () => {
                 <div className="col-sm-12 col-md-3 pb-2">
                     <div className="row">
                         <div className="col-6 pe-1">
+                            <label>Min Year</label>
                             <YearDropdown
                                 onChange={handleMinYearChange}
                                 initialLabel="Min Year"
@@ -95,6 +104,7 @@ const TagsPage = () => {
                             />
                         </div>
                         <div className="col-6 ps-1">
+                            <label>Max Year</label>
                             <YearDropdown
                                 onChange={handleMaxYearChange}
                                 initialLabel="Max Year"
@@ -105,6 +115,7 @@ const TagsPage = () => {
                     </div>
                 </div>
                 <div className="col-sm-12 col-md-3 pb-2">
+                    <label>Click Here!</label>
                     <button
                         className="btn btn-primary text-uppercase w-100"
                         onClick={handleAnalyzeClick}
@@ -141,13 +152,33 @@ const TagsPage = () => {
                         <ParametersInfo />
                         <ul>
                             <li>
-                                <b>Tags (none): ...</b>
+                                Tags (none)
+                                <span className="text-primary fw-bold">*</span>:
+                                Select multiple tags to compare trends across
+                                different categories. Each tag will be analyzed
+                                individually.
                             </li>
-                            <li>Reviews Coeff (30): ...</li>
-                            <li>Min Reviews (10): ...</li>
-                            <li>Max Reviews (inf): ...</li>
-                            <li>Min Year (2020): ...</li>
-                            <li>Max Year (2024): ...</li>
+                            <li>
+                                Reviews Coefficient (30): A multiplier applied
+                                to the number of reviews to estimate a
+                                game&apos;s revenue.
+                            </li>
+                            <li>
+                                Min Reviews (10): The minimum number of reviews
+                                required for a game to be considered.
+                            </li>
+                            <li>
+                                Max Reviews (inf): The maximum number of reviews
+                                allowed for a game to be considered.
+                            </li>
+                            <li>
+                                Min Year (2020): The earliest release year a
+                                game can have to be included.
+                            </li>
+                            <li>
+                                Max Year (2024): The latest release year a game
+                                can have to be included.
+                            </li>
                         </ul>
                     </div>
                 </div>

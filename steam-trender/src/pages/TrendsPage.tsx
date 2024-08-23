@@ -195,11 +195,13 @@ const TrendsPage = () => {
                                 required for a game to be considered.
                             </li>
                             <li>
-                                Pivot Year (2024): trends <b>5 years back</b>{" "}
-                                from that year will be calculated, e.g. if you
-                                select 2023, years: 2019, 2020, 2021, 2022 & 2023
-                                will be taken into account and each year has an
-                                own review multiplier.
+                                Pivot Year (2024)
+                                <span className="text-primary fw-bold">*</span>:
+                                trends <b>5 years back</b> from that year will
+                                be calculated, e.g. if you select 2023, years:
+                                2019, 2020, 2021, 2022 & 2023 will be taken into
+                                account and each year has an own review
+                                multiplier.
                             </li>
                         </ul>
                     </div>
