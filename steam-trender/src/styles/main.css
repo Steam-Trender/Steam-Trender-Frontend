@@ -24,12 +24,12 @@ code {
 
 .react-datepicker__day--keyboard-selected {
     background-color: var(--bs-primary);
-    color: #000;
+    color: var(--bs-text-body);
 }
 
 .react-datepicker__day--selected {
     background-color: var(--bs-primary);
-    color: #000;
+    color: var(--bs-text-body);
 }
 
 .react-datepicker__day:hover {
