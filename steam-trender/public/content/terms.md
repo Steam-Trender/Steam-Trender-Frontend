@@ -14,7 +14,9 @@ You must be at least 18 years old or have the permission of a parent or legal gu
 
 ## 3. Service Description
 
-SteamTrender is an analytics service designed to provide insights and data regarding Steam. Our service is for informational purposes only and does not offer financial, investment, or gaming advice. We do not have a public API, and all information is provided via our platform.
+SteamTrender is an analytics service designed to provide insights and data regarding Steam. **Please note that SteamTrender is currently in beta.** While we strive to provide accurate and reliable data, the beta status of the service means that you may encounter bugs, incomplete features, or interruptions in service. We appreciate your understanding and feedback during this testing phase.
+
+Our service is for informational purposes only and does not offer financial, investment, or gaming advice. **We do not have a public API**, and all information is provided via our platform.
 
 ## 4. Ownership of Data and Rights
 
