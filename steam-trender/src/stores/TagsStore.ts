@@ -1,12 +1,16 @@
 import { makeAutoObservable } from "mobx";
 import { ITag } from "../models/tag";
 import ApiService from "../api/service";
+import { RootStore } from "./RootStore";
 
-class TagStore {
+export class TagsStore {
+    rootStore: RootStore;
+
     tags: ITag[] = [];
     hasFetched = false;
 
-    constructor() {
+    constructor(rootStore: RootStore) {
+        this.rootStore = rootStore;
         makeAutoObservable(this);
     }
 
@@ -26,5 +30,3 @@ class TagStore {
         }
     }
 }
-
-export default new TagStore();
