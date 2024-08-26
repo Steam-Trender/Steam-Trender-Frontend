@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Select, { MultiValue, StylesConfig } from "react-select";
 import { observer } from "mobx-react";
-import TagStore from "../stores/TagStore";
+import { ITag } from "../models/tag";
 
 interface OptionType {
     label: string;
@@ -66,31 +66,39 @@ const selectStyle: StylesConfig<OptionType, true> = {
 
 interface TagsSelectorProps {
     onChange: (selectedTagIds: number[]) => void;
+    tags: ITag[];
     placeholder: string;
     limit: number;
+    selectedTagIds: number[];
 }
 
 const TagSelector = observer(
-    ({ onChange, placeholder, limit }: TagsSelectorProps) => {
+    ({
+        onChange,
+        tags,
+        placeholder,
+        limit,
+        selectedTagIds,
+    }: TagsSelectorProps) => {
         const [selectedTags, setSelectedTags] = useState<
             MultiValue<OptionType>
         >([]);
 
+        useEffect(() => {
+            const initialSelectedTags = tags
+                .filter((tag) => selectedTagIds.includes(tag.id))
+                .map((tag) => ({ value: tag.id, label: tag.title }));
+            setSelectedTags(initialSelectedTags);
+        }, [tags, selectedTagIds]);
+
         const handleChange = (selectedOption: MultiValue<OptionType>) => {
             if (selectedOption.length <= limit) {
                 setSelectedTags(selectedOption);
+                onChange(selectedOption.map((tag) => tag.value));
             }
         };
 
-        useEffect(() => {
-            TagStore.fetchTags();
-        }, []);
-
-        useEffect(() => {
-            onChange(selectedTags.map((tag) => tag.value));
-        }, [selectedTags, onChange]);
-
-        const selectOptions: OptionType[] = TagStore.tags.map((tag) => ({
+        const selectOptions: OptionType[] = tags.map((tag) => ({
             value: tag.id,
             label: tag.title,
         }));
