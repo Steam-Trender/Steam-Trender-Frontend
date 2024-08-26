@@ -9,9 +9,19 @@ import { IYearOverview } from "../models/year_overview";
 import { IStatus } from "../models/status";
 import { format } from "date-fns";
 
-type Params = {
-    [key: string]: any;
-};
+interface FetchTagsOverviewParams {
+    reviewsCoeff: string;
+    minReviews: string;
+    minYear: number;
+    maxYear: number;
+    selectedTags: number[];
+}
+
+interface FetchTrendsOverviewParams {
+    minReviews: string;
+    pivotYear: number;
+    selectedTagIds: number[];
+}
 
 class ApiService {
     static async fetchStatus(): Promise<IStatus> {
@@ -22,7 +32,6 @@ class ApiService {
             return {
                 status: "offline",
                 update: {
-                    id: 0,
                     date: "2024-01-01",
                 },
             };
@@ -62,50 +71,44 @@ class ApiService {
     }
 
     static async fetchCompetitorOverview(
-        min_reviews: string,
-        max_reviews: string,
-        reviews_coeff: string,
-        minYear: Date | string | null,
-        maxYear: Date | string | null,
+        minReviews: string,
+        maxRevires: string,
+        reviewsCoeff: string,
+        minDate: Date | string | null,
+        maxDate: Date | string | null,
         selectedTags: number[],
         bannedTags: number[]
     ): Promise<ICompetitors> {
-        if (minYear !== null) {
-            minYear = format(minYear, "yyyy-MM-dd");
+        if (minDate === null) {
+            minDate = "2020-01-01";
         }
-        if (maxYear !== null) {
-            maxYear = format(maxYear, "yyyy-MM-dd");
+        minDate = format(minDate, "yyyy-MM-dd");
+        if (maxDate === null) {
+            maxDate = "2024-31-12";
+        }
+        maxDate = format(maxDate, "yyyy-MM-dd");
+        if (minReviews === "") {
+            minReviews = "10";
+        }
+        if (maxRevires === "") {
+            maxRevires = "-1";
+        }
+        if (reviewsCoeff === "") {
+            reviewsCoeff = "30";
         }
         try {
-            const addParamIfNotEmpty = (
-                params: Params,
-                key: string,
-                value: any
-            ) => {
-                if (value !== "" && value !== undefined && value !== null) {
-                    params[key] = value;
-                }
-            };
-
-            const getParams = () => {
-                const params: any = {
-                    whitelist_tag_ids: selectedTags,
-                    blacklist_tag_ids: bannedTags,
-                };
-
-                addParamIfNotEmpty(params, "reviews_coeff", reviews_coeff);
-                addParamIfNotEmpty(params, "min_reviews", min_reviews);
-                addParamIfNotEmpty(params, "max_reviews", max_reviews);
-                addParamIfNotEmpty(params, "min_date", minYear);
-                addParamIfNotEmpty(params, "max_date", maxYear);
-
-                return params;
-            };
-
             const response = await API.get<ICompetitors>(
                 "/analyze/competitors",
                 {
-                    params: getParams(),
+                    params: {
+                        reviews_coeff: reviewsCoeff,
+                        min_reviews: minReviews,
+                        max_reviews: maxRevires,
+                        min_date: minDate,
+                        max_date: maxDate,
+                        whitelist_tag_ids: selectedTags,
+                        blacklist_tag_ids: bannedTags,
+                    },
                     paramsSerializer: (params) =>
                         qs.stringify(params, { arrayFormat: "repeat" }),
                 }
@@ -116,18 +119,18 @@ class ApiService {
         }
     }
 
-    static async fetchTagsOverview(
-        reviews_coeff: string,
-        min_reviews: string,
-        minYear: number,
-        maxYear: number,
-        selectedTags: number[]
-    ): Promise<ITagOverview[]> {
-        if (min_reviews === "") {
-            min_reviews = "0";
+    static async fetchTagsOverview({
+        reviewsCoeff,
+        minReviews,
+        minYear,
+        maxYear,
+        selectedTags,
+    }: FetchTagsOverviewParams): Promise<ITagOverview[]> {
+        if (minReviews === "") {
+            minReviews = "10";
         }
-        if (reviews_coeff === "") {
-            reviews_coeff = "30";
+        if (reviewsCoeff === "") {
+            reviewsCoeff = "30";
         }
         try {
             const response = await API.get<ITagOverview[]>("/analyze/tags", {
@@ -135,8 +138,8 @@ class ApiService {
                     min_year: minYear,
                     max_year: maxYear,
                     tag_ids: selectedTags,
-                    min_reviews: min_reviews,
-                    reviews_coeff: reviews_coeff,
+                    min_reviews: minReviews,
+                    reviews_coeff: reviewsCoeff,
                 },
                 paramsSerializer: (params) =>
                     qs.stringify(params, { arrayFormat: "repeat" }),
@@ -147,18 +150,21 @@ class ApiService {
         }
     }
 
-    static async fetchTrendsOverview(
-        min_reviews: string,
-        year: number,
-        selectedTags: number[]
-    ): Promise<IYearOverview[]> {
+    static async fetchTrendsOverview({
+        minReviews,
+        pivotYear,
+        selectedTagIds,
+    }: FetchTrendsOverviewParams): Promise<IYearOverview[]> {
+        if (minReviews === "") {
+            minReviews = "10";
+        }
         try {
             const response = await API.get<IYearOverview[]>("/analyze/trends", {
                 params: {
-                    min_year: year - 5,
-                    max_year: year,
-                    tag_ids: selectedTags,
-                    min_reviews: min_reviews,
+                    min_year: pivotYear - 5,
+                    max_year: pivotYear,
+                    tag_ids: selectedTagIds,
+                    min_reviews: minReviews,
                 },
                 paramsSerializer: (params) =>
                     qs.stringify(params, { arrayFormat: "repeat" }),
