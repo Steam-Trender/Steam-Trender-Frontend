@@ -11,6 +11,7 @@ export class TrendsPageStore {
     year = 2024;
     trendsOverview: IYearOverview[] | null = null;
     tagsLimit = 5;
+    isFetching = false;
 
     constructor(rootStore: RootStore) {
         this.rootStore = rootStore;
@@ -30,12 +31,17 @@ export class TrendsPageStore {
     }
 
     async fetchTrendsOverview() {
+        runInAction(() => {
+            this.isFetching = true;
+            this.trendsOverview = null;
+        });
+
         try {
-            const data = await ApiService.fetchTrendsOverview(
-                this.reviewsThreshold,
-                this.year,
-                this.selectedTagIds
-            );
+            const data = await ApiService.fetchTrendsOverview({
+                minReviews: this.reviewsThreshold,
+                pivotYear: this.year,
+                selectedTagIds: this.selectedTagIds,
+            });
 
             runInAction(() => {
                 this.trendsOverview = data;
@@ -43,5 +49,9 @@ export class TrendsPageStore {
         } catch (error) {
             console.error("Failed to fetch trends overview:", error);
         }
+
+        runInAction(() => {
+            this.isFetching = false;
+        });
     }
 }
