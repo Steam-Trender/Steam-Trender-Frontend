@@ -3,7 +3,7 @@ import ApiService from "../api/service";
 import { IYears } from "../models/years";
 
 class YearStore {
-    timeframe: IYears | null = null;
+    timeframe: IYears = { max_year: 2024, min_year: 2020 };
     years: number[] = [];
     hasFetched = false;
 
@@ -16,7 +16,7 @@ class YearStore {
         this.hasFetched = true;
         this.years = Array.from(
             { length: this.timeframe.max_year - this.timeframe.min_year + 1 },
-            (_, k) => this.timeframe!.max_year - k
+            (_, k) => this.timeframe.max_year - k
         );
     }
 
