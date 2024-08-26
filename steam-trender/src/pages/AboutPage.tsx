@@ -4,7 +4,7 @@ import { Markdown } from "../components/Markdown";
 const AboutPage = () => {
     return (
         <>
-            <Markdown file={"about"} />
+            <Markdown file={"faq"} />
         </>
     );
 };

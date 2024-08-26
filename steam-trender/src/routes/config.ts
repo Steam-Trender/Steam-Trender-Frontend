@@ -5,7 +5,6 @@ import CompetitorsPage from "../pages/CompetitorsPage";
 import TagsPage from "../pages/TagsPage";
 import AboutPage from "../pages/AboutPage";
 import TrendsPage from "../pages/TrendsPage";
-import DescriptionPage from "../pages/DescriptionPage";
 import HomePage from "../pages/HomePage";
 import PrivacyPolicyPage from "../pages/PrivacyPolicyPage";
 import TermsPage from "../pages/TermsPage";
@@ -41,12 +40,12 @@ const routeConfigs: RouteConfig[] = [
     {
         path: "/faq",
         title: "FAQ",
-        element: React.createElement(DescriptionPage),
+        element: React.createElement(AboutPage),
     },
     {
         path: "/about",
         title: "About",
-        element: React.createElement(AboutPage),
+        element: React.createElement(HomePage),
     },
     {
         path: "/privacy",
