@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { ITagOverview } from "../models/tag_overview";
-import ApiService from "../api/service";
+import React, { useEffect } from "react";
 import TagSelector from "../components/TagSelector";
 import YearDropdown from "../components/YearsDropdown";
 import { MoneyBoxPlot } from "../components/MoneyBoxPlot";
@@ -10,44 +8,21 @@ import CombinedChart from "../components/CombinedPlot";
 import { ReviewsCoefficientInput } from "../components/ReviewsCoefficientInput";
 import { ReviewsThresholdInput } from "../components/ReviewsThresholdInput";
 import { ParametersInfo } from "../components/ParametersInfo";
+import { useStore } from "../stores/storeContext";
+import { observer } from "mobx-react-lite";
 
-const TagsPage = () => {
-    const [reviewsCoeff, setReviewsCoeff] = useState("");
-    const [minReviewsThreshold, setMinReviewsThreshold] = useState("");
-    const [maxReviewsThreshold, setMaxReviewsThreshold] = useState("");
-    const [minYear, setMinYear] = useState<number | null>(null);
-    const [maxYear, setMaxYear] = useState<number | null>(null);
-    const [tagsOverview, setTagsOverview] = useState<ITagOverview[] | null>(
-        null
-    );
-    const [selectedTagIds, setSelectedTagIds] = useState<number[]>([]);
+const TagsPage = observer(() => {
+    const { tagsPageStore, tagsStore } = useStore();
+    const { tagsOverview } = tagsPageStore;
+
     const tagsLimit = 10;
 
+    useEffect(() => {
+        tagsStore.fetchTags();
+    }, []);
+
     const handleAnalyzeClick = async () => {
-        if (minYear && maxYear) {
-            try {
-                const data = await ApiService.fetchTagsOverview(
-                    reviewsCoeff,
-                    minReviewsThreshold,
-                    minYear,
-                    maxYear,
-                    selectedTagIds
-                );
-                setTagsOverview(data);
-            } catch (error) {
-                console.error("Failed to fetch data", error);
-            }
-        } else {
-            alert("Please select both a minimum and maximum year.");
-        }
-    };
-
-    const handleMinYearChange = (year: number) => {
-        setMinYear(year);
-    };
-
-    const handleMaxYearChange = (year: number) => {
-        setMaxYear(year);
+        await tagsPageStore.fetchTagsOverview();
     };
 
     return (
@@ -55,12 +30,14 @@ const TagsPage = () => {
             <div className="row pb-2">
                 <div className="col-12">
                     <label>
-                        Tags ({selectedTagIds.length}/{tagsLimit})
+                        Tags ({tagsPageStore.selectedTagIds.length}/{tagsLimit})
                     </label>
                     <TagSelector
-                        onChange={setSelectedTagIds}
+                        onChange={(ids) => tagsPageStore.setSelectedTagIds(ids)}
                         placeholder="Tags"
                         limit={tagsLimit}
+                        tags={tagsStore.tags}
+                        selectedTagIds={tagsPageStore.selectedTagIds}
                     />
                 </div>
             </div>
@@ -68,8 +45,10 @@ const TagsPage = () => {
                 <div className="form-group col-sm-6 col-md-3 pb-2">
                     <label>Reviews Coefficient</label>
                     <ReviewsCoefficientInput
-                        value={reviewsCoeff}
-                        onChange={setReviewsCoeff}
+                        value={tagsPageStore.reviewsCoeff}
+                        onChange={(value) =>
+                            tagsPageStore.setReviewsCoeff(value)
+                        }
                     />
                 </div>
                 <div className="col-sm-6 col-md-3 pb-2">
@@ -77,16 +56,20 @@ const TagsPage = () => {
                         <div className="form-group col-6 pe-1">
                             <label>Min Reviews</label>
                             <ReviewsThresholdInput
-                                value={minReviewsThreshold}
-                                onChange={setMinReviewsThreshold}
+                                value={tagsPageStore.minReviewsThreshold}
+                                onChange={(value) =>
+                                    tagsPageStore.setMinReviewsThreshold(value)
+                                }
                                 max={false}
                             />
                         </div>
                         <div className="form-group col-6 ps-1">
                             <label>Max Reviews</label>
                             <ReviewsThresholdInput
-                                value={maxReviewsThreshold}
-                                onChange={setMaxReviewsThreshold}
+                                value={tagsPageStore.maxReviewsThreshold}
+                                onChange={(value) =>
+                                    tagsPageStore.setMaxReviewsThreshold(value)
+                                }
                                 max={true}
                             />
                         </div>
@@ -97,7 +80,9 @@ const TagsPage = () => {
                         <div className="col-6 pe-1">
                             <label>Min Year</label>
                             <YearDropdown
-                                onChange={handleMinYearChange}
+                                onChange={(year) =>
+                                    tagsPageStore.setMinYear(year)
+                                }
                                 initialLabel="Min Year"
                                 isDescending={false}
                                 defaultYear={2020}
@@ -106,7 +91,9 @@ const TagsPage = () => {
                         <div className="col-6 ps-1">
                             <label>Max Year</label>
                             <YearDropdown
-                                onChange={handleMaxYearChange}
+                                onChange={(year) =>
+                                    tagsPageStore.setMaxYear(year)
+                                }
                                 initialLabel="Max Year"
                                 isDescending={true}
                                 defaultYear={2024}
@@ -119,6 +106,7 @@ const TagsPage = () => {
                     <button
                         className="btn btn-primary text-uppercase w-100"
                         onClick={handleAnalyzeClick}
+                        disabled={tagsPageStore.isFetching}
                     >
                         Analyze
                     </button>
@@ -148,43 +136,59 @@ const TagsPage = () => {
                 </>
             ) : (
                 <div className="row flex-fill align-items-center">
-                    <div>
-                        <ParametersInfo />
-                        <ul>
-                            <li>
-                                Tags (none)
-                                <span className="text-primary fw-bold">*</span>:
-                                Select multiple tags to compare trends across
-                                different categories. Each tag will be analyzed
-                                individually.
-                            </li>
-                            <li>
-                                Reviews Coefficient (30): A multiplier applied
-                                to the number of reviews to estimate a
-                                game&apos;s revenue.
-                            </li>
-                            <li>
-                                Min Reviews (10): The minimum number of reviews
-                                required for a game to be considered.
-                            </li>
-                            <li>
-                                Max Reviews (inf): The maximum number of reviews
-                                allowed for a game to be considered.
-                            </li>
-                            <li>
-                                Min Year (2020): The earliest release year a
-                                game can have to be included.
-                            </li>
-                            <li>
-                                Max Year (2024): The latest release year a game
-                                can have to be included.
-                            </li>
-                        </ul>
-                    </div>
+                    {!tagsPageStore.isFetching ? (
+                        <div>
+                            <ParametersInfo />
+                            <ul>
+                                <li>
+                                    Tags (none)
+                                    <span className="text-primary fw-bold">
+                                        *
+                                    </span>
+                                    : Select multiple tags to compare trends
+                                    across different categories, each one will
+                                    be analyzed individually.
+                                </li>
+                                <li>
+                                    Reviews Coefficient (30): The multiplier
+                                    applied to the number of reviews to estimate
+                                    a game&apos;s revenue.
+                                </li>
+                                <li>
+                                    Min Reviews (10): The minimum number of
+                                    reviews required for a game to be
+                                    considered.
+                                </li>
+                                <li>
+                                    Max Reviews (inf): The maximum number of
+                                    reviews allowed for a game to be considered.
+                                </li>
+                                <li>
+                                    Min Year (2020): The earliest release year a
+                                    game can have to be included.
+                                </li>
+                                <li>
+                                    Max Year (2024): The latest release year a
+                                    game can have to be included.
+                                </li>
+                            </ul>
+                        </div>
+                    ) : (
+                        <div className="text-center">
+                            <div
+                                className="spinner-border text-primary"
+                                role="status"
+                            >
+                                <span className="visually-hidden">
+                                    Loading...
+                                </span>
+                            </div>
+                        </div>
+                    )}
                 </div>
             )}
         </>
     );
-};
+});
 
 export default TagsPage;
