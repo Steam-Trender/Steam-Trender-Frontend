@@ -9,19 +9,8 @@ interface MoneyBoxProps {
     data: IGenericOverview[];
 }
 
-interface BoxPlotData {
-    x: string;
-    y: (number | undefined)[];
-}
-
-interface SeriesType {
-    data: BoxPlotData[];
-}
-
 export function MoneyBoxPlot({ data }: MoneyBoxProps) {
     const [chartOptions, setChartOptions] = useState<ApexOptions>({});
-    const [chartKey, setChartKey] = useState(0);
-    const [series] = useState<SeriesType[]>([]);
 
     const processBoxplotData = (data: IGenericOverview[]) => {
         const seriesData = data.map((item) => ({
@@ -39,10 +28,6 @@ export function MoneyBoxPlot({ data }: MoneyBoxProps) {
 
         return [{ data: seriesData }];
     };
-
-    useEffect(() => {
-        setChartKey((prevKey) => prevKey + 1);
-    }, [series]);
 
     useEffect(() => {
         const upperColor = getCSSVariable("--bs-primary");
