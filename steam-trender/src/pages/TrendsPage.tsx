@@ -1,40 +1,28 @@
-import React, { useState } from "react";
-import ApiService from "../api/service";
+import React, { useEffect } from "react";
 import YearDropdown from "../components/YearsDropdown";
 import TagSelector from "../components/TagSelector";
-import { IYearOverview } from "../models/year_overview";
 import { OverviewTable } from "../components/OverviewTable";
 import { convertYearDataToGeneric } from "../models/generic_overview";
 import { MoneyBoxPlot } from "../components/MoneyBoxPlot";
 import { RegressionPlot } from "../components/RegressionPlot";
-import { getSpecificRevenue } from "../models/overview";
+import { getSpecificRevenue, IOverview } from "../models/overview";
 import { ReviewsThresholdInput } from "../components/ReviewsThresholdInput";
 import { ParametersInfo } from "../components/ParametersInfo";
+import { observer } from "mobx-react-lite";
+import { useStore } from "../stores/storeContext";
 
-const TrendsPage = () => {
-    const [reviewsThreshold, setReviewsThreshold] = useState("");
-    const [selectedTagIds, setSelectedTagIds] = useState<number[]>([]);
-    const [year, setYear] = useState<number>(2024);
-    const [trendsOverview, setTrendsOverview] = useState<
-        IYearOverview[] | null
-    >(null);
-    const tagsLimit = 5;
+const TrendsPage = observer(() => {
+    const { trendsPageStore, tagsStore } = useStore();
+    const { trendsOverview } = trendsPageStore;
+
+    const tagsLimit = 10;
+
+    useEffect(() => {
+        tagsStore.fetchTags();
+    }, []);
 
     const handleAnalyzeClick = async () => {
-        try {
-            const data = await ApiService.fetchTrendsOverview(
-                reviewsThreshold,
-                year,
-                selectedTagIds
-            );
-            setTrendsOverview(data);
-        } catch (error) {
-            console.error("Failed to fetch data", error);
-        }
-    };
-
-    const handleYearChange = (year: number) => {
-        setYear(year);
+        await trendsPageStore.fetchTrendsOverview();
     };
 
     return (
@@ -42,12 +30,17 @@ const TrendsPage = () => {
             <div className="row">
                 <div className="col-sm-12 col-md-6 pb-2">
                     <label>
-                        Tags ({selectedTagIds.length}/{tagsLimit})
+                        Tags ({trendsPageStore.selectedTagIds.length}/
+                        {tagsLimit})
                     </label>
                     <TagSelector
-                        onChange={setSelectedTagIds}
+                        onChange={(ids) =>
+                            trendsPageStore.setSelectedTagIds(ids)
+                        }
                         placeholder="Tags"
                         limit={tagsLimit}
+                        tags={tagsStore.tags}
+                        selectedTagIds={trendsPageStore.selectedTagIds}
                     />
                 </div>
                 <div className="col-sm-12 col-md-3">
@@ -55,18 +48,22 @@ const TrendsPage = () => {
                         <div className="form-group col-sm-12 col-md-6 pb-2">
                             <label>Min Reviews</label>
                             <ReviewsThresholdInput
-                                value={reviewsThreshold}
-                                onChange={setReviewsThreshold}
+                                value={trendsPageStore.reviewsThreshold}
+                                onChange={(value) =>
+                                    trendsPageStore.setReviewsThreshold(value)
+                                }
                                 max={false}
                             />
                         </div>
                         <div className="col-sm-12 col-md-6 pb-2">
                             <label>Pivot Year</label>
                             <YearDropdown
-                                onChange={handleYearChange}
+                                onChange={(year) =>
+                                    trendsPageStore.setYear(year)
+                                }
                                 initialLabel="Pivot Year"
                                 isDescending={true}
-                                defaultYear={2024}
+                                defaultYear={trendsPageStore.year}
                             />
                         </div>
                     </div>
@@ -76,6 +73,7 @@ const TrendsPage = () => {
                     <button
                         className="btn btn-primary text-uppercase w-100"
                         onClick={handleAnalyzeClick}
+                        disabled={trendsPageStore.isFetching}
                     >
                         Analyze
                     </button>
@@ -89,13 +87,16 @@ const TrendsPage = () => {
                             <h2>Median Revenue</h2>
                             <RegressionPlot
                                 categories={trendsOverview.map(
-                                    (item) => item.year
+                                    (item: { year: string }) => item.year
                                 )}
-                                real={trendsOverview.map((item) =>
-                                    getSpecificRevenue(item.overview, 0.5)
+                                real={trendsOverview.map(
+                                    (item: { overview: IOverview }) =>
+                                        getSpecificRevenue(item.overview, 0.5)
                                 )}
                                 trend={trendsOverview.map(
-                                    (item) => item.regression.median_revenue
+                                    (item: {
+                                        regression: { median_revenue: number };
+                                    }) => item.regression.median_revenue
                                 )}
                                 yaxis_title={"Median Revenue"}
                                 money={true}
@@ -113,10 +114,12 @@ const TrendsPage = () => {
                             <h2>Game Released</h2>
                             <RegressionPlot
                                 categories={trendsOverview.map(
-                                    (item) => item.year
+                                    (item: { year: string }) => item.year
                                 )}
                                 real={trendsOverview.map(
-                                    (item) => item.overview.total_games
+                                    (item: {
+                                        overview: { total_games: number };
+                                    }) => item.overview.total_games
                                 )}
                                 trend={null}
                                 yaxis_title={"Games"}
@@ -127,13 +130,17 @@ const TrendsPage = () => {
                             <h2>Median Reviews</h2>
                             <RegressionPlot
                                 categories={trendsOverview.map(
-                                    (item) => item.year
+                                    (item: { year: string }) => item.year
                                 )}
                                 real={trendsOverview.map(
-                                    (item) => item.overview.median_reviews
+                                    (item: {
+                                        overview: { median_reviews: number };
+                                    }) => item.overview.median_reviews
                                 )}
                                 trend={trendsOverview.map(
-                                    (item) => item.regression.median_reviews
+                                    (item: {
+                                        regression: { median_reviews: number };
+                                    }) => item.regression.median_reviews
                                 )}
                                 yaxis_title={"Median Reviews"}
                                 money={false}
@@ -145,13 +152,17 @@ const TrendsPage = () => {
                             <h2>Median Owners</h2>
                             <RegressionPlot
                                 categories={trendsOverview.map(
-                                    (item) => item.year
+                                    (item: { year: string }) => item.year
                                 )}
                                 real={trendsOverview.map(
-                                    (item) => item.overview.median_owners
+                                    (item: {
+                                        overview: { median_owners: number };
+                                    }) => item.overview.median_owners
                                 )}
                                 trend={trendsOverview.map(
-                                    (item) => item.regression.median_owners
+                                    (item: {
+                                        regression: { median_owners: number };
+                                    }) => item.regression.median_owners
                                 )}
                                 yaxis_title={"Median Owners"}
                                 money={false}
@@ -161,13 +172,17 @@ const TrendsPage = () => {
                             <h2>Median Price</h2>
                             <RegressionPlot
                                 categories={trendsOverview.map(
-                                    (item) => item.year
+                                    (item: { year: string }) => item.year
                                 )}
                                 real={trendsOverview.map(
-                                    (item) => item.overview.median_price
+                                    (item: {
+                                        overview: { median_price: number };
+                                    }) => item.overview.median_price
                                 )}
                                 trend={trendsOverview.map(
-                                    (item) => item.regression.median_price
+                                    (item: {
+                                        regression: { median_price: number };
+                                    }) => item.regression.median_price
                                 )}
                                 yaxis_title={"Median Price"}
                                 money={true}
@@ -183,32 +198,48 @@ const TrendsPage = () => {
                 </>
             ) : (
                 <div className="row flex-fill align-items-center">
-                    <div>
-                        <ParametersInfo />
-                        <ul>
-                            <li>
-                                Tags (None): Tags that must all be present for a
-                                game to be considered in the sample.
-                            </li>
-                            <li>
-                                Min Reviews (10): The minimum number of reviews
-                                required for a game to be considered.
-                            </li>
-                            <li>
-                                Pivot Year (2024)
-                                <span className="text-primary fw-bold">*</span>:
-                                trends <b>5 years back</b> from that year will
-                                be calculated, e.g. if you select 2023, years:
-                                2019, 2020, 2021, 2022 & 2023 will be taken into
-                                account and each year has an own review
-                                multiplier.
-                            </li>
-                        </ul>
-                    </div>
+                    {!trendsPageStore.isFetching ? (
+                        <div>
+                            <ParametersInfo />
+                            <ul>
+                                <li>
+                                    Tags (None): Tags that must all be present
+                                    for a game to be considered in the sample.
+                                </li>
+                                <li>
+                                    Min Reviews (10): The minimum number of
+                                    reviews required for a game to be
+                                    considered.
+                                </li>
+                                <li>
+                                    Pivot Year (2024)
+                                    <span className="text-primary fw-bold">
+                                        *
+                                    </span>
+                                    : trends <b>5 years back</b> from that year
+                                    will be calculated, e.g. if you select 2023,
+                                    years: 2019, 2020, 2021, 2022 & 2023 will be
+                                    taken into account and each year has an own
+                                    review multiplier.
+                                </li>
+                            </ul>
+                        </div>
+                    ) : (
+                        <div className="text-center">
+                            <div
+                                className="spinner-border text-primary"
+                                role="status"
+                            >
+                                <span className="visually-hidden">
+                                    Loading...
+                                </span>
+                            </div>
+                        </div>
+                    )}
                 </div>
             )}
         </>
     );
-};
+});
 
 export default TrendsPage;
