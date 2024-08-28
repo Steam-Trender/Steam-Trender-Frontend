@@ -9,6 +9,16 @@ import { IYearOverview } from "../models/year_overview";
 import { IStatus } from "../models/status";
 import { format } from "date-fns";
 
+interface FetchCompetitorsOverviewParams {
+    reviewsCoeff: string;
+    minReviews: string;
+    maxReviews: string;
+    minDate: Date | string | null;
+    maxDate: Date | string | null;
+    includedTags: number[];
+    excludedTags: number[];
+}
+
 interface FetchTagsOverviewParams {
     reviewsCoeff: string;
     minReviews: string;
@@ -70,15 +80,15 @@ class ApiService {
         }
     }
 
-    static async fetchCompetitorOverview(
-        minReviews: string,
-        maxRevires: string,
-        reviewsCoeff: string,
-        minDate: Date | string | null,
-        maxDate: Date | string | null,
-        selectedTags: number[],
-        bannedTags: number[]
-    ): Promise<ICompetitors> {
+    static async fetchCompetitorsOverview({
+        reviewsCoeff,
+        minReviews,
+        maxReviews,
+        minDate,
+        maxDate,
+        includedTags,
+        excludedTags,
+    }: FetchCompetitorsOverviewParams): Promise<ICompetitors> {
         if (minDate === null) {
             minDate = "2020-01-01";
         }
@@ -90,8 +100,8 @@ class ApiService {
         if (minReviews === "") {
             minReviews = "10";
         }
-        if (maxRevires === "") {
-            maxRevires = "-1";
+        if (maxReviews === "") {
+            maxReviews = "-1";
         }
         if (reviewsCoeff === "") {
             reviewsCoeff = "30";
@@ -103,11 +113,11 @@ class ApiService {
                     params: {
                         reviews_coeff: reviewsCoeff,
                         min_reviews: minReviews,
-                        max_reviews: maxRevires,
+                        max_reviews: maxReviews,
                         min_date: minDate,
                         max_date: maxDate,
-                        whitelist_tag_ids: selectedTags,
-                        blacklist_tag_ids: bannedTags,
+                        whitelist_tag_ids: includedTags,
+                        blacklist_tag_ids: excludedTags,
                     },
                     paramsSerializer: (params) =>
                         qs.stringify(params, { arrayFormat: "repeat" }),
