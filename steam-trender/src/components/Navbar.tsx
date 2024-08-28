@@ -9,11 +9,11 @@ const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
             <div className="container px-3 py-1">
-                <Link className="navbar-brand text-uppercase" to="/">
-                    <b>
-                        Steam<span className="text-primary">Trender</span>
-                        <sup className="text-lowercase text-primary">β</sup>
-                    </b>
+                <Link
+                    className="navbar-brand text-uppercase barcode-font"
+                    to="/"
+                >
+                    Steam<span className="text-primary">Trender</span>
                 </Link>
                 <button
                     className="custom-toggler navbar-toggler"
@@ -34,9 +34,20 @@ const Navbar = () => {
                     <ul className="navbar-nav">
                         <li className="nav-item">
                             <NavLink
+                                to="/home"
+                                className={({ isActive }) =>
+                                    "nav-link text-uppercase" +
+                                    (isActive ? " active-link" : "")
+                                }
+                            >
+                                Home
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink
                                 to="/faq"
                                 className={({ isActive }) =>
-                                    "navbar-brand text-uppercase" +
+                                    "nav-link text-uppercase" +
                                     (isActive ? " active-link" : "")
                                 }
                             >
@@ -47,7 +58,7 @@ const Navbar = () => {
                             <NavLink
                                 to="/competitors"
                                 className={({ isActive }) =>
-                                    "navbar-brand text-uppercase" +
+                                    "nav-link text-uppercase" +
                                     (isActive ? " active-link" : "")
                                 }
                             >
@@ -58,7 +69,7 @@ const Navbar = () => {
                             <NavLink
                                 to="/tags"
                                 className={({ isActive }) =>
-                                    "navbar-brand text-uppercase" +
+                                    "nav-link text-uppercase" +
                                     (isActive ? " active-link" : "")
                                 }
                             >
@@ -69,7 +80,7 @@ const Navbar = () => {
                             <NavLink
                                 to="/trends"
                                 className={({ isActive }) =>
-                                    "navbar-brand text-uppercase" +
+                                    "nav-link text-uppercase" +
                                     (isActive ? " active-link" : "")
                                 }
                             >
