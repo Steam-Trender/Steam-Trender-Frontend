@@ -1,13 +1,12 @@
 import React from "react";
 import { Markdown } from "../components/Markdown";
 
-const AboutPage = () => {
+const QuestionsPage = () => {
     return (
         <>
-            <Markdown file={"home"} />
             <Markdown file={"faq"} />
         </>
     );
 };
 
-export default AboutPage;
+export default QuestionsPage;

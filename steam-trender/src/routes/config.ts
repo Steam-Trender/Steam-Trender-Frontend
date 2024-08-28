@@ -8,6 +8,7 @@ import TrendsPage from "../pages/TrendsPage";
 import HomePage from "../pages/HomePage";
 import PrivacyPolicyPage from "../pages/PrivacyPolicyPage";
 import TermsPage from "../pages/TermsPage";
+import QuestionsPage from "../pages/QuestionsPage";
 
 interface RouteConfig {
     path: string;
@@ -40,12 +41,12 @@ const routeConfigs: RouteConfig[] = [
     {
         path: "/faq",
         title: "FAQ",
-        element: React.createElement(AboutPage),
+        element: React.createElement(QuestionsPage),
     },
     {
         path: "/about",
         title: "About",
-        element: React.createElement(HomePage),
+        element: React.createElement(AboutPage),
     },
     {
         path: "/privacy",
