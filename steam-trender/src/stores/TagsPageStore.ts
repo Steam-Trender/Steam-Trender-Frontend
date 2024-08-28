@@ -10,10 +10,10 @@ export class TagsPageStore {
     minReviewsThreshold = "";
     maxReviewsThreshold = "";
     selectedTagIds: number[] = [];
-    maxYear = 2020;
-    minYear = 2024;
+    minYear = 2020;
+    maxYear = 2024;
     tagsOverview: ITagOverview[] | null = null;
-    tagsLimit = 5;
+
     isFetching = false;
 
     constructor(rootStore: RootStore) {
