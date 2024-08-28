@@ -5,7 +5,7 @@ Welcome to the **Steam Trender FAQ** page! Here, you can find basic information 
 ## Who is behind the service?
 
 -   **Lev «evlko» Kobelev** (Developer):
-    -   Product Analyst @ My.Games (ex Game Designer)
+    -   Product Analyst @ My.Games
     -   email: evlko.oklve [at] gmail.com
     -   twitter: [@evllko](https://twitter.com/evllko)
     -   tg: [@evlko](https://t.me/evlko)
