@@ -16,7 +16,7 @@ const Footer = () => {
     }, []);
 
     return (
-        <footer className="pb-3 pt-2 mt-2 bg-light">
+        <footer className="pb-3 pt-3 mt-2 bg-light">
             <div className="container">
                 <div className="row mb-2 text-center">
                     <div className="col-md-4 text-md-start">
