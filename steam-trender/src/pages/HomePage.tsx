@@ -13,16 +13,16 @@ const HomePage = () => {
             try {
                 const maxDate = new Date();
                 const minDate = new Date();
-                minDate.setMonth(minDate.getMonth() - 2);
-                const data = await ApiService.fetchCompetitorOverview(
-                    "1000",
-                    "2000",
-                    "30",
-                    minDate,
-                    maxDate,
-                    [],
-                    []
-                );
+                minDate.setMonth(maxDate.getMonth() - 2);
+                const data = await ApiService.fetchCompetitorsOverview({
+                    reviewsCoeff: "30",
+                    minReviews: "1000",
+                    maxReviews: "2000",
+                    minDate: minDate,
+                    maxDate: maxDate,
+                    includedTags: [],
+                    excludedTags: [],
+                });
                 setCompetitorOverview(data);
             } catch (error) {
                 console.error("Failed to fetch data", error);
@@ -35,7 +35,7 @@ const HomePage = () => {
     return (
         <>
             <Markdown file={"home"} />
-            <h1>Trending</h1>
+            <h2>Trending</h2>
             {competitorOverview && (
                 <GamesTable games={competitorOverview.games} />
             )}
