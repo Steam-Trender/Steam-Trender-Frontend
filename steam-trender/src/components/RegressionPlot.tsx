@@ -34,6 +34,7 @@ export function RegressionPlot({
                 animations: {
                     enabled: false,
                 },
+                fontFamily: "Roboto, sans-serif",
             },
             colors: [mainColor, pregressionColor],
             markers: {

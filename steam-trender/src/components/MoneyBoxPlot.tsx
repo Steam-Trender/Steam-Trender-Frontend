@@ -43,6 +43,7 @@ export function MoneyBoxPlot({ data }: MoneyBoxProps) {
                 zoom: {
                     enabled: false,
                 },
+                fontFamily: "Roboto, sans-serif",
             },
             yaxis: {
                 min: 2,
@@ -61,9 +62,6 @@ export function MoneyBoxPlot({ data }: MoneyBoxProps) {
                 },
             },
             xaxis: {
-                crosshairs: {
-                    show: false,
-                },
                 tooltip: {
                     enabled: false,
                 },
