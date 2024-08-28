@@ -22,6 +22,7 @@ interface FetchCompetitorsOverviewParams {
 interface FetchTagsOverviewParams {
     reviewsCoeff: string;
     minReviews: string;
+    maxReviews: string;
     minYear: number;
     maxYear: number;
     selectedTags: number[];
@@ -132,12 +133,16 @@ class ApiService {
     static async fetchTagsOverview({
         reviewsCoeff,
         minReviews,
+        maxReviews,
         minYear,
         maxYear,
         selectedTags,
     }: FetchTagsOverviewParams): Promise<ITagOverview[]> {
         if (minReviews === "") {
             minReviews = "10";
+        }
+        if (maxReviews === "") {
+            maxReviews = "-1";
         }
         if (reviewsCoeff === "") {
             reviewsCoeff = "30";
@@ -149,6 +154,7 @@ class ApiService {
                     max_year: maxYear,
                     tag_ids: selectedTags,
                     min_reviews: minReviews,
+                    max_reviews: maxReviews,
                     reviews_coeff: reviewsCoeff,
                 },
                 paramsSerializer: (params) =>

@@ -55,6 +55,7 @@ export class TagsPageStore {
             const data = await ApiService.fetchTagsOverview({
                 reviewsCoeff: this.reviewsCoeff,
                 minReviews: this.minReviewsThreshold,
+                maxReviews: this.maxReviewsThreshold,
                 minYear: this.maxYear,
                 maxYear: this.maxYear,
                 selectedTags: this.selectedTagIds,
