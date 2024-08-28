@@ -14,8 +14,9 @@ code {
         monospace;
 }
 
-.active-link {
-    text-decoration: underline;
+.active-link,
+.active-link:focus {
+    color: var(--bs-primary);
 }
 
 .btn-outline-secondary {
@@ -56,4 +57,32 @@ code {
 #yearDropdown:active span,
 #yearDropdown[aria-expanded="true"] span {
     color: var(--bs-text-light);
+}
+
+.barcode-font {
+    font-family: "Libre Barcode 128 Text";
+    font-size: 24pt;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 14pt;
+}
+
+.h1 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.h2 {
+    font-size: 1.75rem;
+    font-weight: 500;
+}
+
+.h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.h4 {
+    font-size: 1.25rem;
+    font-weight: 500;
 }
