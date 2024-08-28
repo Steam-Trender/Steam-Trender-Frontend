@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { ICompetitors } from "../models/competitors";
-import ApiService from "../api/service";
+import React, { useEffect } from "react";
 import TagSelector from "../components/TagSelector";
 import { NumberFormatter } from "../utils/number_formatter";
 import { IGame } from "../models/game";
@@ -12,49 +10,36 @@ import { ITag } from "../models/tag";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ParametersInfo } from "../components/ParametersInfo";
+import { useStore } from "../stores/storeContext";
+import { observer } from "mobx-react";
 
-const CompetitorsPage = () => {
-    const [reviewsCoeff, setReviewsCoeff] = useState("");
-    const [minReviewsThreshold, setMinReviewsThreshold] = useState("");
-    const [maxReviewsThreshold, setMaxReviewsThreshold] = useState("");
-    const [minYear, setMinYear] = useState(new Date("2020-01-01"));
-    const [maxYear, setMaxYear] = useState(new Date("2024-12-31"));
-    const [competitorOverview, setCompetitorOverview] =
-        useState<ICompetitors | null>(null);
-    const [selectedTagIds, setSelectedTagIds] = useState<number[]>([]);
-    const [bannedTagIds, setBannedTagIds] = useState<number[]>([]);
+const CompetitorsPage = observer(() => {
+    const { competitorsPageStore, tagsStore } = useStore();
+    const { competitorsOverview } = competitorsPageStore;
+
     const tagsLimit = 10;
 
+    useEffect(() => {
+        tagsStore.fetchTags();
+    }, []);
+
     const handleAnalyzeClick = async () => {
-        try {
-            const data = await ApiService.fetchCompetitorOverview(
-                minReviewsThreshold,
-                maxReviewsThreshold,
-                reviewsCoeff,
-                minYear,
-                maxYear,
-                selectedTagIds,
-                bannedTagIds
-            );
-            setCompetitorOverview(data);
-        } catch (error) {
-            console.error("Failed to fetch data", error);
-        }
+        await competitorsPageStore.fetchCompetitorsOverview();
     };
 
     const handleDownload = () => {
-        if (competitorOverview === null) {
+        if (competitorsOverview === null) {
             return;
         }
 
         const csvRows = [];
 
         const headers = Object.keys(
-            competitorOverview.games[0]
+            competitorsOverview.games[0]
         ) as (keyof IGame)[];
         csvRows.push(headers.join(";"));
 
-        for (const row of competitorOverview.games) {
+        for (const row of competitorsOverview.games) {
             const values = headers.map((header) => {
                 let cell = row[header];
 
@@ -80,43 +65,39 @@ const CompetitorsPage = () => {
         document.body.removeChild(link);
     };
 
-    const handleMinYearChange = (date: Date | null) => {
-        if (date === null) {
-            setMinYear(new Date("2020-01-01"));
-        } else {
-            setMinYear(date);
-        }
-    };
-
-    const handleMaxYearChange = (date: Date | null) => {
-        if (date === null) {
-            setMaxYear(new Date("2024-31-12"));
-        } else {
-            setMaxYear(date);
-        }
-    };
-
     return (
         <>
             <div className="row">
                 <div className="col-sm-12 col-md-6 pb-2">
                     <label>
-                        Included Tags ({selectedTagIds.length}/{tagsLimit})
+                        Included Tags (
+                        {competitorsPageStore.includedTagIds.length}/{tagsLimit}
+                        )
                     </label>
                     <TagSelector
-                        onChange={setSelectedTagIds}
+                        onChange={(ids) =>
+                            competitorsPageStore.setIncludedTagIds(ids)
+                        }
                         placeholder="Any"
                         limit={tagsLimit}
+                        tags={tagsStore.tags}
+                        selectedTagIds={competitorsPageStore.includedTagIds}
                     />
                 </div>
                 <div className="col-sm-12 col-md-6 pb-2">
                     <label>
-                        Excluded Tags ({bannedTagIds.length}/{tagsLimit})
+                        Excluded Tags (
+                        {competitorsPageStore.excludedTagIds.length}/{tagsLimit}
+                        )
                     </label>
                     <TagSelector
-                        onChange={setBannedTagIds}
+                        onChange={(ids) =>
+                            competitorsPageStore.setExcludedTagIds(ids)
+                        }
                         placeholder="None"
                         limit={tagsLimit}
+                        tags={tagsStore.tags}
+                        selectedTagIds={competitorsPageStore.excludedTagIds}
                     />
                 </div>
             </div>
@@ -124,8 +105,10 @@ const CompetitorsPage = () => {
                 <div className="form-group col-sm-6 col-md-3 pb-2">
                     <label>Reviews Coefficient</label>
                     <ReviewsCoefficientInput
-                        value={reviewsCoeff}
-                        onChange={setReviewsCoeff}
+                        value={competitorsPageStore.reviewsCoeff}
+                        onChange={(value) =>
+                            competitorsPageStore.setReviewsCoeff(value)
+                        }
                     />
                 </div>
                 <div className="col-sm-6 col-md-3 pb-2">
@@ -133,16 +116,24 @@ const CompetitorsPage = () => {
                         <div className="form-group col-6 pe-1">
                             <label>Min Reviews</label>
                             <ReviewsThresholdInput
-                                value={minReviewsThreshold}
-                                onChange={setMinReviewsThreshold}
+                                value={competitorsPageStore.minReviewsThreshold}
+                                onChange={(value) =>
+                                    competitorsPageStore.setMinReviewsThreshold(
+                                        value
+                                    )
+                                }
                                 max={false}
                             />
                         </div>
                         <div className="form-group col-6 ps-1">
                             <label>Max Reviews</label>
                             <ReviewsThresholdInput
-                                value={maxReviewsThreshold}
-                                onChange={setMaxReviewsThreshold}
+                                value={competitorsPageStore.maxReviewsThreshold}
+                                onChange={(value) =>
+                                    competitorsPageStore.setMaxReviewsThreshold(
+                                        value
+                                    )
+                                }
                                 max={true}
                             />
                         </div>
@@ -153,8 +144,10 @@ const CompetitorsPage = () => {
                         <div className="col-6 pe-1">
                             <label>Min Date</label>
                             <DatePicker
-                                selected={minYear}
-                                onChange={handleMinYearChange}
+                                selected={competitorsPageStore.minDate}
+                                onChange={(value) =>
+                                    competitorsPageStore.setMinDate(value)
+                                }
                                 dateFormat="yyyy-MM-dd"
                                 className="form-control w-100"
                                 placeholderText="Min Date"
@@ -163,8 +156,10 @@ const CompetitorsPage = () => {
                         <div className="col-6 ps-1">
                             <label>Max Date</label>
                             <DatePicker
-                                selected={maxYear}
-                                onChange={handleMaxYearChange}
+                                selected={competitorsPageStore.maxDate}
+                                onChange={(value) =>
+                                    competitorsPageStore.setMaxDate(value)
+                                }
                                 dateFormat="yyyy-MM-dd"
                                 className="form-control w-100"
                                 placeholderText="Max Date"
@@ -182,41 +177,41 @@ const CompetitorsPage = () => {
                     </button>
                 </div>
             </div>
-            {competitorOverview ? (
+            {competitorsOverview ? (
                 <>
                     <div className="row">
-                        <h1 className="text-uppercase">Overview</h1>
+                        <h1>Overview</h1>
                         <p>
                             <b>Total Games: </b>
                             <NumberFormatter
-                                value={competitorOverview.overview.total_games}
+                                value={competitorsOverview.overview.total_games}
                             />
                             ,<b> Median Revenue: </b>
                             $
                             <NumberFormatter
                                 value={getSpecificRevenue(
-                                    competitorOverview.overview,
+                                    competitorsOverview.overview,
                                     0.5
                                 )}
                             />
                             ,<b> Median Reviews: </b>
                             <NumberFormatter
                                 value={
-                                    competitorOverview.overview.median_reviews
+                                    competitorsOverview.overview.median_reviews
                                 }
                             />
                             ,<b> Median Owners: </b>
                             <NumberFormatter
                                 value={
-                                    competitorOverview.overview.median_owners
+                                    competitorsOverview.overview.median_owners
                                 }
                             />
                             ,<b> Median Launch Price: </b>$
-                            {competitorOverview.overview.median_price}
+                            {competitorsOverview.overview.median_price}
                         </p>
                     </div>
                     <div className="row">
-                        <h1 className="text-uppercase">Competitors Table</h1>
+                        <h1>Competitors Table</h1>
                         <div className="col-sm-12 col-md-9 pb-2">
                             <p className="my-0">
                                 <i>
@@ -237,52 +232,66 @@ const CompetitorsPage = () => {
                             </button>
                         </div>
                         <div className="col-12">
-                            <GamesTable games={competitorOverview.games} />
+                            <GamesTable games={competitorsOverview.games} />
                         </div>
                     </div>
                 </>
             ) : (
                 <div className="row flex-fill align-items-center">
-                    <div>
-                        <ParametersInfo />
-                        <ul>
-                            <li>
-                                Included Tags (any): Tags that must all be
-                                present for a game to be considered in the
-                                sample.
-                            </li>
-                            <li>
-                                Excluded Tags (none): Tags that, if present,
-                                will exclude a game from the sample (any one is
-                                enough for exclusion).
-                            </li>
-                            <li>
-                                Reviews Coefficient (30): A multiplier applied
-                                to the number of reviews to estimate a
-                                game&apos;s revenue.
-                            </li>
-                            <li>
-                                Min Reviews (10): The minimum number of reviews
-                                required for a game to be considered.
-                            </li>
-                            <li>
-                                Max Reviews (inf): The maximum number of reviews
-                                allowed for a game to be considered.
-                            </li>
-                            <li>
-                                Min Date (2020-01-01): The earliest release date
-                                a game can have to be included.
-                            </li>
-                            <li>
-                                Max Date (2024-12-31): The latest release date a
-                                game can have to be included.
-                            </li>
-                        </ul>
-                    </div>
+                    {!competitorsPageStore.isFetching ? (
+                        <div>
+                            <ParametersInfo />
+                            <ul>
+                                <li>
+                                    Included Tags (any): Tags that must{" "}
+                                    <b>all</b> be present for a game to be
+                                    considered in the sample.
+                                </li>
+                                <li>
+                                    Excluded Tags (none): Tags that, if present,
+                                    will exclude a game from the sample (
+                                    <b>any</b> one is enough for exclusion).
+                                </li>
+                                <li>
+                                    Reviews Coefficient (30): The multiplier
+                                    applied to the number of reviews to estimate
+                                    a game&apos;s revenue.
+                                </li>
+                                <li>
+                                    Min Reviews (10): The minimum number of
+                                    reviews required for a game to be
+                                    considered.
+                                </li>
+                                <li>
+                                    Max Reviews (inf): The maximum number of
+                                    reviews allowed for a game to be considered.
+                                </li>
+                                <li>
+                                    Min Date (2020-01-01): The earliest release
+                                    date a game can have to be included.
+                                </li>
+                                <li>
+                                    Max Date (2024-12-31): The latest release
+                                    date a game can have to be included.
+                                </li>
+                            </ul>
+                        </div>
+                    ) : (
+                        <div className="text-center">
+                            <div
+                                className="spinner-border text-primary"
+                                role="status"
+                            >
+                                <span className="visually-hidden">
+                                    Loading...
+                                </span>
+                            </div>
+                        </div>
+                    )}
                 </div>
             )}
         </>
     );
-};
+});
 
 export default CompetitorsPage;
