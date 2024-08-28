@@ -70,5 +70,3 @@ SteamTrender may terminate or suspend your access to the service at any time, wi
 ## 14. Contact Us
 
 If you have any questions about these Terms of Use, please contact us at help [at] steamtrender [dot] com.
-
-_By using SteamTrender, you acknowledge that you have read, understood, and agreed to these Terms of Use._
