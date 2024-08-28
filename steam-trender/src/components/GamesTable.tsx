@@ -15,7 +15,7 @@ export function GamesTable({ games, limit = 100 }: GamesTableProps) {
                 <div className="table-responsive">
                     <table className="table table-striped">
                         <thead>
-                            <tr>
+                            <tr className="align-top">
                                 <th scope="col">Title</th>
                                 <th scope="col"></th>
                                 <th scope="col">Reviews Total</th>
@@ -33,6 +33,7 @@ export function GamesTable({ games, limit = 100 }: GamesTableProps) {
                                     <td>
                                         <a
                                             href={`https://store.steampowered.com/app/${game.appid}`}
+                                            className="text-body"
                                         >
                                             {game.title}
                                         </a>
