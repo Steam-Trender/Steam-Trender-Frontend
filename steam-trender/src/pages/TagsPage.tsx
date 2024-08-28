@@ -30,7 +30,8 @@ const TagsPage = observer(() => {
             <div className="row pb-2">
                 <div className="col-12">
                     <label>
-                        Tags ({tagsPageStore.selectedTagIds.length}/{tagsLimit})
+                        Tags<span className="text-primary fw-bold">*</span> (
+                        {tagsPageStore.selectedTagIds.length}/{tagsLimit})
                     </label>
                     <TagSelector
                         onChange={(ids) => tagsPageStore.setSelectedTagIds(ids)}
