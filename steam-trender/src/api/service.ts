@@ -43,7 +43,7 @@ class ApiService {
             return {
                 status: "offline",
                 update: {
-                    date: "2024-01-01",
+                    date: "0000-00-00",
                 },
             };
         }
