@@ -10,6 +10,7 @@ import { ReviewsThresholdInput } from "../components/ReviewsThresholdInput";
 import { ParametersInfo } from "../components/ParametersInfo";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../stores/storeContext";
+import LoadingSpinnder from "../components/LoadingSpinner";
 
 const TrendsPage = observer(() => {
     const { trendsPageStore, tagsStore } = useStore();
@@ -225,16 +226,7 @@ const TrendsPage = observer(() => {
                             </ul>
                         </div>
                     ) : (
-                        <div className="text-center">
-                            <div
-                                className="spinner-border text-primary"
-                                role="status"
-                            >
-                                <span className="visually-hidden">
-                                    Loading...
-                                </span>
-                            </div>
-                        </div>
+                        <LoadingSpinnder />
                     )}
                 </div>
             )}

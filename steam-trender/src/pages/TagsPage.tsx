@@ -10,6 +10,7 @@ import { ReviewsThresholdInput } from "../components/ReviewsThresholdInput";
 import { ParametersInfo } from "../components/ParametersInfo";
 import { useStore } from "../stores/storeContext";
 import { observer } from "mobx-react-lite";
+import LoadingSpinnder from "../components/LoadingSpinner";
 
 const TagsPage = observer(() => {
     const { tagsPageStore, tagsStore } = useStore();
@@ -175,16 +176,7 @@ const TagsPage = observer(() => {
                             </ul>
                         </div>
                     ) : (
-                        <div className="text-center">
-                            <div
-                                className="spinner-border text-primary"
-                                role="status"
-                            >
-                                <span className="visually-hidden">
-                                    Loading...
-                                </span>
-                            </div>
-                        </div>
+                        <LoadingSpinnder />
                     )}
                 </div>
             )}
