@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 /steam-trender/node_modules
 /.vscode
+
+.env
