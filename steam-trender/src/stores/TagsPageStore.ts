@@ -56,7 +56,7 @@ export class TagsPageStore {
                 reviewsCoeff: this.reviewsCoeff,
                 minReviews: this.minReviewsThreshold,
                 maxReviews: this.maxReviewsThreshold,
-                minYear: this.maxYear,
+                minYear: this.minYear,
                 maxYear: this.maxYear,
                 selectedTags: this.selectedTagIds,
             });
