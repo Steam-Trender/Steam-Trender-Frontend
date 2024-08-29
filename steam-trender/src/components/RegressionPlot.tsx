@@ -42,6 +42,7 @@ export function RegressionPlot({
             },
             stroke: {
                 width: [4, 2],
+                dashArray: [0, 5],
             },
             xaxis: {
                 categories: categories,

@@ -31,6 +31,7 @@ export function CombinedChart({ data }: ChartProps) {
                 animations: {
                     enabled: false,
                 },
+                fontFamily: "Roboto, sans-serif",
             },
             stroke: {
                 width: [0, 4],
