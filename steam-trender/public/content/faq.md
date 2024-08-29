@@ -1,6 +1,6 @@
 # Questions & Answers
 
-Welcome to the **Steam Trender FAQ** page! Here, you can find basic information about how Steam Trender works, including our methods for estimating game sales, analyzing trends, and more. This page aims to clarify some of the most common questions related to our process and the tools we use.
+Here, you can find basic information about how Steam Trender works, including our methods for estimating game sales, analyzing trends, and more. This page aims to clarify some of the most common questions related to our process and the tools we use.
 
 ## Who is behind the service?
 
@@ -12,9 +12,9 @@ Welcome to the **Steam Trender FAQ** page! Here, you can find basic information 
 -   **Alex «Sadari» Barabanov** (Community Manager, Editor):
     -   Lead Game Designer @ Sad Cat Studios (ex-Game Designer @ ITT, My.Games & some indie)
     -   email: sadari.chan@gmail.com
-    -   LinkedIn: https://www.linkedin.com/in/alexander-barabanov-869b1a146/
     -   twitter: [@Sadari_sama](https://twitter.com/sadari_sama)
     -   tg: [@Sadaris](https://t.me/Sadaris)
+    -   [LinkedIn](https://www.linkedin.com/in/alexander-barabanov-869b1a146/)
 
 ## How is the data collected?
 
