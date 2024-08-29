@@ -21,8 +21,10 @@ export class HomePageStore {
         });
 
         try {
-            const maxDate = new Date();
-            const minDate = new Date();
+            const maxDate = new Date(
+                (await ApiService.fetchStatus()).update.date
+            );
+            const minDate = new Date(maxDate);
             minDate.setMonth(maxDate.getMonth() - 2);
             const data = await ApiService.fetchCompetitorsOverview({
                 reviewsCoeff: "30",
