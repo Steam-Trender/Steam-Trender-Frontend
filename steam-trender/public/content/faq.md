@@ -1,6 +1,6 @@
 # Questions & Answers
 
-Here, you can find basic information about how Steam Trender works, including our methods for estimating game sales, analyzing trends, and more. This page aims to clarify some of the most common questions related to our process and the tools we use.
+Here, you can find basic information about how SteamTrender works, including our methods for estimating game sales, analyzing trends, and more. This page aims to clarify some of the most common questions related to our process and the tools we use.
 
 ## Who is behind the service?
 

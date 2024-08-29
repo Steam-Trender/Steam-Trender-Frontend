@@ -6,7 +6,7 @@ interface TitleProps {
 }
 
 export function PageTitleWrapper({ title, children }: TitleProps) {
-    const maintTitle = "Steam Trender";
+    const maintTitle = "SteamTrender";
 
     useEffect(() => {
         document.title = `${maintTitle} — ${title}`;
