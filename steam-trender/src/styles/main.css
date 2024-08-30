@@ -14,7 +14,9 @@ code {
         monospace;
 }
 
+.nav-link:hover,
 .active-link,
+.active-link:hover,
 .active-link:focus {
     color: var(--bs-primary);
 }
