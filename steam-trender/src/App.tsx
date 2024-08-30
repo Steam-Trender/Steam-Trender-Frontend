@@ -4,6 +4,7 @@ import { createRoutes } from "./routes/Routes";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { StoreProvider } from "./stores/storeContext";
+import CookiesToast from "./components/CookiesToast";
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
                     <div className="container-fluid min-vh-100 d-flex flex-column p-0">
                         <Navbar />
                         <Routes>{createRoutes()}</Routes>
+                        <CookiesToast />
                         <Footer />
                     </div>
                 </Router>
