@@ -41,8 +41,8 @@ const selectStyle: StylesConfig<OptionType, true> = {
                 ? "#f8f9fa"
                 : undefined,
         "&:active": {
-            backgroundColor: "var(--bs-primary-color, #007bff)",
-            color: "white",
+            backgroundColor: "var(--bs-primary, #007bff)",
+            color: "(--bs-text)",
         },
     }),
     multiValue: (provided) => ({
