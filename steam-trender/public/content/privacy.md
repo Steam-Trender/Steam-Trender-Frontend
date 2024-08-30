@@ -17,7 +17,7 @@ SteamTrender does not require users to register for an account to access the ser
 While we do not collect personal information, SteamTrender uses cookies and similar technologies to improve your experience on our site. A cookie is a small data file stored on your device that helps us recognize you during future visits.
 
 -   **Types of Cookies We Use:** SteamTrender may use session cookies and persistent cookies. Session cookies expire when you close your browser, while persistent cookies remain on your device for a set period of time or until you delete them.
--   **Why We Use Cookies**:\*\* We use cookies solely to ensure the proper functionality of our website (e.g., keeping track of user preferences such as language settings).
+-   **Why We Use Cookies**: We use cookies solely to ensure the proper functionality of our website (e.g., keeping track of user preferences such as language settings), we do not use any personal information.
 -   **Managing Cookies:** You can choose to manage or disable cookies through your browser settings. Please note that disabling cookies may affect your ability to use some features of SteamTrender.
 
 ## 4. Third-Party Links
