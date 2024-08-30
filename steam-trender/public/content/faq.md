@@ -60,4 +60,4 @@ Please reach out to any of us, and we’ll consider your suggestion.
 
 ## Can I support you if I really like what you did?
 
-The main goal of the project is non-commercial, but if you'd like to help cover the costs of maintaining the service, you're welcome to support us by [donating](https://google.com)!
+The main goal of the project is non-commercial, but if you'd like to help cover the costs of maintaining the service, you're welcome to support us by [donating](https://buymeacoffee.com/steam_trender)!

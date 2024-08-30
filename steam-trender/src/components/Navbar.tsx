@@ -89,7 +89,7 @@ const Navbar = () => {
                         </li>
                     </ul>
                     <a
-                        href="https://www.paypal.com/donate?business=YOUR_PAYPAL_EMAIL"
+                        href="https://buymeacoffee.com/steam_trender"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn btn-outline-primary ms-auto text-uppercase"

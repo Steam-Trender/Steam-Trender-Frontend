@@ -8,4 +8,4 @@ Why tags? It’s simple. While a Steam tag ≠ genre (for example, _"Beautiful"_
 
 Ready to explore? Check out the tabs above! Learn more about our data and methods in the [FAQ](https://steamtrender.com/faq).
 
-If you’d like to support us, consider buying us a coffee [here](https://google.com) or by clicking the button at the top.
+If you’d like to support us, consider buying us a coffee [here](https://buymeacoffee.com/steam_trender) or by clicking the button at the top.
