@@ -7,7 +7,7 @@ const Navbar = () => {
     const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-custom">
             <div className="container px-3 py-1">
                 <Link
                     className="navbar-brand text-uppercase barcode-font"

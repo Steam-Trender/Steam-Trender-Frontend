@@ -88,3 +88,12 @@ code {
     font-size: 1.25rem;
     font-weight: 500;
 }
+
+.toast-body,
+.toast-header {
+    background-color: white !important;
+}
+
+.shadow-custom {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
