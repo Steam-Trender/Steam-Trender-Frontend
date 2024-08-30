@@ -173,6 +173,7 @@ const CompetitorsPage = observer(() => {
                     <button
                         className="btn btn-primary w-100 text-uppercase"
                         onClick={handleAnalyzeClick}
+                        disabled={competitorsPageStore.isFetching}
                     >
                         Analyze
                     </button>
@@ -220,7 +221,7 @@ const CompetitorsPage = observer(() => {
                                     listed below, sorted by the number of
                                     reviews. Nevertheless, all were taken into
                                     account in the calculation of aggregate
-                                    values. You can download up to 10 000 rows.
+                                    values. You can download up to 1 000 rows.
                                 </i>
                             </p>
                         </div>
