@@ -11,7 +11,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ParametersInfo } from "../components/ParametersInfo";
 import { useStore } from "../stores/storeContext";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import LoadingSpinnder from "../components/LoadingSpinner";
 
 const CompetitorsPage = observer(() => {

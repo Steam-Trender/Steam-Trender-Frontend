@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Markdown } from "../components/Markdown";
 import { GamesTable } from "../components/GamesTable";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import { useStore } from "../stores/storeContext";
 import LoadingSpinnder from "../components/LoadingSpinner";
 
