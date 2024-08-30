@@ -17,7 +17,11 @@ const HomePage = observer(() => {
     return (
         <>
             <Markdown file={"home"} />
-            <h2>Trending</h2>
+            <h2>Trending Indies</h2>
+            <p>
+                All games with between 1 000 and 10 000 reviews in the last two
+                months.
+            </p>
             {homeStore.trendingOverview && (
                 <GamesTable games={homeStore.trendingOverview.games} />
             )}

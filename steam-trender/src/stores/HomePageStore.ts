@@ -29,7 +29,7 @@ export class HomePageStore {
             const data = await ApiService.fetchCompetitorsOverview({
                 reviewsCoeff: "30",
                 minReviews: "1000",
-                maxReviews: "2000",
+                maxReviews: "10000",
                 minDate: minDate,
                 maxDate: maxDate,
                 includedTags: [],
