@@ -42,6 +42,13 @@ Where:
 -   **Discount rate** – Many games see significant sales through discounts, so not every copy is sold at full price. We use an average coefficient of 0.8. Still, looking at the data ([Reddit discussion](https://www.reddit.com/r/gamedev/comments/198yff2/can_a_game_recover_from_an_unsuccessful_steam/_), [Steam Wishlist Insights](https://newsletter.gamediscover.co/p/revealed-the-state-of-steam-wishlist)), it’s clear that the first months often account for a large portion of full-price revenue.
 -   **Regional coefficient** – Since Steam allows for regional pricing, revenue per copy sold can vary greatly depending on the region. We use 0.8 as an average, but it can be much lower (down to 0.5) for games with regional popularity.
 
+## Which games are included?
+
+We exclude certain types of games to ensure the data reflects paid, full games:
+
+-   No demos or prologues are included.
+-   No free-to-play games are included, even if they were previously pay-to-play like CS:GO.
+
 ## How close are your estimates to reality?
 
 Well, that's a tough question. We don’t know for certain. The margin of error for the Boxleiter method is still debated, with most estimates placing it around 30%. However, we encourage you to use other tools like [Gamalytic](https://gamalytic.com) and [VGInsights](https://vginsights.com), which claim to have lower margins of error and are well-regarded within the community.
