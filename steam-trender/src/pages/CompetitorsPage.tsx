@@ -102,7 +102,7 @@ const CompetitorsPage = observer(() => {
                     />
                 </div>
             </div>
-            <div className="row">
+            <div className="row pb-3">
                 <div className="form-group col-sm-6 col-md-3 pb-2">
                     <label>Reviews Coefficient</label>
                     <ReviewsCoefficientInput

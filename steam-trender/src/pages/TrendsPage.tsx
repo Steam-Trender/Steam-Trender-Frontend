@@ -28,7 +28,7 @@ const TrendsPage = observer(() => {
 
     return (
         <>
-            <div className="row">
+            <div className="row pb-3">
                 <div className="col-sm-12 col-md-6 pb-2">
                     <label>
                         Tags ({trendsPageStore.selectedTagIds.length}/

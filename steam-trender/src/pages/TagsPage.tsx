@@ -43,7 +43,7 @@ const TagsPage = observer(() => {
                     />
                 </div>
             </div>
-            <div className="row">
+            <div className="row pb-3">
                 <div className="form-group col-sm-6 col-md-3 pb-2">
                     <label>Reviews Coefficient</label>
                     <ReviewsCoefficientInput
@@ -119,7 +119,7 @@ const TagsPage = observer(() => {
             </div>
             {tagsOverview ? (
                 <>
-                    <div className="row pt-3">
+                    <div className="row pb-3">
                         <h1>Overview</h1>
                         <div className="col-sm-12 col-md-6">
                             <h2>Revenue Box Plot</h2>
@@ -132,7 +132,7 @@ const TagsPage = observer(() => {
                             <CombinedChart data={tagsOverview} />
                         </div>
                     </div>
-                    <div className="row pt-3">
+                    <div className="row">
                         <h1>Table View</h1>
                         <OverviewTable
                             data={convertTagDataToGeneric(tagsOverview)}
