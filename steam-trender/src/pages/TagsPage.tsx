@@ -108,7 +108,10 @@ const TagsPage = observer(() => {
                     <button
                         className="btn btn-primary text-uppercase w-100"
                         onClick={handleAnalyzeClick}
-                        disabled={tagsPageStore.isFetching}
+                        disabled={
+                            tagsPageStore.isFetching ||
+                            tagsPageStore.selectedTagIds.length === 0
+                        }
                     >
                         Analyze
                     </button>

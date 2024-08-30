@@ -46,30 +46,32 @@ export class TagsPageStore {
     }
 
     async fetchTagsOverview() {
-        runInAction(() => {
-            this.isFetching = true;
-            this.tagsOverview = null;
-        });
-
-        try {
-            const data = await ApiService.fetchTagsOverview({
-                reviewsCoeff: this.reviewsCoeff,
-                minReviews: this.minReviewsThreshold,
-                maxReviews: this.maxReviewsThreshold,
-                minYear: this.minYear,
-                maxYear: this.maxYear,
-                selectedTags: this.selectedTagIds,
+        if (this.selectedTagIds.length > 0) {
+            runInAction(() => {
+                this.isFetching = true;
+                this.tagsOverview = null;
             });
+
+            try {
+                const data = await ApiService.fetchTagsOverview({
+                    reviewsCoeff: this.reviewsCoeff,
+                    minReviews: this.minReviewsThreshold,
+                    maxReviews: this.maxReviewsThreshold,
+                    minYear: this.minYear,
+                    maxYear: this.maxYear,
+                    selectedTags: this.selectedTagIds,
+                });
+
+                runInAction(() => {
+                    this.tagsOverview = data;
+                });
+            } catch (error) {
+                console.error("Failed to fetch tags overview:", error);
+            }
 
             runInAction(() => {
-                this.tagsOverview = data;
+                this.isFetching = false;
             });
-        } catch (error) {
-            console.error("Failed to fetch tags overview:", error);
         }
-
-        runInAction(() => {
-            this.isFetching = false;
-        });
     }
 }
