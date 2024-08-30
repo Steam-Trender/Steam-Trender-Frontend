@@ -24,6 +24,13 @@ We collect data directly from Steam at the beginning of each month. Since trends
 -   Revenue estimates are calculated using the well-known **Boxleiter method**.
 -   Tags are not only added by developers but by players as well, keep this in mind when you see tags that may seem unrelated to the game's genre.
 
+## Which games are included?
+
+We exclude certain types of games to ensure the data reflects paid, full games:
+
+-   No demos or prologues are included.
+-   No free-to-play games are included, even if they were previously pay-to-play like CS:GO.
+
 ## What’s behind your revenue estimates?
 
 We use the famous Boxleiter method. For those unfamiliar with this formula, let me give you a quick rundown.
@@ -41,13 +48,6 @@ Where:
 -   **Return rate** – The typical return rate for the game. We use an 8% return rate as an average based on a small sample of data, though this can vary from game to game.
 -   **Discount rate** – Many games see significant sales through discounts, so not every copy is sold at full price. We use an average coefficient of 0.8. Still, looking at the data ([Reddit discussion](https://www.reddit.com/r/gamedev/comments/198yff2/can_a_game_recover_from_an_unsuccessful_steam/_), [Steam Wishlist Insights](https://newsletter.gamediscover.co/p/revealed-the-state-of-steam-wishlist)), it’s clear that the first months often account for a large portion of full-price revenue.
 -   **Regional coefficient** – Since Steam allows for regional pricing, revenue per copy sold can vary greatly depending on the region. We use 0.8 as an average, but it can be much lower (down to 0.5) for games with regional popularity.
-
-## Which games are included?
-
-We exclude certain types of games to ensure the data reflects paid, full games:
-
--   No demos or prologues are included.
--   No free-to-play games are included, even if they were previously pay-to-play like CS:GO.
 
 ## How close are your estimates to reality?
 
