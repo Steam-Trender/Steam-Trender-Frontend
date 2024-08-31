@@ -97,3 +97,8 @@ code {
 .shadow-custom {
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
+
+.navbar-toggler {
+    border: none;
+    box-shadow: none !important;
+}
