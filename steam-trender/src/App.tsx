@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { StoreProvider } from "./stores/storeContext";
 import CookiesToast from "./components/CookiesToast";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
             <StoreProvider>
                 <Router>
                     <div className="container-fluid min-vh-100 d-flex flex-column p-0">
+                        <ScrollToTop />
                         <Navbar />
                         <Routes>{createRoutes()}</Routes>
                         <CookiesToast />
