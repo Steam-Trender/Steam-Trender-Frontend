@@ -20,7 +20,7 @@ const HomePage = observer(() => {
             <h2>Trending Indies</h2>
             <p>
                 All games with between 1 000 and 10 000 reviews in the last two
-                months.
+                months since the db was updated.
             </p>
             {homeStore.trendingOverview && (
                 <GamesTable games={homeStore.trendingOverview.games} />
