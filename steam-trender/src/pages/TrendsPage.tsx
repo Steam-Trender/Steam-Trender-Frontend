@@ -31,14 +31,14 @@ const TrendsPage = observer(() => {
             <div className="row pb-3">
                 <div className="col-sm-12 col-md-6 pb-2">
                     <label>
-                        Tags ({trendsPageStore.selectedTagIds.length}/
+                        Included Tags ({trendsPageStore.selectedTagIds.length}/
                         {tagsLimit})
                     </label>
                     <TagSelector
                         onChange={(ids) =>
                             trendsPageStore.setSelectedTagIds(ids)
                         }
-                        placeholder="Tags"
+                        placeholder="Any"
                         limit={tagsLimit}
                         tags={tagsStore.tags}
                         selectedTagIds={trendsPageStore.selectedTagIds}
@@ -204,8 +204,9 @@ const TrendsPage = observer(() => {
                             <ParametersInfo />
                             <ul>
                                 <li>
-                                    Tags (None): Tags that must all be present
-                                    for a game to be considered in the sample.
+                                    Included Tags (any): Tags that must{" "}
+                                    <b>all</b> be present for a game to be
+                                    considered in the sample.
                                 </li>
                                 <li>
                                     Min Reviews (10): The minimum number of
