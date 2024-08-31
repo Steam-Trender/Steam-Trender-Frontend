@@ -221,8 +221,11 @@ const TrendsPage = observer(() => {
                                     : trends <b>5 years back</b> from that year
                                     will be calculated, e.g. if you select 2023,
                                     years: 2019, 2020, 2021, 2022 & 2023 will be
-                                    taken into account and each year has an own
-                                    review multiplier.
+                                    taken into account and{" "}
+                                    <b>
+                                        each year has an own review multiplier
+                                    </b>
+                                    .
                                 </li>
                             </ul>
                         </div>
