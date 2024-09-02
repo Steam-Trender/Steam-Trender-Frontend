@@ -13,6 +13,7 @@ import { ParametersInfo } from "../components/ParametersInfo";
 import { useStore } from "../stores/storeContext";
 import { observer } from "mobx-react-lite";
 import LoadingSpinnder from "../components/LoadingSpinner";
+import { Link } from "react-router-dom";
 
 const CompetitorsPage = observer(() => {
     const { competitorsPageStore, tagsStore } = useStore();
@@ -242,6 +243,13 @@ const CompetitorsPage = observer(() => {
                 <div className="row flex-fill align-items-center">
                     {!competitorsPageStore.isFetching ? (
                         <div>
+                            <p>
+                                Check games by tags (genres) to see which are
+                                the most popular. Adjust the Review Coefficient
+                                yourself if you want to refine results for AAA
+                                titles or older games (see the{" "}
+                                <Link to="/faq">FAQ</Link> for more details).
+                            </p>
                             <ParametersInfo />
                             <ul>
                                 <li>

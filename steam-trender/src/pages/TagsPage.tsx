@@ -143,6 +143,10 @@ const TagsPage = observer(() => {
                 <div className="row flex-fill align-items-center">
                     {!tagsPageStore.isFetching ? (
                         <div>
+                            <p>
+                                Select up to {tagsLimit} tags to compare various
+                                statistics for each.
+                            </p>
                             <ParametersInfo />
                             <ul>
                                 <li>

@@ -201,6 +201,12 @@ const TrendsPage = observer(() => {
                 <div className="row flex-fill align-items-center">
                     {!trendsPageStore.isFetching ? (
                         <div>
+                            <p>
+                                Select a combination of tags and choose a pivot
+                                year. Trends will be analyzed for the 5-year
+                                period leading up to and including the pivot
+                                year.
+                            </p>
                             <ParametersInfo />
                             <ul>
                                 <li>
