@@ -34,6 +34,8 @@ export function GamesTable({ games, limit = 100 }: GamesTableProps) {
                                         <a
                                             href={`https://store.steampowered.com/app/${game.appid}`}
                                             className="text-body"
+                                            target="_blank"
+                                            rel="noreferrer noopener"
                                         >
                                             {game.title}
                                         </a>
