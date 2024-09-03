@@ -4,11 +4,6 @@ Here, you can find basic information about how SteamTrender works, including our
 
 ## Who is behind the service?
 
--   **Lev «evlko» Kobelev** (Developer):
-    -   Product Analyst @ My.Games
-    -   email: evlko.oklve [at] gmail.com
-    -   twitter: [@evllko](https://twitter.com/evllko)
-    -   tg: [@evlko](https://t.me/evlko)
 -   **Alex «Sadari» Barabanov** (Community Manager, Editor):
     -   Lead Game Designer @ Sad Cat Studios (ex-Game Designer @ ITT, My.Games & some indie)
     -   email: sadari.chan@gmail.com
