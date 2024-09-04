@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import { StoreProvider } from "./stores/storeContext";
 import CookiesToast from "./components/CookiesToast";
 import ScrollToTop from "./components/ScrollToTop";
+import "./i18n";
 
 function App() {
     return (

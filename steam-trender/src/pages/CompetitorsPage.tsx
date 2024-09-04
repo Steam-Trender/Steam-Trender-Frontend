@@ -14,8 +14,10 @@ import { useStore } from "../stores/storeContext";
 import { observer } from "mobx-react-lite";
 import LoadingSpinnder from "../components/LoadingSpinner";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const CompetitorsPage = observer(() => {
+    const { t } = useTranslation();
     const { competitorsPageStore, tagsStore } = useStore();
     const { competitorsOverview } = competitorsPageStore;
 
@@ -72,7 +74,7 @@ const CompetitorsPage = observer(() => {
             <div className="row">
                 <div className="col-sm-12 col-md-6 pb-2">
                     <label>
-                        Included Tags (
+                        {t("included_tags")} (
                         {competitorsPageStore.includedTagIds.length}/{tagsLimit}
                         )
                     </label>
