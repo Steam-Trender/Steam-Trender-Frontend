@@ -72,7 +72,7 @@ export function RegressionPlot({
 
     const series = [
         {
-            name: "Overview Median Reviews",
+            name: "Fact",
             data: real,
         },
     ];
