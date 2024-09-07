@@ -107,6 +107,8 @@ const TrendsPage = observer(() => {
                             <h2>Revenue Box Chart</h2>
                             <MoneyBoxPlot
                                 data={convertYearDataToGeneric(trendsOverview)}
+                                lockedRotation={false}
+                                initialRotate={0}
                             />
                         </div>
                     </div>

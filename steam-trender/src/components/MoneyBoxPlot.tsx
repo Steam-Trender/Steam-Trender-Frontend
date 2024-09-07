@@ -7,9 +7,15 @@ import { IGenericOverview } from "../models/generic_overview";
 
 interface MoneyBoxProps {
     data: IGenericOverview[];
+    lockedRotation: boolean;
+    initialRotate: number;
 }
 
-export function MoneyBoxPlot({ data }: MoneyBoxProps) {
+export function MoneyBoxPlot({
+    data,
+    lockedRotation,
+    initialRotate,
+}: MoneyBoxProps) {
     const [chartOptions, setChartOptions] = useState<ApexOptions>({});
 
     const processBoxplotData = (data: IGenericOverview[]) => {
@@ -30,6 +36,7 @@ export function MoneyBoxPlot({ data }: MoneyBoxProps) {
     };
 
     useEffect(() => {
+        const textColor = getCSSVariable("--bs-body-color");
         const upperColor = getCSSVariable("--bs-primary");
         const lowerColor = getCSSVariable("--bs-secondary");
 
@@ -55,6 +62,7 @@ export function MoneyBoxPlot({ data }: MoneyBoxProps) {
                     },
                     style: {
                         fontSize: "12px",
+                        colors: [textColor || "#000"],
                     },
                 },
                 crosshairs: {
@@ -62,6 +70,14 @@ export function MoneyBoxPlot({ data }: MoneyBoxProps) {
                 },
             },
             xaxis: {
+                labels: {
+                    rotate: initialRotate,
+                    rotateAlways: lockedRotation,
+                    style: {
+                        fontSize: "12px",
+                        colors: [textColor || "#000"],
+                    },
+                },
                 tooltip: {
                     enabled: false,
                 },

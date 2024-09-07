@@ -18,6 +18,7 @@ export function CombinedChart({ data }: ChartProps) {
     );
 
     useEffect(() => {
+        const textColor = getCSSVariable("--bs-body-color");
         const upperColor = getCSSVariable("--bs-primary");
         const lowerColor = getCSSVariable("--bs-secondary");
 
@@ -39,6 +40,14 @@ export function CombinedChart({ data }: ChartProps) {
             colors: [lowerColor, upperColor],
             xaxis: {
                 categories,
+                labels: {
+                    rotate: -90,
+                    rotateAlways: true,
+                    style: {
+                        fontSize: "12px",
+                        colors: [textColor || "#000"],
+                    },
+                },
                 tooltip: {
                     enabled: false,
                 },
@@ -56,6 +65,7 @@ export function CombinedChart({ data }: ChartProps) {
                     labels: {
                         style: {
                             fontSize: "12px",
+                            colors: [textColor || "#000"],
                         },
                     },
                 },

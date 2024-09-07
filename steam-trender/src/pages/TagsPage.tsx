@@ -125,6 +125,8 @@ const TagsPage = observer(() => {
                             <h2>Revenue Box Plot</h2>
                             <MoneyBoxPlot
                                 data={convertTagDataToGeneric(tagsOverview)}
+                                lockedRotation={true}
+                                initialRotate={-90}
                             />
                         </div>
                         <div className="col-sm-12 col-md-6">
