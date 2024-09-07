@@ -28,6 +28,8 @@ export class HomePageStore {
             minDate.setMonth(maxDate.getMonth() - 2);
             const data = await ApiService.fetchCompetitorsOverview({
                 reviewsCoeff: "30",
+                minPrice: "0",
+                maxPrice: "",
                 minReviews: "1000",
                 maxReviews: "10000",
                 minDate: minDate,

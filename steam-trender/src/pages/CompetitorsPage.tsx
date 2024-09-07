@@ -14,6 +14,7 @@ import { useStore } from "../stores/storeContext";
 import { observer } from "mobx-react-lite";
 import LoadingSpinnder from "../components/LoadingSpinner";
 import { Link } from "react-router-dom";
+import { PriceThresholdInput } from "../components/PriceThresholdInput";
 
 const CompetitorsPage = observer(() => {
     const { competitorsPageStore, tagsStore } = useStore();
@@ -70,7 +71,7 @@ const CompetitorsPage = observer(() => {
     return (
         <>
             <div className="row">
-                <div className="col-sm-12 col-md-6 pb-2">
+                <div className="col-md-12 col-lg-6 pb-2">
                     <label>
                         Included Tags (
                         {competitorsPageStore.includedTagIds.length}/{tagsLimit}
@@ -86,7 +87,7 @@ const CompetitorsPage = observer(() => {
                         selectedTagIds={competitorsPageStore.includedTagIds}
                     />
                 </div>
-                <div className="col-sm-12 col-md-6 pb-2">
+                <div className="col-md-12 col-lg-6 pb-2">
                     <label>
                         Excluded Tags (
                         {competitorsPageStore.excludedTagIds.length}/{tagsLimit}
@@ -104,16 +105,35 @@ const CompetitorsPage = observer(() => {
                 </div>
             </div>
             <div className="row pb-3">
-                <div className="form-group col-sm-6 col-md-3 pb-2">
-                    <label>Reviews Coefficient</label>
-                    <ReviewsCoefficientInput
-                        value={competitorsPageStore.reviewsCoeff}
-                        onChange={(value) =>
-                            competitorsPageStore.setReviewsCoeff(value)
-                        }
-                    />
+                <div className="col-md-6 col-lg-3 pb-2">
+                    <div className="row">
+                        <div className="form-group col-6 pe-1">
+                            <label>Min Price</label>
+                            <PriceThresholdInput
+                                value={competitorsPageStore.minPriceThreshold}
+                                onChange={(value) =>
+                                    competitorsPageStore.setMinPriceThreshold(
+                                        value
+                                    )
+                                }
+                                max={false}
+                            />
+                        </div>
+                        <div className="form-group col-6 ps-1">
+                            <label>Max Price</label>
+                            <PriceThresholdInput
+                                value={competitorsPageStore.maxPriceThreshold}
+                                onChange={(value) =>
+                                    competitorsPageStore.setMaxPriceThreshold(
+                                        value
+                                    )
+                                }
+                                max={true}
+                            />
+                        </div>
+                    </div>
                 </div>
-                <div className="col-sm-6 col-md-3 pb-2">
+                <div className="col-md-6 col-lg-3 pb-2">
                     <div className="row">
                         <div className="form-group col-6 pe-1">
                             <label>Min Reviews</label>
@@ -141,7 +161,7 @@ const CompetitorsPage = observer(() => {
                         </div>
                     </div>
                 </div>
-                <div className="col-sm-6 col-md-3 pb-2">
+                <div className="col-md-6 col-lg-3 pb-2">
                     <div className="row">
                         <div className="col-6 pe-1">
                             <label>Min Date</label>
@@ -169,15 +189,28 @@ const CompetitorsPage = observer(() => {
                         </div>
                     </div>
                 </div>
-                <div className="col-sm-12 col-md-3 pb-2">
-                    <label>Click Here!</label>
-                    <button
-                        className="btn btn-primary w-100 text-uppercase"
-                        onClick={handleAnalyzeClick}
-                        disabled={competitorsPageStore.isFetching}
-                    >
-                        Analyze
-                    </button>
+                <div className="col-md-6 col-lg-3 pb-2">
+                    <div className="row">
+                        <div className="form-group col-6">
+                            <label>Reviews Coeff.</label>
+                            <ReviewsCoefficientInput
+                                value={competitorsPageStore.reviewsCoeff}
+                                onChange={(value) =>
+                                    competitorsPageStore.setReviewsCoeff(value)
+                                }
+                            />
+                        </div>
+                        <div className="col-6">
+                            <label>Click Here!</label>
+                            <button
+                                className="btn btn-primary w-100 text-uppercase"
+                                onClick={handleAnalyzeClick}
+                                disabled={competitorsPageStore.isFetching}
+                            >
+                                Analyze
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             {competitorsOverview ? (
@@ -301,9 +334,12 @@ const CompetitorsPage = observer(() => {
                                     <b>any</b> one is enough for exclusion).
                                 </li>
                                 <li>
-                                    Reviews Coefficient (30): The multiplier
-                                    applied to the number of reviews to estimate
-                                    a game&apos;s revenue.
+                                    Min Price (0): The lowest price allowed for
+                                    a game to be sampled.
+                                </li>
+                                <li>
+                                    Max Price (inf): The highest price allowed
+                                    for a game to be sampled.
                                 </li>
                                 <li>
                                     Min Reviews (10): The minimum number of
@@ -321,6 +357,11 @@ const CompetitorsPage = observer(() => {
                                 <li>
                                     Max Date (2024-12-31): The latest release
                                     date a game can have to be included.
+                                </li>
+                                <li>
+                                    Reviews Coefficient (30): The multiplier
+                                    applied to the number of reviews to estimate
+                                    a game&apos;s revenue.
                                 </li>
                             </ul>
                         </div>

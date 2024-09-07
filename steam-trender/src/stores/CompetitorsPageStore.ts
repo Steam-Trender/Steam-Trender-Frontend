@@ -7,6 +7,8 @@ export class CompetitorsPageStore {
     rootStore: RootStore;
 
     reviewsCoeff = "";
+    minPriceThreshold = "";
+    maxPriceThreshold = "";
     minReviewsThreshold = "";
     maxReviewsThreshold = "";
     includedTagIds: number[] = [];
@@ -32,6 +34,16 @@ export class CompetitorsPageStore {
 
     setReviewsCoeff(value: string) {
         this.reviewsCoeff = value;
+    }
+
+    setMinPriceThreshold(value: string) {
+        const sanitizedValue = value.replace(",", ".");
+        this.minPriceThreshold = sanitizedValue;
+    }
+
+    setMaxPriceThreshold(value: string) {
+        const sanitizedValue = value.replace(",", ".");
+        this.maxPriceThreshold = sanitizedValue;
     }
 
     setMinReviewsThreshold(value: string) {
@@ -67,6 +79,8 @@ export class CompetitorsPageStore {
         try {
             const data = await ApiService.fetchCompetitorsOverview({
                 reviewsCoeff: this.reviewsCoeff,
+                minPrice: this.minPriceThreshold,
+                maxPrice: this.maxPriceThreshold,
                 minReviews: this.minReviewsThreshold,
                 maxReviews: this.maxReviewsThreshold,
                 minDate: this.minDate,

@@ -11,6 +11,8 @@ import { format } from "date-fns";
 
 interface FetchCompetitorsOverviewParams {
     reviewsCoeff: string;
+    minPrice: string;
+    maxPrice: string;
     minReviews: string;
     maxReviews: string;
     minDate: Date | string | null;
@@ -83,6 +85,8 @@ class ApiService {
 
     static async fetchCompetitorsOverview({
         reviewsCoeff,
+        minPrice,
+        maxPrice,
         minReviews,
         maxReviews,
         minDate,
@@ -98,12 +102,21 @@ class ApiService {
             maxDate = "2024-31-12";
         }
         maxDate = format(maxDate, "yyyy-MM-dd");
+
+        if (minPrice === "") {
+            minPrice = "0";
+        }
+        if (maxPrice === "") {
+            maxPrice = "-1";
+        }
+
         if (minReviews === "") {
             minReviews = "10";
         }
         if (maxReviews === "") {
             maxReviews = "-1";
         }
+
         if (reviewsCoeff === "") {
             reviewsCoeff = "30";
         }
@@ -113,6 +126,8 @@ class ApiService {
                 {
                     params: {
                         reviews_coeff: reviewsCoeff,
+                        min_price: minPrice,
+                        max_price: maxPrice,
                         min_reviews: minReviews,
                         max_reviews: maxReviews,
                         min_date: minDate,
