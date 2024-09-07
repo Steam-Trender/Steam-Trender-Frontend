@@ -183,35 +183,73 @@ const CompetitorsPage = observer(() => {
             {competitorsOverview ? (
                 <>
                     <div className="row">
-                        <h1>Overview</h1>
-                        <p>
-                            <b>Total Games: </b>
+                        <h1>
+                            Overview of{" "}
                             <NumberFormatter
                                 value={competitorsOverview.overview.total_games}
-                            />
-                            ,<b> Median Revenue: </b>
-                            $
-                            <NumberFormatter
-                                value={getSpecificRevenue(
-                                    competitorsOverview.overview,
-                                    0.5
-                                )}
-                            />
-                            ,<b> Median Reviews: </b>
-                            <NumberFormatter
-                                value={
-                                    competitorsOverview.overview.median_reviews
-                                }
-                            />
-                            ,<b> Median Owners: </b>
-                            <NumberFormatter
-                                value={
-                                    competitorsOverview.overview.median_owners
-                                }
-                            />
-                            ,<b> Median Launch Price: </b>$
-                            {competitorsOverview.overview.median_price}
-                        </p>
+                            />{" "}
+                            games
+                        </h1>
+                        <div className="col-6">
+                            <ul className="list-unstyled">
+                                <li>
+                                    <b>Q3 Revenue: </b>
+                                    $
+                                    <NumberFormatter
+                                        value={getSpecificRevenue(
+                                            competitorsOverview.overview,
+                                            0.75
+                                        )}
+                                    />
+                                </li>
+                                <li>
+                                    <b>Median Revenue: </b>
+                                    $
+                                    <NumberFormatter
+                                        value={getSpecificRevenue(
+                                            competitorsOverview.overview,
+                                            0.5
+                                        )}
+                                    />
+                                </li>
+                                <li>
+                                    <b>Q1 Revenue: </b>
+                                    $
+                                    <NumberFormatter
+                                        value={getSpecificRevenue(
+                                            competitorsOverview.overview,
+                                            0.25
+                                        )}
+                                    />
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="col-6">
+                            <ul className="list-unstyled">
+                                <li>
+                                    <b>Median Reviews: </b>
+                                    <NumberFormatter
+                                        value={
+                                            competitorsOverview.overview
+                                                .median_reviews
+                                        }
+                                    />
+                                </li>
+                                <li>
+                                    <b>Median Owners: </b>
+                                    <NumberFormatter
+                                        value={
+                                            competitorsOverview.overview
+                                                .median_owners
+                                        }
+                                    />
+                                </li>
+                                <li>
+                                    <b>Median Price: </b>$
+                                    {competitorsOverview.overview.median_price}
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div className="row">
                         <h1>Competitors Table</h1>
