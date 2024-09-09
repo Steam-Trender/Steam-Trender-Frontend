@@ -5,6 +5,7 @@ export interface IOverview {
     median_reviews: number;
     median_owners: number;
     median_price: number;
+    revenue_total: number;
     revenue: [IRevenue];
 }
 
