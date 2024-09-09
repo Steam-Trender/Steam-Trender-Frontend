@@ -13,114 +13,94 @@ export function OverviewTable({ data }: OverviewTableProps) {
             <div className="table-responsive">
                 <table className="table table-striped">
                     <thead>
-                        <tr>
-                            <th></th>
-                            {data.map((item, index) => (
-                                <th key={index}>{item.title}</th>
-                            ))}
+                        <tr className="align-top">
+                            <th scope="col"></th>
+                            <th scope="col">Games Total</th>
+                            <th scope="col">Median Reviews</th>
+                            <th scope="col">Median Owners</th>
+                            <th scope="col">Min Revenue</th>
+                            <th scope="col">Q1 Revenue</th>
+                            <th scope="col">Median Revenue</th>
+                            <th scope="col">Q3 Revenue</th>
+                            <th scope="col">Max Revenue</th>
+                            <th scope="col">Total Revenue</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Games Released</td>
-                            {data.map((item, index) => (
-                                <td key={index}>
-                                    <NumberFormatter
-                                        value={item.overview.total_games}
-                                    />
-                                </td>
+                        {data
+                            .slice()
+                            .reverse()
+                            .map((item, index) => (
+                                <tr key={index}>
+                                    <td>{item.title}</td>
+                                    <td>
+                                        <NumberFormatter
+                                            value={item.overview.total_games}
+                                        />
+                                    </td>
+                                    <td>
+                                        <NumberFormatter
+                                            value={item.overview.median_reviews}
+                                        />
+                                    </td>
+                                    <td>
+                                        <NumberFormatter
+                                            value={item.overview.median_owners}
+                                        />
+                                    </td>
+                                    <td>
+                                        $
+                                        <NumberFormatter
+                                            value={getSpecificRevenue(
+                                                item.overview,
+                                                0
+                                            )}
+                                        />
+                                    </td>
+                                    <td>
+                                        $
+                                        <NumberFormatter
+                                            value={getSpecificRevenue(
+                                                item.overview,
+                                                0.25
+                                            )}
+                                        />
+                                    </td>
+                                    <td>
+                                        $
+                                        <NumberFormatter
+                                            value={getSpecificRevenue(
+                                                item.overview,
+                                                0.5
+                                            )}
+                                        />
+                                    </td>
+                                    <td>
+                                        $
+                                        <NumberFormatter
+                                            value={getSpecificRevenue(
+                                                item.overview,
+                                                0.75
+                                            )}
+                                        />
+                                    </td>
+                                    <td>
+                                        $
+                                        <NumberFormatter
+                                            value={getSpecificRevenue(
+                                                item.overview,
+                                                1
+                                            )}
+                                        />
+                                    </td>
+                                    <td>
+                                        $
+                                        <NumberFormatter
+                                            value={item.overview.revenue_total}
+                                        />
+                                    </td>
+                                </tr>
                             ))}
-                        </tr>
-                        <tr>
-                            <td>Median Reviews</td>
-                            {data.map((item, index) => (
-                                <td key={index}>
-                                    <NumberFormatter
-                                        value={item.overview.median_reviews}
-                                    />
-                                </td>
-                            ))}
-                        </tr>
-                        <tr>
-                            <td>Median Owners</td>
-                            {data.map((item, index) => (
-                                <td key={index}>
-                                    <NumberFormatter
-                                        value={item.overview.median_owners}
-                                    />
-                                </td>
-                            ))}
-                        </tr>
-                        <tr>
-                            <td>Max Revenue</td>
-                            {data.map((item, index) => (
-                                <td key={index}>
-                                    $
-                                    <NumberFormatter
-                                        value={getSpecificRevenue(
-                                            item.overview,
-                                            1
-                                        )}
-                                    />
-                                </td>
-                            ))}
-                        </tr>
-                        <tr>
-                            <td>Q3 Revenue</td>
-                            {data.map((item, index) => (
-                                <td key={index}>
-                                    $
-                                    <NumberFormatter
-                                        value={getSpecificRevenue(
-                                            item.overview,
-                                            0.75
-                                        )}
-                                    />
-                                </td>
-                            ))}
-                        </tr>
-                        <tr>
-                            <td>Median Revenue</td>
-                            {data.map((item, index) => (
-                                <td key={index}>
-                                    $
-                                    <NumberFormatter
-                                        value={getSpecificRevenue(
-                                            item.overview,
-                                            0.5
-                                        )}
-                                    />
-                                </td>
-                            ))}
-                        </tr>
-                        <tr>
-                            <td>Q1 Revenue</td>
-                            {data.map((item, index) => (
-                                <td key={index}>
-                                    $
-                                    <NumberFormatter
-                                        value={getSpecificRevenue(
-                                            item.overview,
-                                            0.25
-                                        )}
-                                    />
-                                </td>
-                            ))}
-                        </tr>
-                        <tr>
-                            <td>Min Revenue</td>
-                            {data.map((item, index) => (
-                                <td key={index}>
-                                    $
-                                    <NumberFormatter
-                                        value={getSpecificRevenue(
-                                            item.overview,
-                                            0
-                                        )}
-                                    />
-                                </td>
-                            ))}
-                        </tr>
                     </tbody>
                 </table>
             </div>
