@@ -5,7 +5,7 @@ Here, you can find basic information about how SteamTrender works, including our
 ## Who is behind the service?
 
 -   **Somebody That I Used to Know** (Developer):
-    - ???
+    -   ???
 -   **Alex «Sadari» Barabanov** (Community Manager, Editor):
     -   Lead Game Designer @ Sad Cat Studios (ex-Game Designer @ ITT, My.Games & some indie)
     -   email: sadari.chan@gmail.com
