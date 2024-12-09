@@ -120,22 +120,22 @@ const TagsPage = observer(() => {
             {tagsOverview ? (
                 <>
                     <div className="row">
-                        <div className="col-12 pb-3">
+                        <div className="col-6 pb-3">
                             <h1>Revenue Box Plot</h1>
                             <MoneyBoxPlot
                                 data={convertTagDataToGeneric(tagsOverview)}
                                 lockedRotation={true}
                                 initialRotate={-90}
-                                height={600}
+                                height={400}
                             />
                         </div>
-                        <div className="col-12 pb-3">
+                        <div className="col-6 pb-3">
                             <h1>Games & Median Revenue</h1>
-                            <CombinedChart data={tagsOverview} height={600} />
+                            <CombinedChart data={tagsOverview} height={400} />
                         </div>
                     </div>
                     <div className="row">
-                        <h1>Table View</h1>
+                        <h1>Table</h1>
                         <OverviewTable
                             data={convertTagDataToGeneric(tagsOverview)}
                         />
