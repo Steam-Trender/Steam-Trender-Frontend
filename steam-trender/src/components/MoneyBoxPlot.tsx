@@ -55,7 +55,7 @@ export function MoneyBoxPlot({
                 fontFamily: "Roboto, sans-serif",
             },
             yaxis: {
-                min: 2,
+                min: 1,
                 max: 10,
                 labels: {
                     formatter: (value) => {
