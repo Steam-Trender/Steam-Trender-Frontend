@@ -36,7 +36,10 @@ export function CombinedChart({ data, height }: ChartProps) {
                 fontFamily: "Roboto, sans-serif",
             },
             stroke: {
-                width: [0, 4],
+                width: [0, 2],
+            },
+            markers: {
+                size: [0, 3],
             },
             colors: [lowerColor, upperColor],
             xaxis: {
@@ -59,11 +62,14 @@ export function CombinedChart({ data, height }: ChartProps) {
                         show: false,
                     },
                     min: 0,
-                    max: 2000,
                     axisTicks: {
                         show: true,
                     },
                     labels: {
+                        formatter: (value) => {
+                            if (value === 0) return "0";
+                            return `${value.toLocaleString()}`;
+                        },
                         style: {
                             fontSize: "12px",
                             colors: [textColor || "#000"],
@@ -72,7 +78,6 @@ export function CombinedChart({ data, height }: ChartProps) {
                 },
                 {
                     min: 0,
-                    max: 200000,
                     opposite: true,
                     axisTicks: {
                         show: true,
@@ -84,6 +89,7 @@ export function CombinedChart({ data, height }: ChartProps) {
                         },
                         style: {
                             fontSize: "12px",
+                            colors: [textColor || "#000"],
                         },
                     },
                 },
