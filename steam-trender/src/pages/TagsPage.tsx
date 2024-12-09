@@ -16,7 +16,7 @@ const TagsPage = observer(() => {
     const { tagsPageStore, tagsStore } = useStore();
     const { tagsOverview } = tagsPageStore;
 
-    const tagsLimit = 10;
+    const tagsLimit = 20;
 
     useEffect(() => {
         tagsStore.fetchTags();
@@ -119,19 +119,19 @@ const TagsPage = observer(() => {
             </div>
             {tagsOverview ? (
                 <>
-                    <div className="row pb-3">
-                        <h1>Overview</h1>
-                        <div className="col-sm-12 col-md-6">
-                            <h2>Revenue Box Plot</h2>
+                    <div className="row">
+                        <div className="col-12 pb-3">
+                            <h1>Revenue Box Plot</h1>
                             <MoneyBoxPlot
                                 data={convertTagDataToGeneric(tagsOverview)}
                                 lockedRotation={true}
                                 initialRotate={-90}
+                                height={600}
                             />
                         </div>
-                        <div className="col-sm-12 col-md-6">
-                            <h2>Games & Median Revenue</h2>
-                            <CombinedChart data={tagsOverview} />
+                        <div className="col-12 pb-3">
+                            <h1>Games & Median Revenue</h1>
+                            <CombinedChart data={tagsOverview} height={600} />
                         </div>
                     </div>
                     <div className="row">

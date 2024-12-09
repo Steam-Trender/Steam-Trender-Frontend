@@ -9,12 +9,14 @@ interface MoneyBoxProps {
     data: IGenericOverview[];
     lockedRotation: boolean;
     initialRotate: number;
+    height: number;
 }
 
 export function MoneyBoxPlot({
     data,
     lockedRotation,
     initialRotate,
+    height,
 }: MoneyBoxProps) {
     const [chartOptions, setChartOptions] = useState<ApexOptions>({});
 
@@ -127,7 +129,7 @@ export function MoneyBoxPlot({
                 options={chartOptions}
                 series={processBoxplotData(data)}
                 type="boxPlot"
-                height={400}
+                height={height}
             />
         </>
     );

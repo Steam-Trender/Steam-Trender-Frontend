@@ -102,3 +102,7 @@ code {
     border: none;
     box-shadow: none !important;
 }
+
+.apexcharts-svg {
+    overflow: visible;
+}

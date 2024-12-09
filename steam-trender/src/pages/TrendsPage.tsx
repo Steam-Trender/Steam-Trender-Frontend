@@ -109,6 +109,7 @@ const TrendsPage = observer(() => {
                                 data={convertYearDataToGeneric(trendsOverview)}
                                 lockedRotation={false}
                                 initialRotate={0}
+                                height={400}
                             />
                         </div>
                     </div>

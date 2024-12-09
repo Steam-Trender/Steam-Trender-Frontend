@@ -7,9 +7,10 @@ import { getCSSVariable } from "../utils/get_css";
 
 interface ChartProps {
     data: ITagOverview[];
+    height: number;
 }
 
-export function CombinedChart({ data }: ChartProps) {
+export function CombinedChart({ data, height }: ChartProps) {
     const [chartOptions, setChartOptions] = useState<ApexOptions>({});
     const categories = data.map((item) => item.tag.title);
     const totalGames = data.map((item) => item.overview.total_games);
@@ -71,7 +72,7 @@ export function CombinedChart({ data }: ChartProps) {
                 },
                 {
                     min: 0,
-                    max: 1000000,
+                    max: 200000,
                     opposite: true,
                     axisTicks: {
                         show: true,
@@ -102,6 +103,9 @@ export function CombinedChart({ data }: ChartProps) {
                     },
                 },
             },
+            legend: {
+                position: "top",
+            },
         };
         setChartOptions(newOptions);
     }, [data]);
@@ -124,7 +128,7 @@ export function CombinedChart({ data }: ChartProps) {
             options={chartOptions}
             series={series}
             type="line"
-            height={400}
+            height={height}
         />
     );
 }
