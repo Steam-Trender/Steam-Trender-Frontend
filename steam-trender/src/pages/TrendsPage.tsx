@@ -82,10 +82,9 @@ const TrendsPage = observer(() => {
             </div>
             {trendsOverview ? (
                 <>
-                    <h1>Overview</h1>
                     <div className="row">
                         <div className="col-sm-12 col-md-6">
-                            <h2>Median Revenue</h2>
+                            <h1>Median Revenue</h1>
                             <RegressionPlot
                                 categories={trendsOverview.map(
                                     (item: { year: string }) => item.year
@@ -104,7 +103,7 @@ const TrendsPage = observer(() => {
                             />
                         </div>
                         <div className="col-sm-12 col-md-6">
-                            <h2>Revenue Box Chart</h2>
+                            <h1>Revenue Box Chart</h1>
                             <MoneyBoxPlot
                                 data={convertYearDataToGeneric(trendsOverview)}
                                 lockedRotation={false}
@@ -115,7 +114,7 @@ const TrendsPage = observer(() => {
                     </div>
                     <div className="row pt-3">
                         <div className="col-sm-12 col-md-6">
-                            <h2>Game Released</h2>
+                            <h1>Game Released</h1>
                             <RegressionPlot
                                 categories={trendsOverview.map(
                                     (item: { year: string }) => item.year
@@ -131,7 +130,7 @@ const TrendsPage = observer(() => {
                             />
                         </div>
                         <div className="col-sm-12 col-md-6">
-                            <h2>Median Reviews</h2>
+                            <h1>Median Reviews</h1>
                             <RegressionPlot
                                 categories={trendsOverview.map(
                                     (item: { year: string }) => item.year
@@ -153,7 +152,7 @@ const TrendsPage = observer(() => {
                     </div>
                     <div className="row pt-3">
                         <div className="col-sm-12 col-md-6">
-                            <h2>Median Owners</h2>
+                            <h1>Median Owners</h1>
                             <RegressionPlot
                                 categories={trendsOverview.map(
                                     (item: { year: string }) => item.year
@@ -173,7 +172,7 @@ const TrendsPage = observer(() => {
                             />
                         </div>
                         <div className="col-sm-12 col-md-6">
-                            <h2>Median Price</h2>
+                            <h1>Median Price</h1>
                             <RegressionPlot
                                 categories={trendsOverview.map(
                                     (item: { year: string }) => item.year
@@ -194,7 +193,7 @@ const TrendsPage = observer(() => {
                         </div>
                     </div>
                     <div className="row pt-3">
-                        <h1>Table View</h1>
+                        <h1>Table</h1>
                         <OverviewTable
                             data={convertYearDataToGeneric(trendsOverview)}
                         />
