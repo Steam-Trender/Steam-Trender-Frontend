@@ -11,6 +11,7 @@ import { ParametersInfo } from "../components/ParametersInfo";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../stores/storeContext";
 import LoadingSpinnder from "../components/LoadingSpinner";
+import { BarPlot } from "../components/BarPlot";
 
 const TrendsPage = observer(() => {
     const { trendsPageStore, tagsStore } = useStore();
@@ -115,7 +116,7 @@ const TrendsPage = observer(() => {
                     <div className="row pt-3">
                         <div className="col-sm-12 col-md-6">
                             <h1>Game Released</h1>
-                            <RegressionPlot
+                            <BarPlot
                                 categories={trendsOverview.map(
                                     (item: { year: string }) => item.year
                                 )}
@@ -124,7 +125,6 @@ const TrendsPage = observer(() => {
                                         overview: { total_games: number };
                                     }) => item.overview.total_games
                                 )}
-                                trend={null}
                                 yaxis_title={"Games"}
                                 money={false}
                             />
