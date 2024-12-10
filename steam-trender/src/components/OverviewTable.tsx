@@ -32,7 +32,9 @@ export function OverviewTable({ data }: OverviewTableProps) {
                             .reverse()
                             .map((item, index) => (
                                 <tr key={index}>
-                                    <td>{item.title}</td>
+                                    <td>
+                                        <b>{item.title}</b>
+                                    </td>
                                     <td>
                                         <NumberFormatter
                                             value={item.overview.total_games}
