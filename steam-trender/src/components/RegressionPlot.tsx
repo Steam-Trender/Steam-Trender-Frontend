@@ -66,6 +66,9 @@ export function RegressionPlot({
                 shared: true,
                 intersect: false,
             },
+            legend: {
+                position: "top",
+            },
         };
         setChartOptions(newOptions);
     }, [real]);
