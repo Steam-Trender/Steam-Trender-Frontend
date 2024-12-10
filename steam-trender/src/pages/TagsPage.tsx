@@ -120,7 +120,7 @@ const TagsPage = observer(() => {
             {tagsOverview ? (
                 <>
                     <div className="row">
-                        <div className="col-6 pb-3">
+                        <div className="col-md-12 col-lg-6 pb-3">
                             <h1>Revenue Box Plot</h1>
                             <MoneyBoxPlot
                                 data={convertTagDataToGeneric(tagsOverview)}
@@ -129,7 +129,7 @@ const TagsPage = observer(() => {
                                 height={400}
                             />
                         </div>
-                        <div className="col-6 pb-3">
+                        <div className="col-md-12 col-lg-6 pb-3">
                             <h1>Games & Median Revenue</h1>
                             <CombinedChart data={tagsOverview} height={400} />
                         </div>
