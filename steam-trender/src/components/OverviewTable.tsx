@@ -15,7 +15,7 @@ export function OverviewTable({ data }: OverviewTableProps) {
                     <thead>
                         <tr className="align-top">
                             <th scope="col"></th>
-                            <th scope="col">Games Total</th>
+                            <th scope="col">Total Games</th>
                             <th scope="col">Median Reviews</th>
                             <th scope="col">Median Owners</th>
                             <th scope="col">Min Revenue</th>
