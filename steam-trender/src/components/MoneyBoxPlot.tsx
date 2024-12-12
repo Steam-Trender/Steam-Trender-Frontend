@@ -19,7 +19,6 @@ export function MoneyBoxPlot({
     height,
 }: MoneyBoxProps) {
     const [chartOptions, setChartOptions] = useState<ApexOptions>({});
-    const [display, setDisplay] = useState(false);
 
     const processBoxplotData = (data: IGenericOverview[]) => {
         const seriesData = data.map((item) => ({
@@ -42,7 +41,6 @@ export function MoneyBoxPlot({
         const textColor = getCSSVariable("--bs-body-color");
         const upperColor = getCSSVariable("--bs-primary");
         const lowerColor = getCSSVariable("--bs-secondary");
-        setTimeout(() => setDisplay(true), 2);
 
         const newOptions: ApexOptions = {
             chart: {
@@ -124,10 +122,6 @@ export function MoneyBoxPlot({
         };
         setChartOptions(newOptions);
     }, [data]);
-
-    if (!display) {
-        return <></>;
-    }
 
     return (
         <>
