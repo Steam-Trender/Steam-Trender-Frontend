@@ -12,10 +12,12 @@ interface ChartProps {
 
 export function BarPlot({ categories, real, yaxis_title, money }: ChartProps) {
     const [chartOptions, setChartOptions] = useState<ApexOptions>({});
+    const [display, setDisplay] = useState(false);
 
     useEffect(() => {
         const mainColor = getCSSVariable("--bs-primary");
         const pregressionColor = getCSSVariable("--bs-secondary");
+        setTimeout(() => setDisplay(true), 2);
 
         const newOptions: ApexOptions = {
             chart: {
@@ -62,6 +64,10 @@ export function BarPlot({ categories, real, yaxis_title, money }: ChartProps) {
             data: real,
         },
     ];
+
+    if (!display) {
+        return <></>;
+    }
 
     return (
         <ReactApexChart

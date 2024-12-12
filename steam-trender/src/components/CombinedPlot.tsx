@@ -17,11 +17,13 @@ export function CombinedChart({ data, height }: ChartProps) {
     const medianRevenues = data.map((item) =>
         getSpecificRevenue(item.overview, 0.5)
     );
+    const [display, setDisplay] = useState(false);
 
     useEffect(() => {
         const textColor = getCSSVariable("--bs-body-color");
         const upperColor = getCSSVariable("--bs-primary");
         const lowerColor = getCSSVariable("--bs-secondary");
+        setTimeout(() => setDisplay(true), 2);
 
         const newOptions: ApexOptions = {
             chart: {
@@ -128,6 +130,10 @@ export function CombinedChart({ data, height }: ChartProps) {
             data: medianRevenues,
         },
     ];
+
+    if (!display) {
+        return <></>;
+    }
 
     return (
         <ReactApexChart

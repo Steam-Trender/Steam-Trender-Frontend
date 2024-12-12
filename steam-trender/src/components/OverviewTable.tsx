@@ -104,7 +104,10 @@ export function OverviewTable({ data }: OverviewTableProps) {
                                     </td>
                                     <td>
                                         {item.overview.related_tags
-                                            .map((tag) => `${tag.title} (${tag.games_count})`)
+                                            .map(
+                                                (tag) =>
+                                                    `${tag.title} (${tag.games_count})`
+                                            )
                                             .join(", ")}
                                     </td>
                                 </tr>
