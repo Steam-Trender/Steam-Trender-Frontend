@@ -196,6 +196,7 @@ const TrendsPage = observer(() => {
                         <h1>Table</h1>
                         <OverviewTable
                             data={convertYearDataToGeneric(trendsOverview)}
+                            data_title={"Year"}
                         />
                     </div>
                 </>

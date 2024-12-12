@@ -106,3 +106,7 @@ code {
 .apexcharts-svg {
     overflow: visible;
 }
+
+.apexcharts-toolbar {
+    z-index: 0 !important;
+}

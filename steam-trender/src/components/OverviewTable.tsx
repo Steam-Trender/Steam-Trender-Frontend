@@ -4,17 +4,18 @@ import { NumberFormatter } from "../utils/number_formatter";
 import { IGenericOverview } from "../models/generic_overview";
 
 interface OverviewTableProps {
+    data_title: string;
     data: IGenericOverview[];
 }
 
-export function OverviewTable({ data }: OverviewTableProps) {
+export function OverviewTable({ data, data_title }: OverviewTableProps) {
     return (
         <small>
             <div className="table-responsive">
                 <table className="table table-striped">
                     <thead>
                         <tr className="align-top">
-                            <th scope="col"></th>
+                            <th scope="col">{data_title}</th>
                             <th scope="col">Total Games</th>
                             <th scope="col">Median Reviews</th>
                             <th scope="col">Median Owners</th>

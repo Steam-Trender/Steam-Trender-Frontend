@@ -105,12 +105,12 @@ export function MoneyBoxPlot({
 
                 return `
                 <div class="apexcharts-tooltip-box apexcharts-tooltip-boxPlot">
-                    <div>Minimum: <span class="value">$${Math.pow(10, minimum).toLocaleString()}</span></div>
+                    <div>Min: <span class="value">$${Math.pow(10, minimum).toLocaleString()}</span></div>
                     <div>Q1: <span class="value">$${Math.pow(10, q1).toLocaleString()}</span></div>
                     <div>Median: <span class="value">$${Math.pow(10, median).toLocaleString()}</span></div>
                     <div>Q3: <span class="value">$${Math.pow(10, q3).toLocaleString()}</span></div>
-                    <div>Maximum: <span class="value">$${Math.pow(10, maximum).toLocaleString()}</span></div>
-                    <div class="apexcharts-tooltip-title" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;">${data[dataPointIndex].title}</div>
+                    <div>Max: <span class="value">$${Math.pow(10, maximum).toLocaleString()}</span></div>
+                    <div class="apexcharts-tooltip-title" style="font-size: 12px;">${data[dataPointIndex].title}</div>
                 </div>`;
             },
         },

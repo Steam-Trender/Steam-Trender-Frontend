@@ -138,6 +138,7 @@ const TagsPage = observer(() => {
                         <h1>Table</h1>
                         <OverviewTable
                             data={convertTagDataToGeneric(tagsOverview)}
+                            data_title={"Tag"}
                         />
                     </div>
                 </>
