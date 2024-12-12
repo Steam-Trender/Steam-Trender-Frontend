@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactApexChart from "react-apexcharts";
 import { ITagOverview } from "../models/tag_overview";
 import { ApexOptions } from "apexcharts";
@@ -11,110 +11,106 @@ interface ChartProps {
 }
 
 export function CombinedChart({ data, height }: ChartProps) {
-    const [chartOptions, setChartOptions] = useState<ApexOptions>({});
     const categories = data.map((item) => item.tag.title);
     const totalGames = data.map((item) => item.overview.total_games);
     const medianRevenues = data.map((item) =>
         getSpecificRevenue(item.overview, 0.5)
     );
 
-    useEffect(() => {
-        const textColor = getCSSVariable("--bs-body-color");
-        const upperColor = getCSSVariable("--bs-primary");
-        const lowerColor = getCSSVariable("--bs-secondary");
+    const textColor = getCSSVariable("--bs-body-color");
+    const upperColor = getCSSVariable("--bs-primary");
+    const lowerColor = getCSSVariable("--bs-secondary");
 
-        const newOptions: ApexOptions = {
-            chart: {
-                type: "line",
-                height: 500,
-                zoom: {
-                    enabled: false,
+    const chartOptions: ApexOptions = {
+        chart: {
+            type: "line",
+            height: 500,
+            zoom: {
+                enabled: false,
+            },
+            animations: {
+                enabled: false,
+            },
+            fontFamily: "Roboto, sans-serif",
+        },
+        stroke: {
+            width: [0, 2],
+        },
+        markers: {
+            size: [0, 3],
+        },
+        colors: [lowerColor, upperColor],
+        xaxis: {
+            categories,
+            labels: {
+                rotate: -90,
+                rotateAlways: true,
+                style: {
+                    fontSize: "12px",
+                    colors: [textColor || "#000"],
                 },
-                animations: {
-                    enabled: false,
+            },
+            tooltip: {
+                enabled: false,
+            },
+        },
+        yaxis: [
+            {
+                crosshairs: {
+                    show: false,
                 },
-                fontFamily: "Roboto, sans-serif",
-            },
-            stroke: {
-                width: [0, 2],
-            },
-            markers: {
-                size: [0, 3],
-            },
-            colors: [lowerColor, upperColor],
-            xaxis: {
-                categories,
+                min: 0,
+                axisTicks: {
+                    show: true,
+                },
                 labels: {
-                    rotate: -90,
-                    rotateAlways: true,
+                    formatter: (value) => {
+                        if (value === 0) return "0";
+                        return `${value.toLocaleString()}`;
+                    },
                     style: {
                         fontSize: "12px",
                         colors: [textColor || "#000"],
                     },
                 },
-                tooltip: {
-                    enabled: false,
+            },
+            {
+                min: 0,
+                opposite: true,
+                axisTicks: {
+                    show: true,
+                },
+                labels: {
+                    formatter: (value) => {
+                        if (value === 0) return "$0";
+                        return `$${value.toLocaleString()}`;
+                    },
+                    style: {
+                        fontSize: "12px",
+                        colors: [textColor || "#000"],
+                    },
                 },
             },
-            yaxis: [
-                {
-                    crosshairs: {
-                        show: false,
-                    },
-                    min: 0,
-                    axisTicks: {
-                        show: true,
-                    },
-                    labels: {
-                        formatter: (value) => {
-                            if (value === 0) return "0";
-                            return `${value.toLocaleString()}`;
-                        },
-                        style: {
-                            fontSize: "12px",
-                            colors: [textColor || "#000"],
-                        },
-                    },
-                },
-                {
-                    min: 0,
-                    opposite: true,
-                    axisTicks: {
-                        show: true,
-                    },
-                    labels: {
-                        formatter: (value) => {
-                            if (value === 0) return "$0";
-                            return `$${value.toLocaleString()}`;
-                        },
-                        style: {
-                            fontSize: "12px",
-                            colors: [textColor || "#000"],
-                        },
-                    },
-                },
-            ],
-            tooltip: {
-                shared: true,
-                intersect: false,
-                y: {
-                    formatter: function (y, { seriesIndex }) {
-                        if (typeof y !== "undefined") {
-                            if (seriesIndex === 1) {
-                                return `$${y.toLocaleString()}`;
-                            }
-                            return `${y.toFixed(0)}`;
+        ],
+        tooltip: {
+            shared: true,
+            intersect: false,
+            y: {
+                formatter: function (y, { seriesIndex }) {
+                    if (typeof y !== "undefined") {
+                        if (seriesIndex === 1) {
+                            return `$${y.toLocaleString()}`;
                         }
-                        return y;
-                    },
+                        return `${y.toFixed(0)}`;
+                    }
+                    return y;
                 },
             },
-            legend: {
-                position: "top",
-            },
-        };
-        setChartOptions(newOptions);
-    }, [data]);
+        },
+        legend: {
+            position: "top",
+        },
+    };
 
     const series = [
         {

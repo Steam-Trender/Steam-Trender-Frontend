@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { getSpecificRevenue } from "../models/overview";
 import { getCSSVariable } from "../utils/get_css";
 import ReactApexChart from "react-apexcharts";
@@ -18,8 +18,6 @@ export function MoneyBoxPlot({
     initialRotate,
     height,
 }: MoneyBoxProps) {
-    const [chartOptions, setChartOptions] = useState<ApexOptions>({});
-
     const processBoxplotData = (data: IGenericOverview[]) => {
         const seriesData = data.map((item) => ({
             x: item.title,
@@ -37,78 +35,75 @@ export function MoneyBoxPlot({
         return [{ data: seriesData }];
     };
 
-    useEffect(() => {
-        const textColor = getCSSVariable("--bs-body-color");
-        const upperColor = getCSSVariable("--bs-primary");
-        const lowerColor = getCSSVariable("--bs-secondary");
+    const textColor = getCSSVariable("--bs-body-color");
+    const upperColor = getCSSVariable("--bs-primary");
+    const lowerColor = getCSSVariable("--bs-secondary");
 
-        const newOptions: ApexOptions = {
-            chart: {
-                type: "boxPlot",
-                height: 500,
-                animations: {
-                    enabled: false,
-                },
-                zoom: {
-                    enabled: false,
-                },
-                fontFamily: "Roboto, sans-serif",
+    const chartOptions: ApexOptions = {
+        chart: {
+            type: "boxPlot",
+            height: 500,
+            animations: {
+                enabled: false,
             },
-            yaxis: {
-                min: 1,
-                max: 10,
-                labels: {
-                    formatter: (value) => {
-                        if (value === 0) return "$0";
-                        return `$${Math.pow(10, value).toLocaleString()}`;
-                    },
-                    style: {
-                        fontSize: "12px",
-                        colors: [textColor || "#000"],
-                    },
+            zoom: {
+                enabled: false,
+            },
+            fontFamily: "Roboto, sans-serif",
+        },
+        yaxis: {
+            min: 1,
+            max: 10,
+            labels: {
+                formatter: (value) => {
+                    if (value === 0) return "$0";
+                    return `$${Math.pow(10, value).toLocaleString()}`;
                 },
-                crosshairs: {
-                    show: false,
+                style: {
+                    fontSize: "12px",
+                    colors: [textColor || "#000"],
                 },
             },
-            xaxis: {
-                labels: {
-                    rotate: initialRotate,
-                    rotateAlways: lockedRotation,
-                    style: {
-                        fontSize: "12px",
-                        colors: [textColor || "#000"],
-                    },
-                },
-                tooltip: {
-                    enabled: false,
-                },
+            crosshairs: {
+                show: false,
             },
-            plotOptions: {
-                boxPlot: {
-                    colors: {
-                        upper: upperColor || "#000",
-                        lower: lowerColor || "#000",
-                    },
+        },
+        xaxis: {
+            labels: {
+                rotate: initialRotate,
+                rotateAlways: lockedRotation,
+                style: {
+                    fontSize: "12px",
+                    colors: [textColor || "#000"],
                 },
             },
             tooltip: {
-                shared: false,
-                enabled: true,
-                intersect: false,
-                custom: function ({ seriesIndex, dataPointIndex, w }) {
-                    const minimum =
-                        w.globals.seriesCandleO[seriesIndex][dataPointIndex];
-                    const q1 =
-                        w.globals.seriesCandleH[seriesIndex][dataPointIndex];
-                    const median =
-                        w.globals.seriesCandleM[seriesIndex][dataPointIndex];
-                    const q3 =
-                        w.globals.seriesCandleL[seriesIndex][dataPointIndex];
-                    const maximum =
-                        w.globals.seriesCandleC[seriesIndex][dataPointIndex];
+                enabled: false,
+            },
+        },
+        plotOptions: {
+            boxPlot: {
+                colors: {
+                    upper: upperColor || "#000",
+                    lower: lowerColor || "#000",
+                },
+            },
+        },
+        tooltip: {
+            shared: false,
+            enabled: true,
+            intersect: false,
+            custom: function ({ seriesIndex, dataPointIndex, w }) {
+                const minimum =
+                    w.globals.seriesCandleO[seriesIndex][dataPointIndex];
+                const q1 = w.globals.seriesCandleH[seriesIndex][dataPointIndex];
+                const median =
+                    w.globals.seriesCandleM[seriesIndex][dataPointIndex];
+                const q3 = w.globals.seriesCandleL[seriesIndex][dataPointIndex];
+                const maximum =
+                    w.globals.seriesCandleC[seriesIndex][dataPointIndex];
 
-                    return `
+                return `
                 <div class="apexcharts-tooltip-box apexcharts-tooltip-boxPlot">
                     <div>Minimum: <span class="value">$${Math.pow(10, minimum).toLocaleString()}</span></div>
                     <div>Q1: <span class="value">$${Math.pow(10, q1).toLocaleString()}</span></div>
@@ -117,11 +112,9 @@ export function MoneyBoxPlot({
                     <div>Maximum: <span class="value">$${Math.pow(10, maximum).toLocaleString()}</span></div>
                     <div class="apexcharts-tooltip-title" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;">${data[dataPointIndex].title}</div>
                 </div>`;
-                },
             },
-        };
-        setChartOptions(newOptions);
-    }, [data]);
+        },
+    };
 
     return (
         <>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { getCSSVariable } from "../utils/get_css";
@@ -11,50 +11,45 @@ interface ChartProps {
 }
 
 export function BarPlot({ categories, real, yaxis_title, money }: ChartProps) {
-    const [chartOptions, setChartOptions] = useState<ApexOptions>({});
+    const mainColor = getCSSVariable("--bs-primary");
+    const regressionColor = getCSSVariable("--bs-secondary");
 
-    useEffect(() => {
-        const mainColor = getCSSVariable("--bs-primary");
-        const pregressionColor = getCSSVariable("--bs-secondary");
-
-        const newOptions: ApexOptions = {
-            chart: {
-                type: "bar",
-                height: 400,
-                zoom: {
-                    enabled: false,
-                },
-                animations: {
-                    enabled: false,
-                },
-                fontFamily: "Roboto, sans-serif",
+    const chartOptions: ApexOptions = {
+        chart: {
+            type: "bar",
+            height: 400,
+            zoom: {
+                enabled: false,
             },
-            colors: [mainColor, pregressionColor],
-            xaxis: {
-                categories: categories,
+            animations: {
+                enabled: false,
             },
-            yaxis: {
-                title: {
-                    text: yaxis_title,
+            fontFamily: "Roboto, sans-serif",
+        },
+        colors: [mainColor, regressionColor],
+        xaxis: {
+            categories: categories,
+        },
+        yaxis: {
+            title: {
+                text: yaxis_title,
+            },
+            min: 0,
+            labels: {
+                formatter: (value) => {
+                    if (money) return `$${value.toLocaleString()}`;
+                    return value.toLocaleString();
                 },
-                min: 0,
-                labels: {
-                    formatter: (value) => {
-                        if (money) return `$${value.toLocaleString()}`;
-                        return value.toLocaleString();
-                    },
-                    style: {
-                        fontSize: "12px",
-                    },
+                style: {
+                    fontSize: "12px",
                 },
             },
-            tooltip: {
-                shared: true,
-                intersect: false,
-            },
-        };
-        setChartOptions(newOptions);
-    }, [real]);
+        },
+        tooltip: {
+            shared: true,
+            intersect: false,
+        },
+    };
 
     const series = [
         {
