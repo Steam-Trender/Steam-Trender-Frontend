@@ -1,3 +1,4 @@
+import { IExtendedTag } from "./extended_tag";
 import { IRevenue } from "./revenue";
 
 export interface IOverview {
@@ -7,6 +8,7 @@ export interface IOverview {
     median_price: number;
     revenue_total: number;
     revenue: [IRevenue];
+    related_tags: [IExtendedTag];
 }
 
 export const getSpecificRevenue = (

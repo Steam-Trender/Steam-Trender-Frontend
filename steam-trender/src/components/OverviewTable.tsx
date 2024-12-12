@@ -24,6 +24,7 @@ export function OverviewTable({ data }: OverviewTableProps) {
                             <th scope="col">Q3 Revenue</th>
                             <th scope="col">Max Revenue</th>
                             <th scope="col">Total Revenue</th>
+                            <th scope="col">Associated Tags</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,6 +101,11 @@ export function OverviewTable({ data }: OverviewTableProps) {
                                         <NumberFormatter
                                             value={item.overview.revenue_total}
                                         />
+                                    </td>
+                                    <td>
+                                        {item.overview.related_tags
+                                            .map((tag) => `${tag.title} (${tag.games_count})`)
+                                            .join(", ")}
                                     </td>
                                 </tr>
                             ))}
