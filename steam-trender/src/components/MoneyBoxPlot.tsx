@@ -104,13 +104,25 @@ export function MoneyBoxPlot({
                     w.globals.seriesCandleC[seriesIndex][dataPointIndex];
 
                 return `
-                <div class="apexcharts-tooltip-box apexcharts-tooltip-boxPlot">
-                    <div>Min: <span class="value">$${Math.pow(10, minimum).toLocaleString()}</span></div>
-                    <div>Q1: <span class="value">$${Math.pow(10, q1).toLocaleString()}</span></div>
-                    <div>Median: <span class="value">$${Math.pow(10, median).toLocaleString()}</span></div>
-                    <div>Q3: <span class="value">$${Math.pow(10, q3).toLocaleString()}</span></div>
-                    <div>Max: <span class="value">$${Math.pow(10, maximum).toLocaleString()}</span></div>
-                    <div class="apexcharts-tooltip-title" style="font-size: 12px;">${data[dataPointIndex].title}</div>
+                <div class="apexcharts-tooltip-box apexcharts-tooltip-boxPlot" style="font-size: 12px; padding: 0px;">
+                    <div class="py-1 px-3">
+                        <div class="row mb-2">
+                            <span>Max: <b>$${Math.pow(10, maximum).toLocaleString()}</b></span>
+                        </div>
+                        <div class="row mb-2">
+                            <span>Q3: <b>$${Math.pow(10, q3).toLocaleString()}</b></span>
+                        </div>
+                        <div class="row mb-2">
+                            <span>Median: <b>$${Math.pow(10, median).toLocaleString()}</b></span>
+                        </div>
+                        <div class="row mb-2">
+                            <span>Q1: <b>$${Math.pow(10, q1).toLocaleString()}</b></span>
+                        </div>
+                        <div class="row">
+                            <span>Min: <b>$${Math.pow(10, minimum).toLocaleString()}</b></span>
+                        </div>
+                    </div>
+                    <div class="apexcharts-tooltip-title" style="font-size: 12px; margin: 0px">${data[dataPointIndex].title}</div>
                 </div>`;
             },
         },
