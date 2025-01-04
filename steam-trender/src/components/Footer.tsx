@@ -46,7 +46,7 @@ const Footer = () => {
                         </a>
                     </div>
                     <div className="col-md-3">
-                        <Link to="/about">About</Link>
+                        <Link to="/resources">Resources</Link>
                     </div>
                     <div className="col-md-3">
                         <Link to="/terms-of-use">Terms of Use</Link>

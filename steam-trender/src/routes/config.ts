@@ -9,6 +9,7 @@ import HomePage from "../pages/HomePage";
 import PrivacyPolicyPage from "../pages/PrivacyPolicyPage";
 import TermsPage from "../pages/TermsPage";
 import QuestionsPage from "../pages/QuestionsPage";
+import ResourcesPage from "../pages/ResourcesPage";
 
 interface RouteConfig {
     path: string;
@@ -57,6 +58,11 @@ const routeConfigs: RouteConfig[] = [
         path: "/terms-of-use",
         title: "Terms of Use",
         element: React.createElement(TermsPage),
+    },
+    {
+        path: "/resources",
+        title: "Resources",
+        element: React.createElement(ResourcesPage),   
     },
     {
         path: "*",
