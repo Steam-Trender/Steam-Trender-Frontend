@@ -192,7 +192,7 @@ class ApiService {
         try {
             const response = await API.get<IYearOverview[]>("/analyze/trends", {
                 params: {
-                    min_year: pivotYear - 5,
+                    min_year: pivotYear - 4,
                     max_year: pivotYear,
                     tag_ids: selectedTagIds,
                     min_reviews: minReviews,
