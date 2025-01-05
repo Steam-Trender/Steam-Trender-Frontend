@@ -104,7 +104,7 @@ const TagsPage = observer(() => {
                     </div>
                 </div>
                 <div className="col-sm-12 col-md-3 pb-2">
-                    <label>Click Here!</label>
+                    <label className="invisible">Click Here!</label>
                     <button
                         className="btn btn-primary text-uppercase w-100"
                         onClick={handleAnalyzeClick}

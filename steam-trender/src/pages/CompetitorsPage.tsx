@@ -201,7 +201,7 @@ const CompetitorsPage = observer(() => {
                             />
                         </div>
                         <div className="col-6">
-                            <label>Click Here!</label>
+                            <label className="invisible">Click Here!</label>
                             <button
                                 className="btn btn-primary w-100 text-uppercase"
                                 onClick={handleAnalyzeClick}
@@ -223,7 +223,7 @@ const CompetitorsPage = observer(() => {
                             />{" "}
                             games
                         </h1>
-                        <div className="col-6">
+                        <div className="col-sm-12 col-md-6">
                             <ul className="list-unstyled">
                                 <li>
                                     <b>Q3 Revenue: </b>
@@ -257,7 +257,7 @@ const CompetitorsPage = observer(() => {
                                 </li>
                             </ul>
                         </div>
-                        <div className="col-6">
+                        <div className="col-sm-12 col-md-6">
                             <ul className="list-unstyled">
                                 <li>
                                     <b>Median Reviews: </b>
