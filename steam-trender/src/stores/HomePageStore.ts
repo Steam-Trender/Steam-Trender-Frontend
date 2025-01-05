@@ -67,7 +67,6 @@ export class HomePageStore {
                 excludedTags: [],
             });
 
-
             runInAction(() => {
                 this.risingOverview = risingData;
                 this.hitsOverview = hitsData;

@@ -5,6 +5,7 @@ import { IStatus } from "../models/status";
 
 const Footer = () => {
     const [status, setStatus] = useState<IStatus>();
+    const currentYear = new Date().getFullYear();
 
     useEffect(() => {
         const fetchStatus = async () => {
@@ -63,7 +64,7 @@ const Footer = () => {
                         </span>
                     </div>
                     <div className="col-md-3 text-md-end">
-                        <span>© 2024 SteamTrender</span>
+                        <span>© {currentYear} SteamTrender</span>
                     </div>
                 </div>
             </div>

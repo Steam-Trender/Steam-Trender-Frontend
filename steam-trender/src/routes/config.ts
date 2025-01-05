@@ -62,7 +62,7 @@ const routeConfigs: RouteConfig[] = [
     {
         path: "/resources",
         title: "Resources",
-        element: React.createElement(ResourcesPage),   
+        element: React.createElement(ResourcesPage),
     },
     {
         path: "*",

@@ -67,8 +67,8 @@ const HomePage = observer(() => {
                         <div className="tab-pane active">
                             <p>
                                 All games with reviews between{" "}
-                                <b>1 000 and 10 000</b> released in the last
-                                two months since the db was updated.
+                                <b>1 000 and 10 000</b> released in the last two
+                                months since the db was updated.
                             </p>
                             {homeStore.hitsOverview && (
                                 <GamesTable
