@@ -302,7 +302,7 @@ const CompetitorsPage = observer(() => {
                                 className="btn btn-outline-primary w-100 text-uppercase"
                                 onClick={handleDownload}
                             >
-                                Download
+                                Download Table
                             </button>
                         </div>
                         <div className="col-12">

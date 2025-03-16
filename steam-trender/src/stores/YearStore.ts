@@ -3,7 +3,7 @@ import ApiService from "../api/service";
 import { IYears } from "../models/years";
 
 class YearStore {
-    timeframe: IYears = { max_year: 2024, min_year: 2020 };
+    timeframe: IYears = { max_year: 2025, min_year: 2020 };
     years: number[] = [];
     hasFetched = false;
 
