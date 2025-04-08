@@ -8,6 +8,7 @@ import { ITagOverview } from "../models/tag_overview";
 import { IYearOverview } from "../models/year_overview";
 import { IStatus } from "../models/status";
 import { format } from "date-fns";
+import { ISummary } from "../models/summary";
 
 interface FetchCompetitorsOverviewParams {
     reviewsCoeff: string;
@@ -34,6 +35,10 @@ interface FetchTrendsOverviewParams {
     minReviews: string;
     pivotYear: number;
     selectedTagIds: number[];
+}
+
+interface FetchSummaryParams {
+    gameId: number;
 }
 
 class ApiService {
@@ -196,6 +201,23 @@ class ApiService {
                     max_year: pivotYear,
                     tag_ids: selectedTagIds,
                     min_reviews: minReviews,
+                },
+                paramsSerializer: (params) =>
+                    qs.stringify(params, { arrayFormat: "repeat" }),
+            });
+            return response.data;
+        } catch (error) {
+            throw new Error("Failed to fetch data from API");
+        }
+    }
+
+    static async fetchGameSummary({
+        gameId,
+    }: FetchSummaryParams): Promise<ISummary> {
+        try {
+            const response = await API.get<ISummary>("/summary", {
+                params: {
+                    gameid: gameId,
                 },
                 paramsSerializer: (params) =>
                     qs.stringify(params, { arrayFormat: "repeat" }),

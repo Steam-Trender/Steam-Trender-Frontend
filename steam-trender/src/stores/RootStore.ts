@@ -1,5 +1,6 @@
 import { CompetitorsPageStore } from "./CompetitorsPageStore";
 import { HomePageStore } from "./HomePageStore";
+import { SummaryPageStore } from "./SummaryStore";
 import { TagsPageStore } from "./TagsPageStore";
 import { TagsStore } from "./TagsStore";
 import { TrendsPageStore } from "./TrendsPageStore";
@@ -12,6 +13,7 @@ export class RootStore {
     tagsPageStore: TagsPageStore;
     competitorsPageStore: CompetitorsPageStore;
     utilsStore: UtilsStore;
+    summaryPageStore: SummaryPageStore;
 
     constructor() {
         this.homeStore = new HomePageStore(this);
@@ -20,6 +22,7 @@ export class RootStore {
         this.tagsPageStore = new TagsPageStore(this);
         this.tagsStore = new TagsStore(this);
         this.utilsStore = new UtilsStore(this);
+        this.summaryPageStore = new SummaryPageStore(this);
     }
 }
 
