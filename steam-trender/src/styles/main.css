@@ -1,3 +1,12 @@
+@font-face {
+    font-family: "Libre Barcode 128 Text";
+    src: url("../assets/fonts/LibreBarcode128Text-Regular.woff2")
+        format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 html {
     background-color: #f8f9fa;
 }
@@ -62,8 +71,10 @@ code {
 }
 
 .barcode-font {
-    font-family: "Libre Barcode 128 Text";
-    font-size: 24pt;
+    font-family: "Libre Barcode 128 Text", monospace;
+    font-size: 24pt !important;
+    font-weight: 400;
+    font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 14pt;
