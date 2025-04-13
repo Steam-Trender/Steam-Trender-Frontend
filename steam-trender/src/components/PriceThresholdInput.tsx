@@ -18,7 +18,7 @@ export function PriceThresholdInput({
 
     const prefix = max ? "Max" : "Min";
     const tooltipText = `${prefix} price that game should have to be sampled.`;
-    const placeholderText = max ? "inf" : "0.00";
+    const placeholderText = max ? "∞" : "0.00";
 
     return (
         <>

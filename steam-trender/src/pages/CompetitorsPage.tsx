@@ -7,7 +7,7 @@ import { GamesTable } from "../components/GamesTable";
 import { ReviewsThresholdInput } from "../components/ReviewsThresholdInput";
 import { ReviewsCoefficientInput } from "../components/ReviewsCoefficientInput";
 import { ITag } from "../models/tag";
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ParametersInfo } from "../components/ParametersInfo";
 import { useStore } from "../stores/storeContext";
@@ -15,6 +15,9 @@ import { observer } from "mobx-react-lite";
 import LoadingSpinnder from "../components/LoadingSpinner";
 import { Link } from "react-router-dom";
 import { PriceThresholdInput } from "../components/PriceThresholdInput";
+import { enGB } from "date-fns/locale";
+
+registerLocale("en-GB", enGB);
 
 const CompetitorsPage = observer(() => {
     const { competitorsPageStore, tagsStore } = useStore();
@@ -166,6 +169,7 @@ const CompetitorsPage = observer(() => {
                         <div className="col-6 pe-1">
                             <label>Min Date</label>
                             <DatePicker
+                                disabledKeyboardNavigation
                                 selected={competitorsPageStore.minDate}
                                 onChange={(value) =>
                                     competitorsPageStore.setMinDate(value)
@@ -173,11 +177,13 @@ const CompetitorsPage = observer(() => {
                                 dateFormat="yyyy-MM-dd"
                                 className="form-control w-100"
                                 placeholderText="Min Date"
+                                locale="en-GB"
                             />
                         </div>
                         <div className="col-6 ps-1">
                             <label>Max Date</label>
                             <DatePicker
+                                disabledKeyboardNavigation
                                 selected={competitorsPageStore.maxDate}
                                 onChange={(value) =>
                                     competitorsPageStore.setMaxDate(value)
@@ -185,6 +191,7 @@ const CompetitorsPage = observer(() => {
                                 dateFormat="yyyy-MM-dd"
                                 className="form-control w-100"
                                 placeholderText="Max Date"
+                                locale="en-GB"
                             />
                         </div>
                     </div>
@@ -338,8 +345,12 @@ const CompetitorsPage = observer(() => {
                                     a game to be sampled.
                                 </li>
                                 <li>
-                                    Max Price (inf): The highest price allowed
-                                    for a game to be sampled.
+                                    Max Price (
+                                    <span style={{ verticalAlign: "-0.1em" }}>
+                                        ∞
+                                    </span>
+                                    ): The highest price allowed for a game to
+                                    be sampled.
                                 </li>
                                 <li>
                                     Min Reviews (10): The minimum number of
@@ -347,8 +358,12 @@ const CompetitorsPage = observer(() => {
                                     considered.
                                 </li>
                                 <li>
-                                    Max Reviews (inf): The maximum number of
-                                    reviews allowed for a game to be considered.
+                                    Max Reviews (
+                                    <span style={{ verticalAlign: "-0.1em" }}>
+                                        ∞
+                                    </span>
+                                    ): The maximum number of reviews allowed for
+                                    a game to be considered.
                                 </li>
                                 <li>
                                     Min Date (2020-01-01): The earliest release
