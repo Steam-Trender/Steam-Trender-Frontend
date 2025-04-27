@@ -14,7 +14,7 @@ export class CompetitorsPageStore {
     includedTagIds: number[] = [];
     excludedTagIds: number[] = [];
     minDate = new Date("2020-01-01");
-    maxDate = new Date("2024-12-31");
+    maxDate = new Date("2025-12-31");
     competitorsOverview: ICompetitors | null = null;
 
     isFetching = false;

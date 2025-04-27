@@ -370,7 +370,7 @@ const CompetitorsPage = observer(() => {
                                     date a game can have to be included.
                                 </li>
                                 <li>
-                                    Max Date (2024-12-31): The latest release
+                                    Max Date (2025-12-31): The latest release
                                     date a game can have to be included.
                                 </li>
                                 <li>
