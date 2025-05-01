@@ -114,6 +114,22 @@ const SummaryPage = observer(() => {
                 <div className="row flex-fill align-items-center">
                     {!summaryPageStore.isFetching ? (
                         <div>
+                            <div className="alert alert-warning" role="alert">
+                                <p>
+                                    <b>YSDA ONLY</b>
+                                </p>
+                                <p>
+                                    Привет! Если вы из ШАД, то вы по адресу. В
+                                    противном случае - нет.
+                                </p>
+                                <span>
+                                    Для примера вставьте в поле выше любую
+                                    ссылку на игру из Steam, например,{" "}
+                                    <i>
+                                        https://store.steampowered.com/app/976010/I_hate_this_game/
+                                    </i>
+                                </span>
+                            </div>
                             <p>
                                 Paste a link (URL) to the game page to get its
                                 summary.
