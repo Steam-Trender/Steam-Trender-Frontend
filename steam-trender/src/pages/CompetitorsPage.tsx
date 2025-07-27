@@ -74,37 +74,58 @@ const CompetitorsPage = observer(() => {
     return (
         <>
             <div className="row">
-                <div className="col-md-12 col-lg-6 pb-2">
-                    <label>
-                        Included Tags (
-                        {competitorsPageStore.includedTagIds.length}/{tagsLimit}
-                        )
-                    </label>
-                    <TagSelector
-                        onChange={(ids) =>
-                            competitorsPageStore.setIncludedTagIds(ids)
-                        }
-                        placeholder="Any"
-                        limit={tagsLimit}
-                        tags={tagsStore.tags}
-                        selectedTagIds={competitorsPageStore.includedTagIds}
-                    />
+                <div className="col-md-12 col-lg-9">
+                    <div className="row">
+                        <div className="col-md-12 col-lg-6 pb-2 pe-lg-1">
+                            <label>
+                                Included Tags (
+                                {competitorsPageStore.includedTagIds.length}/{tagsLimit}
+                                )
+                            </label>
+                            <TagSelector
+                                onChange={(ids) =>
+                                    competitorsPageStore.setIncludedTagIds(ids)
+                                }
+                                placeholder="Any"
+                                limit={tagsLimit}
+                                tags={tagsStore.tags}
+                                selectedTagIds={competitorsPageStore.includedTagIds}
+                            />
+                        </div>
+                        <div className="col-md-12 col-lg-6 pb-2 ps-lg-1">
+                            <label>
+                                Excluded Tags (
+                                {competitorsPageStore.excludedTagIds.length}/{tagsLimit}
+                                )
+                            </label>
+                            <TagSelector
+                                onChange={(ids) =>
+                                    competitorsPageStore.setExcludedTagIds(ids)
+                                }
+                                placeholder="None"
+                                limit={tagsLimit}
+                                tags={tagsStore.tags}
+                                selectedTagIds={competitorsPageStore.excludedTagIds}
+                            />
+                        </div>
+                    </div>
                 </div>
-                <div className="col-md-12 col-lg-6 pb-2">
-                    <label>
-                        Excluded Tags (
-                        {competitorsPageStore.excludedTagIds.length}/{tagsLimit}
-                        )
-                    </label>
-                    <TagSelector
-                        onChange={(ids) =>
-                            competitorsPageStore.setExcludedTagIds(ids)
-                        }
-                        placeholder="None"
-                        limit={tagsLimit}
-                        tags={tagsStore.tags}
-                        selectedTagIds={competitorsPageStore.excludedTagIds}
-                    />
+                <div className="col-md-12 col-lg-3 pb-2">
+                    <div className="row">
+                        <div className="form-group col-6">
+                            <label>Reviews Coeff.</label>
+                            <ReviewsCoefficientInput
+                                value={competitorsPageStore.reviewsCoeff}
+                                onChange={(value) =>
+                                    competitorsPageStore.setReviewsCoeff(value)
+                                }
+                            />
+                        </div>
+                        <div className="form-check col-6">
+                            <label htmlFor="customRange2" className="form-label">Tag Checker (5)</label>
+                            <input type="range" className="form-range" min="0" max="5" id="customRange2"/>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="row pb-3">
@@ -167,7 +188,7 @@ const CompetitorsPage = observer(() => {
                 <div className="col-md-6 col-lg-3 pb-2">
                     <div className="row">
                         <div className="col-6 pe-1">
-                            <label>Min Date</label>
+                            <label>Min Release Date</label>
                             <DatePicker
                                 disabledKeyboardNavigation
                                 selected={competitorsPageStore.minDate}
@@ -176,12 +197,12 @@ const CompetitorsPage = observer(() => {
                                 }
                                 dateFormat="yyyy-MM-dd"
                                 className="form-control w-100"
-                                placeholderText="Min Date"
+                                placeholderText="Min Release Date"
                                 locale="en-GB"
                             />
                         </div>
                         <div className="col-6 ps-1">
-                            <label>Max Date</label>
+                            <label>Max Release Date</label>
                             <DatePicker
                                 disabledKeyboardNavigation
                                 selected={competitorsPageStore.maxDate}
@@ -190,34 +211,21 @@ const CompetitorsPage = observer(() => {
                                 }
                                 dateFormat="yyyy-MM-dd"
                                 className="form-control w-100"
-                                placeholderText="Max Date"
+                                placeholderText="Max Release Date"
                                 locale="en-GB"
                             />
                         </div>
                     </div>
                 </div>
                 <div className="col-md-6 col-lg-3 pb-2">
-                    <div className="row">
-                        <div className="form-group col-6">
-                            <label>Reviews Coeff.</label>
-                            <ReviewsCoefficientInput
-                                value={competitorsPageStore.reviewsCoeff}
-                                onChange={(value) =>
-                                    competitorsPageStore.setReviewsCoeff(value)
-                                }
-                            />
-                        </div>
-                        <div className="col-6">
-                            <label className="invisible">Click Here!</label>
-                            <button
-                                className="btn btn-primary w-100 text-uppercase"
-                                onClick={handleAnalyzeClick}
-                                disabled={competitorsPageStore.isFetching}
-                            >
-                                Analyze
-                            </button>
-                        </div>
-                    </div>
+                    <label className="invisible">Click Here!</label>
+                    <button
+                        className="btn btn-primary w-100 text-uppercase"
+                        onClick={handleAnalyzeClick}
+                        disabled={competitorsPageStore.isFetching}
+                    >
+                        Analyze
+                    </button>
                 </div>
             </div>
             {competitorsOverview ? (
