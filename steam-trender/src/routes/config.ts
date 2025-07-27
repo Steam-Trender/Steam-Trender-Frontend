@@ -41,11 +41,6 @@ const routeConfigs: RouteConfig[] = [
         element: React.createElement(TrendsPage),
     },
     {
-        path: "/reviews",
-        title: "Reviews Summary",
-        element: React.createElement(SummaryPage),
-    },
-    {
         path: "/faq",
         title: "FAQ",
         element: React.createElement(QuestionsPage),
