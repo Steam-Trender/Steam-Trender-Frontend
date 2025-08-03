@@ -15,7 +15,7 @@ export function TagsThresholdInput({
     };
 
     return (
-        <Tooltip text="N first tags to look up for." placement="bottom">
+        <Tooltip text="N first tags to check." placement="bottom">
             <input
                 type="range"
                 min="1"
