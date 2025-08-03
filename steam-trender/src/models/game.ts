@@ -8,7 +8,7 @@ export interface IGame {
     reviews_score: number;
     release_date: string;
     price: number;
-    tags: [ITag];
+    tags_sorted: [ITag];
     revenue: number;
     owners: number;
 }

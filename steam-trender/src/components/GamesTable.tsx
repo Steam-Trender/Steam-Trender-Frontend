@@ -53,7 +53,7 @@ export function GamesTable({ games, limit = 100 }: GamesTableProps) {
                                     <td>{game.release_date}</td>
                                     <td>${game.price}</td>
                                     <td>
-                                        {game.tags
+                                        {game.tags_sorted
                                             .map((tag) => tag.title)
                                             .join(", ")}
                                     </td>

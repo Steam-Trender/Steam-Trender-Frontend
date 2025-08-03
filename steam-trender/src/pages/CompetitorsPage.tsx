@@ -50,7 +50,7 @@ const CompetitorsPage = observer(() => {
             const values = headers.map((header) => {
                 let cell = row[header];
 
-                if (header === "tags") {
+                if (header === "tags_sorted") {
                     cell = (cell as ITag[]).map((tag) => tag.title).join(",");
                 }
 
