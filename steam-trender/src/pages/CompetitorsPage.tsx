@@ -16,6 +16,7 @@ import LoadingSpinnder from "../components/LoadingSpinner";
 import { Link } from "react-router-dom";
 import { PriceThresholdInput } from "../components/PriceThresholdInput";
 import { enGB } from "date-fns/locale";
+import { TagsThresholdInput } from "../components/TagsThresholdInput";
 
 registerLocale("en-GB", enGB);
 
@@ -79,8 +80,8 @@ const CompetitorsPage = observer(() => {
                         <div className="col-md-12 col-lg-6 pb-2 pe-lg-1">
                             <label>
                                 Included Tags (
-                                {competitorsPageStore.includedTagIds.length}/{tagsLimit}
-                                )
+                                {competitorsPageStore.includedTagIds.length}/
+                                {tagsLimit})
                             </label>
                             <TagSelector
                                 onChange={(ids) =>
@@ -89,14 +90,16 @@ const CompetitorsPage = observer(() => {
                                 placeholder="Any"
                                 limit={tagsLimit}
                                 tags={tagsStore.tags}
-                                selectedTagIds={competitorsPageStore.includedTagIds}
+                                selectedTagIds={
+                                    competitorsPageStore.includedTagIds
+                                }
                             />
                         </div>
                         <div className="col-md-12 col-lg-6 pb-2 ps-lg-1">
                             <label>
                                 Excluded Tags (
-                                {competitorsPageStore.excludedTagIds.length}/{tagsLimit}
-                                )
+                                {competitorsPageStore.excludedTagIds.length}/
+                                {tagsLimit})
                             </label>
                             <TagSelector
                                 onChange={(ids) =>
@@ -105,7 +108,9 @@ const CompetitorsPage = observer(() => {
                                 placeholder="None"
                                 limit={tagsLimit}
                                 tags={tagsStore.tags}
-                                selectedTagIds={competitorsPageStore.excludedTagIds}
+                                selectedTagIds={
+                                    competitorsPageStore.excludedTagIds
+                                }
                             />
                         </div>
                     </div>
@@ -113,7 +118,9 @@ const CompetitorsPage = observer(() => {
                 <div className="col-md-12 col-lg-3 pb-2">
                     <div className="row">
                         <div className="form-group col-6">
-                            <label>Reviews Coeff.</label>
+                            <label>
+                                R-Coeff: {competitorsPageStore.reviewsCoeff}
+                            </label>
                             <ReviewsCoefficientInput
                                 value={competitorsPageStore.reviewsCoeff}
                                 onChange={(value) =>
@@ -122,8 +129,15 @@ const CompetitorsPage = observer(() => {
                             />
                         </div>
                         <div className="form-check col-6">
-                            <label htmlFor="customRange2" className="form-label">Tag Checker (5)</label>
-                            <input type="range" className="form-range" min="0" max="5" id="customRange2"/>
+                            <label>
+                                Tags@{competitorsPageStore.tagsThreshold}
+                            </label>
+                            <TagsThresholdInput
+                                value={competitorsPageStore.tagsThreshold}
+                                onChange={(value) =>
+                                    competitorsPageStore.setTagsThreshold(value)
+                                }
+                            />
                         </div>
                     </div>
                 </div>
@@ -188,7 +202,7 @@ const CompetitorsPage = observer(() => {
                 <div className="col-md-6 col-lg-3 pb-2">
                     <div className="row">
                         <div className="col-6 pe-1">
-                            <label>Min Release Date</label>
+                            <label>Min Release</label>
                             <DatePicker
                                 disabledKeyboardNavigation
                                 selected={competitorsPageStore.minDate}
@@ -197,12 +211,12 @@ const CompetitorsPage = observer(() => {
                                 }
                                 dateFormat="yyyy-MM-dd"
                                 className="form-control w-100"
-                                placeholderText="Min Release Date"
+                                placeholderText="Min Release"
                                 locale="en-GB"
                             />
                         </div>
                         <div className="col-6 ps-1">
-                            <label>Max Release Date</label>
+                            <label>Max Release</label>
                             <DatePicker
                                 disabledKeyboardNavigation
                                 selected={competitorsPageStore.maxDate}
@@ -211,7 +225,7 @@ const CompetitorsPage = observer(() => {
                                 }
                                 dateFormat="yyyy-MM-dd"
                                 className="form-control w-100"
-                                placeholderText="Max Release Date"
+                                placeholderText="Max Release"
                                 locale="en-GB"
                             />
                         </div>

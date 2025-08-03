@@ -1,33 +1,30 @@
 import React from "react";
 import { Tooltip } from "./Tooltip";
 
-interface ReviewsCoefficientInputProps {
+interface TagsThresholdInputProps {
     value: string;
     onChange: (value: string) => void;
 }
 
-export function ReviewsCoefficientInput({
+export function TagsThresholdInput({
     value,
     onChange,
-}: ReviewsCoefficientInputProps) {
+}: TagsThresholdInputProps) {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         onChange(e.target.value);
     };
 
     return (
-        <Tooltip
-            text="The coeff by which the number of reviews a game has is multiplied."
-            placement="bottom"
-        >
+        <Tooltip text="N first tags to look up for." placement="bottom">
             <input
                 type="range"
                 min="1"
-                max="100"
+                max="20"
                 className="form-range mt-2"
-                id="reviewsThreshold"
+                id="tagsThreshold"
                 value={value}
                 onChange={handleChange}
-                placeholder="30"
+                placeholder="10"
             />
         </Tooltip>
     );

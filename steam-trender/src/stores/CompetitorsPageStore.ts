@@ -6,13 +6,14 @@ import { makeAutoObservable, runInAction } from "mobx";
 export class CompetitorsPageStore {
     rootStore: RootStore;
 
-    reviewsCoeff = "";
+    reviewsCoeff = "30";
     minPriceThreshold = "";
     maxPriceThreshold = "";
     minReviewsThreshold = "";
     maxReviewsThreshold = "";
     includedTagIds: number[] = [];
     excludedTagIds: number[] = [];
+    tagsThreshold = "10";
     minDate = new Date("2020-01-01");
     maxDate = new Date("2025-12-31");
     competitorsOverview: ICompetitors | null = null;
@@ -54,6 +55,10 @@ export class CompetitorsPageStore {
         this.maxReviewsThreshold = value;
     }
 
+    setTagsThreshold(value: string) {
+        this.tagsThreshold = value;
+    }
+
     setMinDate(value: Date | null) {
         if (value === null) {
             this.minDate = new Date("2020-01-01");
@@ -87,6 +92,7 @@ export class CompetitorsPageStore {
                 maxDate: this.maxDate,
                 includedTags: this.includedTagIds,
                 excludedTags: this.excludedTagIds,
+                tagsThreshold: this.tagsThreshold,
             });
 
             runInAction(() => {

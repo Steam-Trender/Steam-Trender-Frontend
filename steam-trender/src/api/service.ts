@@ -20,6 +20,7 @@ interface FetchCompetitorsOverviewParams {
     maxDate: Date | string | null;
     includedTags: number[];
     excludedTags: number[];
+    tagsThreshold: string;
 }
 
 interface FetchTagsOverviewParams {
@@ -29,6 +30,7 @@ interface FetchTagsOverviewParams {
     minYear: number;
     maxYear: number;
     selectedTags: number[];
+    tagsThreshold: string;
 }
 
 interface FetchTrendsOverviewParams {
@@ -98,6 +100,7 @@ class ApiService {
         maxDate,
         includedTags,
         excludedTags,
+        tagsThreshold,
     }: FetchCompetitorsOverviewParams): Promise<ICompetitors> {
         if (minDate === null) {
             minDate = "2020-01-01";
@@ -125,6 +128,11 @@ class ApiService {
         if (reviewsCoeff === "") {
             reviewsCoeff = "30";
         }
+
+        if (tagsThreshold === "") {
+            tagsThreshold = "10";
+        }
+
         try {
             const response = await API.get<ICompetitors>(
                 "/analyze/competitors",
@@ -139,6 +147,7 @@ class ApiService {
                         max_date: maxDate,
                         whitelist_tag_ids: includedTags,
                         blacklist_tag_ids: excludedTags,
+                        tags_threshold: tagsThreshold,
                     },
                     paramsSerializer: (params) =>
                         qs.stringify(params, { arrayFormat: "repeat" }),
@@ -157,6 +166,7 @@ class ApiService {
         minYear,
         maxYear,
         selectedTags,
+        tagsThreshold,
     }: FetchTagsOverviewParams): Promise<ITagOverview[]> {
         if (minReviews === "") {
             minReviews = "10";
@@ -167,6 +177,9 @@ class ApiService {
         if (reviewsCoeff === "") {
             reviewsCoeff = "30";
         }
+        if (tagsThreshold === "") {
+            tagsThreshold = "10";
+        }
         try {
             const response = await API.get<ITagOverview[]>("/analyze/tags", {
                 params: {
@@ -176,6 +189,7 @@ class ApiService {
                     min_reviews: minReviews,
                     max_reviews: maxReviews,
                     reviews_coeff: reviewsCoeff,
+                    tags_threshold: tagsThreshold,
                 },
                 paramsSerializer: (params) =>
                     qs.stringify(params, { arrayFormat: "repeat" }),

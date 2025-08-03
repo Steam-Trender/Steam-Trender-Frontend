@@ -10,7 +10,6 @@ import PrivacyPolicyPage from "../pages/PrivacyPolicyPage";
 import TermsPage from "../pages/TermsPage";
 import QuestionsPage from "../pages/QuestionsPage";
 import ResourcesPage from "../pages/ResourcesPage";
-import SummaryPage from "../pages/SummaryPage";
 
 interface RouteConfig {
     path: string;

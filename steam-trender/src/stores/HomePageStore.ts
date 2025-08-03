@@ -41,6 +41,7 @@ export class HomePageStore {
                 maxDate: maxDate,
                 includedTags: [],
                 excludedTags: [],
+                tagsThreshold: "20",
             });
 
             const hitsData = await ApiService.fetchCompetitorsOverview({
@@ -53,6 +54,7 @@ export class HomePageStore {
                 maxDate: maxDate,
                 includedTags: [],
                 excludedTags: [],
+                tagsThreshold: "20",
             });
 
             const megahitsData = await ApiService.fetchCompetitorsOverview({
@@ -65,6 +67,7 @@ export class HomePageStore {
                 maxDate: maxDate,
                 includedTags: [],
                 excludedTags: [],
+                tagsThreshold: "20",
             });
 
             runInAction(() => {

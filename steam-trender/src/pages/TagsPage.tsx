@@ -7,6 +7,7 @@ import { convertTagDataToGeneric } from "../models/generic_overview";
 import CombinedChart from "../components/CombinedPlot";
 import { ReviewsCoefficientInput } from "../components/ReviewsCoefficientInput";
 import { ReviewsThresholdInput } from "../components/ReviewsThresholdInput";
+import { TagsThresholdInput } from "../components/TagsThresholdInput";
 import { ParametersInfo } from "../components/ParametersInfo";
 import { useStore } from "../stores/storeContext";
 import { observer } from "mobx-react-lite";
@@ -44,16 +45,29 @@ const TagsPage = observer(() => {
                 </div>
             </div>
             <div className="row pb-3">
-                <div className="form-group col-sm-6 col-md-3 pb-2">
-                    <label>Reviews Coefficient</label>
-                    <ReviewsCoefficientInput
-                        value={tagsPageStore.reviewsCoeff}
-                        onChange={(value) =>
-                            tagsPageStore.setReviewsCoeff(value)
-                        }
-                    />
+                <div className="col-sm-12 col-md-3 pb-2">
+                    <div className="row">
+                        <div className="form-group col-6">
+                            <label>R-Coeff: {tagsPageStore.reviewsCoeff}</label>
+                            <ReviewsCoefficientInput
+                                value={tagsPageStore.reviewsCoeff}
+                                onChange={(value) =>
+                                    tagsPageStore.setReviewsCoeff(value)
+                                }
+                            />
+                        </div>
+                        <div className="form-group col-6">
+                            <label>Tags@{tagsPageStore.tagsThreshold}</label>
+                            <TagsThresholdInput
+                                value={tagsPageStore.tagsThreshold}
+                                onChange={(value) =>
+                                    tagsPageStore.setTagsThreshold(value)
+                                }
+                            />
+                        </div>
+                    </div>
                 </div>
-                <div className="col-sm-6 col-md-3 pb-2">
+                <div className="col-sm-12 col-md-3 pb-2">
                     <div className="row">
                         <div className="form-group col-6 pe-1">
                             <label>Min Reviews</label>

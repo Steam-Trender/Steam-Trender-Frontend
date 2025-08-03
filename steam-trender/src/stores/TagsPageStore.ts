@@ -6,10 +6,11 @@ import { makeAutoObservable, runInAction } from "mobx";
 export class TagsPageStore {
     rootStore: RootStore;
 
-    reviewsCoeff = "";
+    reviewsCoeff = "30";
     minReviewsThreshold = "";
     maxReviewsThreshold = "";
     selectedTagIds: number[] = [];
+    tagsThreshold = "10";
     minYear = 2020;
     maxYear = 2024;
     tagsOverview: ITagOverview[] | null = null;
@@ -45,6 +46,10 @@ export class TagsPageStore {
         this.maxYear = value;
     }
 
+    setTagsThreshold(value: string) {
+        this.tagsThreshold = value;
+    }
+
     async fetchTagsOverview() {
         if (this.selectedTagIds.length > 0) {
             runInAction(() => {
@@ -60,6 +65,7 @@ export class TagsPageStore {
                     minYear: this.minYear,
                     maxYear: this.maxYear,
                     selectedTags: this.selectedTagIds,
+                    tagsThreshold: this.tagsThreshold,
                 });
 
                 runInAction(() => {
